@@ -25,7 +25,7 @@ const App = () => {
     }
   
     return (
-      <div className="container">
+      <div className="containers">
         hello webpack {counter} clicks
   
         <button onClick={handleClick}>
