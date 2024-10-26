@@ -3,6 +3,7 @@ import express, { request, response } from "express";
 import dotenv from "dotenv";
 import connectDb from "./db.js";
 import cors from "cors";
+import itenaryRoutes from "./routes/routes.itenary.js";
 
 dotenv.config();
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 // this line allow our express app to parse(read) requests with json payloads(data)
 app.use(express.json());
 app.use(cors());
+app.use('/itenary',itenaryRoutes);
 
 const PORT = process.env.PORT || 3000;
 
