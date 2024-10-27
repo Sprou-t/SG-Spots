@@ -1,28 +1,37 @@
 import { response } from "express";
 import Itenary from "../models/models.itenary.js";
+import User from "../models/models.users.js";
 import mongoose from "mongoose";
 
-export const getItenary = async (req, res) => {
+export const getAllItenary = async (req, res) => {
 	try {
 		const itenary = await Itenary.find({});
 		res.status(200).json({ success: true, data: itenary });
 	} catch (error) {
+		console.error(`error in obtaining itenaries: ${error.message}`);
 		res.status(500).json({ success: false, message: "server error" });
 	}
 };
 
 export const createItenary = async (req, res) => {
-	const itenary = req.body;
+	const itenaryData = req.body;
 	//check if req data is sent correctly
-	if (!itenary.title || !itenary.description) {
+	if (!itenaryData.title || !itenaryData.description) {
 		return res
 			.status(400)
 			.json({ success: false, message: "please input required fields!" });
 	}
-	const newItenary = new Itenary(itenary);
+	const newItenary = new Itenary(itenaryData);
+	
 	try {
+		const user = await User.findById(itenaryData.author);
 		await newItenary.save();
-		res.status(201).json({ success: true, message: `itenary created: ${newItenary}` });
+		user.itenaries = user.itenaries.concat(newItenary._id);
+		await user.save();
+		res.status(201).json({
+			success: true,
+			message: `itenary created: ${newItenary}`,
+		});
 	} catch (error) {
 		console.error(`error in itenary creation: ${error.message}`);
 		res.status(500).json({ success: false, message: "server error" });
@@ -43,7 +52,7 @@ export const updateItenary = async (req, res) => {
 			new: true,
 		});
 		console.log(`updated itenary to send: ${updatedItenary}`);
-		res.status(201).json({success:true, data: updatedItenary})
+		res.status(201).json({ success: true, data: updatedItenary });
 	} catch (error) {
 		console.error(`error in updating itenary: ${error.message}`);
 		res.status(500).json({ success: false, message: "server error" });
@@ -69,4 +78,4 @@ export const deleteItenary = async (req, res) => {
 		// If there was a server or validation error
 		res.status(500).json({ success: false, message: "Server Error" });
 	}
-}
+};
