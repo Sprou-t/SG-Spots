@@ -5,6 +5,7 @@ import connectDb from "./db.js";
 import cors from "cors";
 import itenaryRoutes from "./routes/routes.itenary.js";
 import userRoutes from "./routes/routes.user.js";
+import apiRoutes from "./routes/routes.apiCall.js";
 
 dotenv.config();
 const app = express();
@@ -14,8 +15,9 @@ app.use(express.json());
 app.use(cors());
 app.use("/itenary", itenaryRoutes);
 app.use("/user", userRoutes);
+app.use("/api", apiRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
 	connectDb();
