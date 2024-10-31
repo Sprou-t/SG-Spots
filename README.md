@@ -1,1 +1,1 @@
-# CompareIt
+# SG Spots
