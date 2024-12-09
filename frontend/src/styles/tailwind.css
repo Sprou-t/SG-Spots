@@ -3,8 +3,17 @@
 @tailwind utilities;
 
 
-#root{
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html,
+body {
+  height: 100%;
+  width: 100dvw;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: grid;
+  height: 100%;
+  width: 100dvw;
+  grid-template-rows:80px 1fr 300px; 
 }
