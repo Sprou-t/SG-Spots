@@ -1,6 +1,11 @@
 import React from "react";
 
-// TODO: main section
+/* TODO: main section
+1. follow the webpage
+2. get some good pics
+3. design accordingly
+
+*/
 const Main = () => {
 	console.log("loaded");
 	return (

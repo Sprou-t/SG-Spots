@@ -8,7 +8,7 @@ const App = () => {
 	console.log('wats up')
 
 	return (
-		<div className="container h-full w-full">
+		<div className="container h-full w-full mt-20">
 			<Navbar />
 			<Landing />
 			<Footer />
