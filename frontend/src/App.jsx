@@ -5,11 +5,14 @@ import Footer from "./components/footer.jsx";
 
 const App = () => {
 	const [counter, setCounter] = useState(0);
-	console.log('wats up')
+	console.log('App loaded')
 
 	return (
-		<div className="container h-full w-full mt-20">
+		<div className="container h-full w-full">
+
 			<Navbar />
+
+
 			<Landing />
 			<Footer />
 		</div>
