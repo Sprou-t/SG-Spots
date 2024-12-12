@@ -6,7 +6,7 @@ import { SlideLeft, SlideRight } from "../components/slideInAnimation.jsx";
 
 /* TODO: add the bottom sections
 			1. follow rateMyDorm's footer design
-			2. add animation for bottom part
+			2. make everything responsive
 			3. write a blog(share your experiences) 
 			4.*/
 const Main = () => {
