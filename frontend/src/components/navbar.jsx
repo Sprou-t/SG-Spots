@@ -4,6 +4,7 @@ import logo from "../assets/images/borders-2099224.svg"
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
   return (
 
     < div className="z-50 group fixed scroll-m-0 top-0 font-bold w-screen flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between items-center backdrop-filter backdrop-blur-3xl bg-opacity-70  hover:bg-white" >
