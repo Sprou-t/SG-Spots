@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom'
 import linkedin from '../assets/images/linkedin-icon-2-logo-svgrepo-com.svg'
 import github from '../assets/images/github-142-svgrepo-com.svg'
 /*TODO:
-1. add github and linkedin
-2.  add blog + about
-3. terms and conditions + privacy policies*/
+1. add the links in href*/
 const footer = () => {
     return (
-        <div className='flex flex-col gap-5 items-center bg-gray-300 w-screen p-5'>
+        <div className='flex flex-col gap-5 items-center bg-gray-300 w-screen p-5 text-center'>
             <Link className='text-red-600 text-5xl font-bold'>SG<span className='text-black'> SPOTS</span></Link>
 
             <ul className='flex gap-5'>
