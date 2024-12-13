@@ -6,7 +6,7 @@ import github from '../assets/images/github-142-svgrepo-com.svg'
 1. add the links in href*/
 const footer = () => {
     return (
-        <div className='flex flex-col gap-5 items-center bg-gray-300 w-screen p-5 text-center'>
+        <div className='flex flex-col gap-5 items-center bg-gray-300 w-screen p-12 text-center'>
             <Link className='text-red-600 text-5xl font-bold'>SG<span className='text-black'> SPOTS</span></Link>
 
             <ul className='flex gap-5'>
