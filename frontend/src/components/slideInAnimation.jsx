@@ -12,7 +12,7 @@ const SlideRight = ({ children, customClass }) => {
             whileInView={{
                 x: 0, opacity: 1, filter: "blur(0px)"
             }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ type: "tween", duration: 1.5, ease: "easeInOut" }}>
 
             {children}
@@ -32,7 +32,7 @@ const SlideLeft = ({ children, customClass }) => {
             whileInView={{
                 x: 0, opacity: 1, filter: "blur(0px)"
             }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ type: "tween", duration: 1.5, ease: "easeInOut" }}>
 
             {children}

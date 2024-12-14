@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import mainImg1 from "../assets/images/pexels-alaric-sim-380461-1029188.jpg"
-import mainImg2 from "../assets/images/Singapore-Bird-Paradise-8a764bb0-aaa3-407f-a934-d594dee2bf10.jpeg"
-import mainImg3 from "../assets/images/sentosa-island-singapore-23-1440x1920.webp"
-import mainImg4 from "../assets/images/night-wonderful-urban-beautiful-landscape.jpg"
-import mainImg5 from "../assets/images/beautiful-flamingos-zoo.jpg"
-import findImg from "../assets/images/water-new-night-marina-business.jpg"
-import writeImg from "../assets/images/garden-by-bay-night-scene-singapore.jpg"
+import mainImg1 from "../assets/landingImages/pexels-alaric-sim-380461-1029188.jpg"
+import mainImg2 from "../assets/landingImages/Singapore-Bird-Paradise-8a764bb0-aaa3-407f-a934-d594dee2bf10.jpeg"
+import mainImg3 from "../assets/landingImages/sentosa-island-singapore-23-1440x1920.webp"
+import mainImg4 from "../assets/landingImages/night-wonderful-urban-beautiful-landscape.jpg"
+import mainImg5 from "../assets/landingImages/beautiful-flamingos-zoo.jpg"
+import findImg from "../assets/landingImages/water-new-night-marina-business.jpg"
+import writeImg from "../assets/landingImages/garden-by-bay-night-scene-singapore.jpg"
 import { SlideLeft, SlideRight } from "../components/slideInAnimation.jsx";
 import Carousel from '../components/carousell.jsx';
 
-/* TODO: add the bottom sections
-			2. make an image carousell
+/* TODO: 
 			3. write a blog(share your experiences) 
-			4. 832 when text size needs to change*/
+*/
 
 
 const Main = () => {
-	console.log("landing page loaded");
 	const images = [mainImg1, mainImg2, mainImg3, mainImg4, mainImg5];
 	return (
-		<div className="w-screen sm:py-4 m-0">
+		<div className="w-screen sm:py-4 m-0 text-left">
 			<div className="relative flex h-screen w-screen">
 				<Carousel images={images} autoSlide={true} autoSlideInterval={5000} />
 			</div>
 
-			<div className="sm:w-screen md:w-4/5 flex flex-col gap-20 md:mx-auto py-40 m-0 xs:text-center xs:p-16">
+			<div className="sm:w-screen md:w-4/5 flex flex-col gap-20 md:mx-auto py-40 m-0 xs:p-16">
 				<SlideRight customClass="flex gap-5 flex-col lg:flex-row items-center justify-center">
 					<img src={findImg} className="lg:size-1/2" alt="Find spots" />
 					<div className="flex flex-col lg:gap-10 sm:gap-2">
