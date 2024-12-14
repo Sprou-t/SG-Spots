@@ -8,12 +8,12 @@ const Navbar = () => {
 
   return (
 
-    < div className=" sm:text-sm z-50 fixed scroll-m-0 top-0 font-bold w-screen flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between items-center  hover:bg-white bg-white" >
+    < div className=" border-2 border-gray-300 sm:text-sm z-50 fixed scroll-m-0 top-0 font-bold w-screen flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between items-center  hover:bg-white bg-white" >
 
       {/* Logo and Text Linking to Homepage */}
       < Link to="/" className="flex gap-2 items-center" >
         <img src={logo} alt="SG SPOTS" className="h-16 rounded-lg" />
-        <h1 className='text-black'><span className='text-red-600'>SG</span> SPOTS</h1>
+        <h1 className='text-black'><span className='text-red-600'>SG</span>ssss SPOTS</h1>
       </Link >
 
       {/* Searchbox Component */}
