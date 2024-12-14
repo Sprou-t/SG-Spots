@@ -1,0 +1,149 @@
+{
+    "attractions":[
+        {
+            "title":"Southern Albatross",
+            "type": " Leisure & Recreation",
+            "description":"THE NEWEST ADDITION TO THE ALBATROSS FAMILYGo On Exploration Aboard A Fast Craft Designed To Bring You Closer To The Water And Nearer To The Islands.Our Purpose And Goal To Creating The Southern Albatross Fast Craft Experience Was To Access Areas Where Her Elder Brother The Royal Albatross Couldn’t Achieve With It’s Massive Size. The Southern Albatross Was Meticulously Engineered To Be A Nimble And Efficient Vessel, Capable Of Carrying Up To 50 Passengers At A Time. Its Twin-Hull And Dual Onboard Motor Design Enable It To Reach Impressive Speeds Of Up To 26 Knots In The Water. The Southern Albatross, With Its Smaller Profile, Allows For Superior Maneuverability, Making It Adept At Navigating Closer To The Islands.Every Thursday To MondaySetting Sail Twice Daily1pm – 2pm 5pm – 6pmRWS Sentosa At Royal Albatross Home Berth.Special SailCOUNTDOWN ON THE SOUTHERN ALBATROSSlink: https://www.tallship.com.sg/events/nye-countdown/ ",
+            "rating": 0,
+            "pricing": "$45 / pax",
+            "address":  "8 Sentosa Gateway, 098136",
+            "opening time":"09:00" ,
+            "closing time":"18:00",
+            "imageURL": "https://www.boatlagoonyachting.com/wp-content/uploads/2023/09/271880883_153510390363436_5462214142711888785_n.jpg",
+            "tags":["Activities", "Adults", "History", "Attractions", "Romantic"]
+        },
+        
+        {
+            "title": "Skyline Luge Sentosa",
+            "type": "Adventure & Activities",
+            "description": "Ride Downhill Thrills With The Skyline Luge Sentosa! Experience The Perfect Blend Of Adrenaline And Fun As You Glide Through Purpose-Built Tracks On A Luge Kart. With Four Unique Tracks Spanning Over 2.6KM, You’ll Enjoy Scenic Views During The Day And A Thrilling LED-Lit Experience At Night. The Adventure Begins With A Scenic Skyride That Takes You To The Start Point, Offering Stunning Views Of Sentosa Island.",
+            "rating": 0,
+            "pricing": "$25 / ride",
+            "address": "45 Siloso Beach Walk, Sentosa, 099003",
+            "opening time": "10:00",
+            "closing time": "21:30",
+            "imageURL": "https://media.skyline.nz.beingbui.lt/sentosa/media/uploads/2024/04/19042859/Skyline-Luge-Singapore_family-ride-the-skyride-hands-up_M.jpg",
+            "tags": ["Adventure", "Family", "Outdoor", "Fun", "Night"]
+        },
+        {
+            "title": "Gardens by the Bay – Cloud Forest",
+            "type": "Nature & Attractions",
+            "description": "Step Into A Misty Wonderland At The Cloud Forest, A Spectacular Indoor Tropical Rainforest Dome In The Heart Of Singapore. Marvel At The Towering Indoor Waterfall, Exotic Plant Life, And Aerial Walkways. The Cloud Forest Brings Together Conservation And Beauty, Offering A Unique Opportunity To Explore Rare Plant Species And Stunning Views Of The Marina Bay Skyline.",
+            "rating": 0,
+            "pricing": "$20 / entry",
+            "address": "18 Marina Gardens Dr, 018953",
+            "opening time": "09:00",
+            "closing time": "21:00",
+            "imageURL": "https://www.gardensbythebay.com.sg/content/dam/gbb-2021/image/things-to-do/attractions/cloud-forest/gallery/cloud-forest-02.jpg",
+            "tags": ["Nature", "Indoor", "Scenic", "Educational", "Family"]
+        },
+        {
+            "title": "Sentosa Adventure Cove Waterpark",
+            "type": "Leisure & Recreation",
+            "description": "Dive Into Fun At Adventure Cove Waterpark! Enjoy Thrilling Water Slides, A Lazy River, And The Unique Opportunity To Snorkel With 20,000 Tropical Fish In The Rainbow Reef. Perfect For Families And Friends Looking For A Splashing Good Time. Don’t Miss The Exciting Hydro-Magnetic Coaster, Asia’s First Water-Based Roller Coaster!",
+            "rating": 0,
+            "pricing": "$38 / pax",
+            "address": "8 Sentosa Gateway, 098269",
+            "opening time": "10:00",
+            "closing time": "18:00",
+            "imageURL": "https://www.sentosa.com.sg/-/media/sentosa/hero-asset/attractions/adventure-cove/2022/acw2389_adventureriver_1840x1035.jpg",
+            "tags": ["Water Activities", "Family", "Thrills", "Outdoor", "Fun"]
+        },
+        {
+            "title": "Singapore Flyer",
+            "type": "Attractions",
+            "description": "Enjoy Unparalleled Views Of Singapore’s Iconic Skyline From The Singapore Flyer, One Of The World’s Largest Observation Wheels. Perfect For Couples, Families, Or Groups, The Flyer Offers Stunning Panoramic Views Of Marina Bay, Gardens by the Bay, And Even Neighboring Malaysia And Indonesia On A Clear Day.",
+            "rating": 0,
+            "pricing": "$33 / pax",
+            "address": "30 Raffles Ave, 039803",
+            "opening time": "08:30",
+            "closing time": "22:30",
+            "imageURL": "https://www.singaporeflyer.com/storage/custom-menus/September2020/enKE8lC5tyqLHWZoHuPY.jpg",
+            "tags": ["Romantic", "Scenic", "Family", "Iconic", "Photography"]
+        },
+        {
+            "title": "Pulau Ubin Cycling Adventure",
+            "type": "Outdoor Activities",
+            "description": "Escape The Hustle Of City Life With A Trip To Pulau Ubin. Rent A Bicycle And Explore This Rustic Island At Your Own Pace. Discover Hidden Trails, Mangroves, And Kampong Houses While Immersing Yourself In Singapore’s Heritage. Don’t Miss The Chek Jawa Wetlands For Stunning Biodiversity!",
+            "rating": 0,
+            "pricing": "$12 / bike rental",
+            "address": "Pulau Ubin Jetty, 508329",
+            "opening time": "07:00",
+            "closing time": "19:00",
+            "imageURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhP4y1U1Dp73q6MWVcROrSQ-e7ULKS9pA4aA&s",
+            "tags": ["Adventure", "Nature", "Outdoor", "History", "Eco-friendly"]
+        },
+        {
+            "title": "Universal Studios Singapore",
+            "type": "Theme Parks",
+            "description": "Step Into A World Of Thrills At Universal Studios Singapore. Explore Seven Themed Zones Packed With Rides, Shows, And Entertainment For All Ages. From The Transformers Ride To Jurassic Park Rapids, Each Attraction Promises An Unforgettable Adventure. Great For Families And Movie Enthusiasts!",
+            "rating": 0,
+            "pricing": "$88 / pax",
+            "address": "8 Sentosa Gateway, 098269",
+            "opening time": "10:00",
+            "closing time": "19:00",
+            "imageURL": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.getyourguide.com%2Funiversal-studios-singapore-l4045%2Funiversal-studios-singapore-entrance-ticket-t66117%2F&psig=AOvVaw072yi40TjMtsIvalyHK0H8&ust=1734239894921000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNi5_Z7CpooDFQAAAAAdAAAAABAE",
+            "tags": ["Family", "Thrills", "Movies", "Adventure", "Entertainment"]
+        },
+        {
+            "title": "Marina Bay Sands Infinity Pool",
+            "type": "Luxury Experience",
+            "description": "Take A Dip In The World’s Largest Rooftop Infinity Pool At Marina Bay Sands. Reserved Exclusively For Hotel Guests, This Iconic Pool Offers Stunning Views Of Singapore’s Skyline While Providing A Luxurious Relaxation Experience. Perfect For Romantic Getaways Or Indulgent Self-Care.",
+            "rating": 0,
+            "pricing": "$550 / night (hotel stay)",
+            "address": "10 Bayfront Ave, 018956",
+            "opening time": "06:00",
+            "closing time": "23:00",
+            "imageURL": "http",
+            "tags": ["Luxury", "Romantic", "Scenic", "Relaxation", "Iconic"]
+        },
+        {
+            "title": "Changi Jurassic Mile",
+            "type": "Outdoor Attractions",
+            "description": "Walk Among Life-Sized Dinosaur Sculptures At The Changi Jurassic Mile, Singapore’s Longest Outdoor Display Of Prehistoric Creatures. Great For Families And Dino Enthusiasts, This Trail Is Accessible For Cyclists And Pedestrians Alike.",
+            "rating": 0,
+            "pricing": "Free",
+            "address": "Changi Airport Connector, 819666",
+            "opening time": "24 Hours",
+            "closing time": "24 Hours",
+            "imageURL": "http",
+            "tags": ["Family", "Free", "Outdoor", "Adventure", "Fun"]
+        },
+        {
+            "title": "Singapore Botanic Gardens",
+            "type": "Nature & Recreation",
+            "description": "Relax And Reconnect With Nature At The Singapore Botanic Gardens, A UNESCO World Heritage Site. Home To The National Orchid Garden, Picturesque Lakes, And A Wide Variety Of Plant Species, This Garden Is Perfect For Picnics, Photography, And Leisurely Walks.",
+            "rating": 0,
+            "pricing": "Free (Orchid Garden: $5)",
+            "address": "1 Cluny Rd, 259569",
+            "opening time": "05:00",
+            "closing time": "00:00",
+            "imageURL": "http",
+            "tags": ["Nature", "Free", "Scenic", "Relaxation", "UNESCO"]
+        },
+        {
+            "title": "The Night Safari",
+            "type": "Wildlife & Nightlife",
+            "description": "Embark On A Nocturnal Adventure At The World’s First Night Safari. Witness Over 1,000 Animals In Their Natural Habitats Across Seven Zones. Experience The Thrill Of Spotting Creatures Such As Leopards And Elephants In This One-Of-A-Kind Wildlife Park.",
+            "rating": 0,
+            "pricing": "$55 / pax",
+            "address": "80 Mandai Lake Rd, 729826",
+            "opening time": "19:15",
+            "closing time": "00:00",
+            "imageURL": "http",
+            "tags": ["Wildlife", "Adventure", "Nightlife", "Family", "Unique"]
+        },
+        {
+            "title": "Haw Par Villa",
+            "type": "Cultural & Historical",
+            "description": "Step Into The World Of Chinese Mythology At Haw Par Villa. This Unique Park Features Over 1,000 Statues And Dioramas Depicting Traditional Folklore, Myths, And Morals. Great For Those Seeking A Cultural And Offbeat Experience.",
+            "rating": 0,
+            "pricing": "Free",
+            "address": "262 Pasir Panjang Rd, 118628",
+            "opening time": "09:00",
+            "closing time": "19:00",
+            "imageURL": "http",
+            "tags": ["Cultural", "Free", "Educational", "Offbeat", "History"]
+        }
+    ]
+}
