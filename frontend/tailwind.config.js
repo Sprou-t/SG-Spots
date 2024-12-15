@@ -6,6 +6,8 @@ export default {
     extend: {
       screens: {
         'xs': '320px',   // Extra small screens
+        'xss': '375px',
+        'xsm': '425px',  // Extra small medium screens
         'sm': '640px',  // Small screens
         'md': '768px',  // Medium screens
         'lg': '1024px', // Large screens

@@ -13,7 +13,7 @@ const Navbar = () => {
       {/* Logo and Text Linking to Homepage */}
       < Link to="/" className="flex gap-2 items-center" >
         <img src={logo} alt="SG SPOTS" className="h-16 rounded-lg" />
-        <h1 className='text-black'><span className='text-red-600'>SG</span>ssss SPOTS</h1>
+        <h1 className='text-black'><span className='text-red-600'>SG</span> SPOTS</h1>
       </Link >
 
       {/* Searchbox Component */}
