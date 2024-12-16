@@ -6,8 +6,8 @@ import mainImg4 from "../assets/landingImages/night-wonderful-urban-beautiful-la
 import mainImg5 from "../assets/landingImages/beautiful-flamingos-zoo.jpg"
 import findImg from "../assets/landingImages/water-new-night-marina-business.jpg"
 import writeImg from "../assets/landingImages/garden-by-bay-night-scene-singapore.jpg"
-import { SlideLeft, SlideRight } from "../components/slideInAnimation.jsx";
-import Carousel from '../components/carousell.jsx';
+import { SlideLeft, SlideRight } from "../features/SlideInAnimation.jsx";
+import Carousel from '../features/Carousell.jsx';
 
 /* TODO: 
 			3. write a blog(share your experiences) 
@@ -17,7 +17,7 @@ import Carousel from '../components/carousell.jsx';
 const Main = () => {
 	const images = [mainImg1, mainImg2, mainImg3, mainImg4, mainImg5];
 	return (
-		<div className="w-screen sm:py-4 m-0 text-left">
+		<div className="w-screen sm:pb-4 m-0 text-left">
 			<div className="relative flex h-screen w-screen">
 				<Carousel images={images} autoSlide={true} autoSlideInterval={5000} />
 			</div>

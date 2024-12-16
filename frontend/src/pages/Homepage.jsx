@@ -4,7 +4,9 @@ import axios from "axios";
 
 /*TODO:
 1. make the page responsive
-2. just by tapping the card to open each card */
+2. just by tapping the card to open each card
+- effect: when hovered image zooms in or entire card enlarges 
+ + cursor changes */
 
 const AttractionCard = ({ attraction }) => {
     return (
