@@ -8,7 +8,7 @@ import Footer from "./components/Footer.jsx";
 
 const App = () => {
 	return (
-		<div className=" h-[5000px] w-full">
+		<div className="w-full">
 
 			<Navbar />
 			<AttractionPage />
