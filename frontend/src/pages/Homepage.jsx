@@ -12,7 +12,7 @@ const AttractionCard = ({ attraction }) => {
     return (
         <div className="border-gray-300 border-solid border-2 flex flex-col gap-4  shadow-lg rounded-lg h-full bg-white">
             <div>
-                <img className="w-full md:max-h-32 lg:max-h-44 xl:max-h-72 object-cover rounded-t-lg" src={attraction.imageURL} alt={attraction.title} />
+                <img className="w-full md:max-h-32 lg:max-h-44 xl:max-h-72 object-cover rounded-t-lg" src={attraction.imageURL[0]} alt={attraction.title} />
             </div>
             <div className="p-2 text-center flex flex-col flex-grow">
                 <h2 className="font-bold text-lg truncate">{attraction.title}</h2>
