@@ -4,10 +4,31 @@ import logo from "../assets/navbarImages/borders-2099224.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ scrollDirection }) => {
+  const oldScrollY = useRef(window.scrollY); // oldScrolly retains its value across renders
+
+  const [direction, setDirection] = useState('up');
+
+  const controlDirection = () => {
+    if (window.scrollY > oldScrollY.current) {
+      setDirection('down');
+    } else {
+      setDirection('up');
+    }
+    oldScrollY.current = window.scrollY;
+  }
+
+  useEffect(() => {
+
+    window.addEventListener('scroll', controlDirection, true);
+
+    return () => {
+      window.removeEventListener('scroll', controlDirection, true);
+    };
+  }, []);
 
   return (
     <div
-      className={`z-50 fixed top-0 w-screen bg-transparent backdrop-filter bg-opacity-30 text-white font-bold transition-transform duration-300 ${scrollDirection == 'up' ? 'translate-y-0' : ' -translate-y-full'
+      className={`z-50 fixed top-0 w-screen bg-transparent backdrop-filter bg-opacity-30 text-white font-bold transition-transform duration-300 ${direction == 'up' ? 'translate-y-0' : ' -translate-y-full'
         }`}
     >
       {/* Dark overlay effect */}
