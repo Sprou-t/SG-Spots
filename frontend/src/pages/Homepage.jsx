@@ -10,11 +10,11 @@ import axios from "axios";
 
 const AttractionCard = ({ attraction }) => {
     return (
-        <div className="border-gray-300 border-solid border-2 flex flex-col gap-4  shadow-lg rounded-lg h-full bg-white">
+        <div className=" xs:w-10/12 border-gray-300 border-solid border-2 flex flex-col gap-4  shadow-lg rounded-lg h-full bg-white">
             <div>
-                <img className="w-full md:max-h-32 lg:max-h-44 xl:max-h-72 object-cover rounded-t-lg" src={attraction.imageURL[0]} alt={attraction.title} />
+                <img className="w-full md:max-h-32 lg:max-h-32 xl:max-h-40 object-cover rounded-t-lg" src={attraction.imageURL[0]} alt={attraction.title} />
             </div>
-            <div className="p-2 text-center flex flex-col flex-grow">
+            <div className="p-2 text-center flex flex-col flex-grow mb-4">
                 <h2 className="font-bold text-lg truncate">{attraction.title}</h2>
                 <div className="flex flex-col gap-2 mt-auto">
                     <p>Type: {attraction.type}</p>
@@ -36,7 +36,7 @@ const Homepage = () => {
     }, []);
 
     return (
-        <div className=" xs:w-full  md:w-11/12 xl:w- mb-20 xs:mt-56 md:mt-32 mx-auto xl:translate-x-20 grid lg:grid-cols-3 md:grid-cols-2 gap-10">
+        <div className=" xs:w-full  md:w-11/12 xl:w-3/4 mb-20 xs:mt-56 md:mt-32 mx-auto xl:translate-x-4 grid lg:grid-cols-3 md:grid-cols-2 gap-10 place-items-center">
             {attractions.map(attraction => (
                 <AttractionCard key={attraction.id} attraction={attraction} />
             ))}

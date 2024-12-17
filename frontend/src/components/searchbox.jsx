@@ -3,10 +3,15 @@ import React from 'react'
 
 const searchbox = () => {
     return (
-        <div className="flex items-center  rounded-lg p-2 max-w-md mx-auto  gap-2 sm:size-full xs:size-11/12">
-            <input placeholder="Search..." type="text" className=" rounded-xl w-80 h-8 border-2 p-3" />
+        <div className="flex items-center p-2 w-full md:w-3/4">
+            <input
+                placeholder="Search..."
+                type="text"
+                className="w-full rounded-xl h-10 border-2 p-3 md:w-1/2"
+            />
         </div>
-    )
-}
+    );
+};
+
 
 export default searchbox
