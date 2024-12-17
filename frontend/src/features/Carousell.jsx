@@ -22,7 +22,7 @@ const Carousel = ({ images, autoSlide = true, autoSlideInterval = 5000 }) => {
     };
 
     return (
-        <div className="w-screen object-cover m-0">
+        <div className="object-cover m-0">
             <div className="overflow-hidden relative h-screen">
                 {images.map((image, index) => {
                     const isActive = index === currentIndex;
