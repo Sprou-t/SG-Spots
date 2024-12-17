@@ -9,13 +9,6 @@ import Carousel from '../features/Carousell.jsx';
 import CommentSection from '../components/CommentSection.jsx';
 
 /* TODO:
-1. retrieve info
--multiple images for slideshow
-    -count the number of images. (last)
-        if there's more than 1, slideshow
-        else only display first index 0
--only use 1 db obj
--implement slideshow functionality
 -comment section + make icons more colorful
  */
 
@@ -82,8 +75,8 @@ const AttractionPage = () => {
                             <h2>{attraction.title}</h2>
                             <CgWebsite />
                         </div>
-                        <div className='flex gap-16 text-xl justify-center  border-2  p-10'>
-                            <div className='flex-col gap-6 flex'>
+                        <div className='md:flex gap-16 text-xl justify-center  border-2 xs:p-2 md:p-10'>
+                            <div className='flex-col gap-6 flex mb-6 md:mb-0'>
                                 <div className='flex items-center gap-1'>
                                     <MdOutlineStarRate />
                                     <p>Rating: <span className='font-bold text-gray-600'>{attraction.rating}</span></p>
