@@ -6,7 +6,9 @@ import axios from "axios";
 1. make the page responsive
 2. just by tapping the card to open each card
 - effect: when hovered image zooms in or entire card enlarges 
- + cursor changes */
+ + cursor changes 
+ 3. follow sgtourism website: navbar at the start is transparent cuz of image,
+ when user scrolls up navbar becomes white but when it reaches the top it turns transparent*/
 
 const AttractionCard = ({ attraction }) => {
     return (

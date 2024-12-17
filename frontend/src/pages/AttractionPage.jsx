@@ -5,6 +5,8 @@ import { CgWebsite } from "react-icons/cg";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdOutlineStarRate } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
+import Carousel from '../features/Carousell.jsx';
+import CommentSection from '../components/CommentSection.jsx';
 
 /* TODO:
 1. retrieve info
@@ -23,7 +25,7 @@ const AttractionPage = () => {
     useEffect(() => {
         axios.get('http://localhost:3001/attractions')
             .then(response => {
-                setAttraction(response.data[1]);
+                setAttraction(response.data[0]);
                 console.log("data retrieved successfully")
             })
             .catch(error => {
@@ -31,47 +33,86 @@ const AttractionPage = () => {
             });
     }, [])
     console.log(attraction)
+    // count the number of images
 
     if (attraction != null) {
-        return (
-            <div className=''>
-                <img src={attraction.imageURL[0]} alt="" />
-                <div className='w-10/12 mx-auto my-14 gap-10 flex flex-col items-center'>
-                    <div className='flex items-center text-3xl gap-3 justify-center gray-800'>
-                        <h2>{attraction.title}</h2>
-                        <CgWebsite />
-                    </div>
-                    <div className='flex gap-10 text-xl justify-center  border-2 w-8/12 p-4'>
-                        <div>
-                            <div className='flex items-center'>
-                                <MdOutlineStarRate />
-                                <p>Rating: <span className='font-bold gray-800'>{attraction.rating}</span></p>
+        const imageCounter = attraction.imageURL.length
+        if (imageCounter == 1) {
+            return (
+                <div>
+                    <img src={attraction.imageURL[0]} alt="" />
+                    <div className='w-10/12 mx-auto my-14 gap-10 flex flex-col '>
+                        <div className='flex items-center text-4xl font-semibold text-gray-600 gap-6 justify-center gray-800'>
+                            <h2>{attraction.title}</h2>
+                            <CgWebsite />
+                        </div>
+                        <div className='flex gap-16 text-xl justify-center  border-2  p-10'>
+                            <div className='flex-col gap-6 flex'>
+                                <div className='flex '>
+                                    <MdOutlineStarRate className='mr-1' />
+                                    <div className='ml-5'>Rating: <span className='font-bold text-gray-600'>{attraction.rating}</span></div>
+                                </div>
+                                <div className='flex items-center'>
+                                    <RiMoneyDollarCircleFill />
+                                    <p>Price <span className='font-bold text-gray-600'>{attraction.pricing}</span></p>
+                                </div>
                             </div>
-                            <div className='flex items-center'>
-                                <RiMoneyDollarCircleFill />
-                                <p>Price <span className='font-bold gray-800'>{attraction.pricing}</span></p>
+                            <div className='flex-col gap-6 flex'>
+                                <div className='flex items-center'>
+                                    <MdAccessTimeFilled />
+                                    <p className='font-bold text-gray-600'>{attraction.openingTime} - {attraction.closingTime}</p>
+                                </div>
+                                <div className='flex items-center'>
+                                    <FaLocationDot />
+                                    <p className='font-bold text-gray-600'> {attraction.address}</p>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div className='flex items-center'>
-                                <MdAccessTimeFilled />
-                                <p className='font-bold gray-800'>{attraction.openingTime} - {attraction.closingTime}</p>
-                            </div>
-                            <div className='flex items-center'>
-                                <FaLocationDot />
-                                <p className='font-bold gray-800'> {attraction.address}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p className='text-lg w-10/12'>{attraction.description}</p>
+                        <p className='text-lg w-7/12 leading-relaxed'>{attraction.description}</p>
+                        <CommentSection />
+                    </div >
                 </div >
+            )
+        } else if (imageCounter > 1) {
+            return (
+                <div>
+                    <Carousel images={attraction.imageURL} />
+                    <div className='w-10/12 mx-auto my-14 gap-10 flex flex-col items-center'>
+                        <div className='flex items-center text-4xl font-semibold text-gray-600 gap-6 justify-center gray-800'>
+                            <h2>{attraction.title}</h2>
+                            <CgWebsite />
+                        </div>
+                        <div className='flex gap-16 text-xl justify-center  border-2  p-10'>
+                            <div className='flex-col gap-6 flex'>
+                                <div className='flex items-center gap-1'>
+                                    <MdOutlineStarRate />
+                                    <p>Rating: <span className='font-bold text-gray-600'>{attraction.rating}</span></p>
+                                </div>
+                                <div className='flex items-center gap-1'>
+                                    <RiMoneyDollarCircleFill />
+                                    <p>Price <span className='font-bold text-gray-600'>{attraction.pricing}</span></p>
+                                </div>
+                            </div>
+                            <div className='flex-col gap-6 flex'>
+                                <div className='flex items-center gap-1'>
+                                    <MdAccessTimeFilled />
+                                    <p className='font-bold text-gray-600'>{attraction.openingTime} - {attraction.closingTime}</p>
+                                </div>
+                                <div className='flex items-center gap-1'>
+                                    <FaLocationDot />
+                                    <p className='font-bold text-gray-600'> {attraction.address}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p className='text-lg w-7/12 leading-relaxed'>{attraction.description}</p>
+                        <CommentSection />
+                    </div >
 
 
-            </div >
-        )
+                </div >
+            )
+        }
     }
-
-
 }
 
 export default AttractionPage

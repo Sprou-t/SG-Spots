@@ -1,0 +1,4 @@
+# Ignore Node modules for both frontend and backend
+node_modules/
+
+backend/.env

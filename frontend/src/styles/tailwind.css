@@ -6,7 +6,6 @@
 html,
 body {
   height: 100%;
-  width: 100dvw;
   margin: 0;
   padding: 0;
   text-align: left;
@@ -15,6 +14,5 @@ body {
 #root {
   display: grid;
   height: 100%;
-  width: 100dvw;
   grid-template-rows:80px 1fr 300px; 
 }
