@@ -10,15 +10,20 @@ import { SlideLeft, SlideRight } from "../features/SlideInAnimation.jsx";
 import Carousel from '../features/Carousell.jsx';
 
 /* TODO: 
-			3. write a blog(share your experiences) 
+Routing
+1. to homepage
+2. sign up/ login page
+Extra features
+-links
+-write a blog(share your experiences) 
 */
 
 
 const Main = () => {
 	const images = [mainImg1, mainImg2, mainImg3, mainImg4, mainImg5];
 	return (
-		<div className="w-screen sm:pb-4 m-0 text-left">
-			<div className="relative flex h-screen w-screen">
+		<div className=" sm:pb-4 m-0 text-left">
+			<div className="relative flex h-screen">
 				<Carousel images={images} autoSlide={true} autoSlideInterval={5000} />
 			</div>
 
