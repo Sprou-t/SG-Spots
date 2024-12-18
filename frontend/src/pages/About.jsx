@@ -13,14 +13,14 @@ const AboutSGSpots = () => {
 
                     <p>
                         If you have any ideas for improvements, or if you'd like to collaborate on this project or other ventures, feel free to reach out! Drop an email at{' '}
-                        <a href="mailto:lauweibin77@gmail.com" className="text-blue-600 hover:underline">
+                        <a href="mailto:lauweibin77@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                             lauweibin77@gmail.com
                         </a>{' '}
                         or visit my{' '}
-                        <a href="https://www.linkedin.com/in/wei-bin-lau-326439239/" className="text-blue-600 hover:underline">
+                        <a href="https://www.linkedin.com/in/wei-bin-lau-326439239/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                             LinkedIn
                         </a>. For collaboration in this project, you can also join me on{' '}
-                        <a href="https://github.com/Sprou-t/SG-Spots" className="text-blue-600 hover:underline">
+                        <a href="https://github.com/Sprou-t/SG-Spots" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                             GitHub
                         </a>.
                     </p>

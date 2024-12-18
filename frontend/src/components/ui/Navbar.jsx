@@ -47,7 +47,7 @@ const Navbar = ({ openModal }) => {
       {/* Navbar content */}
       <div className="relative flex flex-col md:flex-row justify-between items-center px-4 py-3 gap-2">
         {/* Logo and Text Linking to Homepage */}
-        <Link to="/" className="flex gap-2 items-center md:mr-16">
+        <Link to="/home" className="flex gap-2 items-center md:mr-16">
           <img src={logo} alt="SG SPOTS" className="h-16 rounded-lg" />
           <h1 className="text-white">
             <span className="text-red-600">SG</span> SPOTS

@@ -11,6 +11,7 @@ import Modal from "./components/ui/Modal.jsx";
 import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import AboutSGSpots from "./pages/About.jsx";
+import Blog from "./pages/Blog.jsx";
 
 
 const App = () => {
@@ -33,13 +34,16 @@ const App = () => {
 			<Navbar openModal={openModal} />
 			<Modal isModalOpen={isModalOpen} closeModal={closeModal} modalType={modalType} />
 
-			<AboutSGSpots />
-			{/* <Routes>
-				<Route path='/' element={<Landing />}></Route>
-				<Route path='/home' element={<Homepage />}>
-					<Route path=':id' element={<AttractionPage />}></Route>
-				</Route >
-			</Routes > */}
+			<Routes>
+				<Route path='/' element={<Landing />} />
+				<Route path='/home' element={<Homepage />} />
+				<Route path='/home/:id' element={<AttractionPage />} />
+
+				<Route path="/blog" element={<Blog />} />
+				<Route path='/privacyPolicy' element={<PrivacyPolicy />} />
+				<Route path='/termsAndConditions' element={<TermsAndConditions />} />
+				<Route path='/about' element={<AboutSGSpots />} />
+			</Routes >
 			<Footer />
 		</div >
 	);
