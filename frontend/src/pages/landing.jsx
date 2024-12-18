@@ -8,7 +8,7 @@ import findImg from "../assets/landingImages/water-new-night-marina-business.jpg
 import writeImg from "../assets/landingImages/garden-by-bay-night-scene-singapore.jpg"
 import { SlideLeft, SlideRight } from "../components/animation/SlideInAnimation.jsx";
 import Carousel from '../components/animation/Carousell.jsx';
-
+import { Link } from 'react-router-dom';
 /* TODO: 
 Routing
 1. to homepage
@@ -35,6 +35,7 @@ const Main = () => {
 						<p>
 							We've curated over 1000 amazing spots across Singapore, from breathtaking views to delicious food and hidden gems. Explore places that match your mood, get community-driven insights, and enjoy authentic experiences that help you make unforgettable memories.
 						</p>
+						<Link to="/home" className='text-red-600 hover:text-customRed-light underline text-lg font-semibold'>Visit our Webpage</Link>
 					</div>
 				</SlideRight>
 
@@ -50,7 +51,7 @@ const Main = () => {
 					<img src={writeImg} className="lg:size-1/2" alt="Write reviews" />
 				</SlideLeft>
 			</div >
-		</div>
+		</div >
 
 	);
 }

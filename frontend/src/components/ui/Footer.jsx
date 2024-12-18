@@ -10,39 +10,39 @@ import github from '../../assets/footerImages/github-142-svgrepo-com.svg'
 const footer = () => {
     return (
         <div className='flex flex-col gap-5 items-center bg-gray-300  p-12 text-center'>
-            <Link className='text-red-600 text-5xl font-bold'>SG<span className='text-black'> SPOTS</span></Link>
+            <Link to='/home' className='text-red-600 text-5xl font-bold'>SG<span className='text-black'> SPOTS</span></Link>
 
             <ul className='flex gap-5'>
                 <li>
                     <a>
-                        <img src={linkedin} alt="LinkedIn" className='size-10 hover:scale-110' />
+                        <img src={linkedin} alt="LinkedIn" className='size-10 hover:scale-110' href="https://www.linkedin.com/in/wei-bin-lau-326439239/" target="_blank" rel="noopener noreferrer" />
                     </a>
                 </li>
                 <li>
                     <a>
-                        <img src={github} alt="GitHub" className='size-10 hover:scale-110' />
+                        <img src={github} alt="GitHub" className='size-10 hover:scale-110' href="https://github.com/Sprou-t/SG-Spots" target="_blank" rel="noopener noreferrer" />
                     </a>
                 </li>
             </ul>
 
             <ul className='flex gap-7 text-lg font-semibold'>
                 <li>
-                    <a className='hover:border-b-2 border-black'>Blog</a>
+                    <Link to='/blog' className='hover:border-b-2 border-black'>Blog</Link>
                 </li>
                 <li>
-                    <a className='hover:border-b-2 border-black'>About</a>
+                    <Link to='/about' className='hover:border-b-2 border-black'>About</Link>
                 </li>
             </ul>
 
             <ul className='flex gap-5 text-sm'>
                 <li>
-                    <a href='hi' className='hover:border-b-2 border-black'>Terms & Conditions</a>
+                    <Link to='/termsAndConditions' className='hover:border-b-2 border-black'>Terms & Conditions</Link>
                 </li>
                 <li>
                     <p>•</p>
                 </li>
                 <li>
-                    <a className='hover:border-b-2 border-black'>Privacy Policy</a>
+                    <Link to='/privacyPolicy' className='hover:border-b-2 border-black'>Privacy Policy</Link>
                 </li>
                 <li>
                     <p>•</p>
