@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Searchbox from './Searchbox.jsx';
-import logo from "../assets/navbarImages/borders-2099224.svg";
+import logo from "../../assets/navbarImages/borders-2099224.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ scrollDirection }) => {
