@@ -5,7 +5,7 @@ import { CgWebsite } from "react-icons/cg";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdOutlineStarRate } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
-import Carousel from '../features/Carousell.jsx';
+import Carousel from '../components/animation/Carousell.jsx';
 import CommentSection from '../components/ui/CommentSection.jsx';
 
 /* TODO:

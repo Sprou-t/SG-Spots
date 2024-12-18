@@ -4,6 +4,8 @@ import Landing from "./pages/Landing.jsx";
 import AttractionPage from "./pages/AttractionPage.jsx";
 import Navbar from "./components/ui/Navbar.jsx";
 import Footer from "./components/ui/Footer.jsx";
+import LogIn from "./pages/LogIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 
 const App = () => {
@@ -11,7 +13,7 @@ const App = () => {
 		<div className="w-full">
 
 			<Navbar />
-			<AttractionPage />
+			<LogIn />
 			<Footer />
 		</div>
 	);

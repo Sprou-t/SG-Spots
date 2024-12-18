@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import linkedin from '../assets/footerImages/linkedin-icon-2-logo-svgrepo-com.svg'
-import github from '../assets/footerImages/github-142-svgrepo-com.svg'
+import linkedin from '../../assets/footerImages/linkedin-icon-2-logo-svgrepo-com.svg'
+import github from '../../assets/footerImages/github-142-svgrepo-com.svg'
 
 /*TODO:
 1. add the links in href

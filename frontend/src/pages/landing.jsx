@@ -6,8 +6,8 @@ import mainImg4 from "../assets/landingImages/night-wonderful-urban-beautiful-la
 import mainImg5 from "../assets/landingImages/beautiful-flamingos-zoo.jpg"
 import findImg from "../assets/landingImages/water-new-night-marina-business.jpg"
 import writeImg from "../assets/landingImages/garden-by-bay-night-scene-singapore.jpg"
-import { SlideLeft, SlideRight } from "../features/SlideInAnimation.jsx";
-import Carousel from '../features/Carousell.jsx';
+import { SlideLeft, SlideRight } from "../components/animation/SlideInAnimation.jsx";
+import Carousel from '../components/animation/Carousell.jsx';
 
 /* TODO: 
 Routing
