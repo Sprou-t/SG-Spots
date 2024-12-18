@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Searchbox from './Searchbox.jsx';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import logo from "../../assets/navbarImages/borders-2099224.svg";
-import { Link } from "react-router-dom";
+import Searchbox from './Searchbox.jsx';
+import Modal from './Modal.jsx'; // Import Modal for login/signup
 
-const Navbar = ({ scrollDirection }) => {
-  const oldScrollY = useRef(window.scrollY); // oldScrolly retains its value across renders
+const Navbar = ({ openModal }) => {
+  const oldScrollY = useRef(window.scrollY); // Retains scroll position between renders
+  const [direction, setDirection] = useState('up'); // Default direction is up
 
-  const [direction, setDirection] = useState('up');
-
+  // Handle scroll direction
   const controlDirection = () => {
     if (window.scrollY > oldScrollY.current) {
       setDirection('down');
@@ -15,20 +16,29 @@ const Navbar = ({ scrollDirection }) => {
       setDirection('up');
     }
     oldScrollY.current = window.scrollY;
-  }
+  };
 
+  // Adding event listener for scroll
   useEffect(() => {
-
     window.addEventListener('scroll', controlDirection, true);
 
     return () => {
-      window.removeEventListener('scroll', controlDirection, true);
+      window.removeEventListener('scroll', controlDirection, true); // Cleanup on unmount
     };
   }, []);
 
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+
+  // Functions to open and close modals
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+  const openSignUpModal = () => setIsSignUpModalOpen(true);
+  const closeSignUpModal = () => setIsSignUpModalOpen(false);
+
   return (
     <div
-      className={`z-50 fixed top-0 w-full bg-transparent backdrop-filter  text-white font-bold transition-transform duration-300 ${direction == 'up' ? 'translate-y-0' : ' -translate-y-full'
+      className={`z-50 fixed top-0 w-full bg-transparent backdrop-filter text-white font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : ' -translate-y-full'
         }`}
     >
       {/* Dark overlay effect */}
@@ -48,19 +58,20 @@ const Navbar = ({ scrollDirection }) => {
         <Searchbox />
 
         {/* Navigation Buttons */}
-        <div className="flex gap-8 md:gap-4 ">
-          <Link
-            to="/login"
+        <div className="flex gap-8 md:gap-4">
+          <button
+            onClick={() => openModal('login')} // Open login modal on click
             className="md:w-24 inline-flex items-center justify-center h-9 px-4 py-2 text-white font-bold rounded-xl border border-white hover:bg-white hover:text-black"
           >
             Log In
-          </Link>
-          <Link
-            to="/signup"
+          </button>
+
+          <button
+            onClick={() => openModal('signUp')} // Open sign-up modal on click
             className="md:w-24 inline-flex items-center justify-center h-9 px-4 py-2 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700"
           >
             Sign Up
-          </Link>
+          </button>
         </div>
       </div>
     </div>
