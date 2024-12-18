@@ -8,6 +8,9 @@ import Footer from "./components/ui/Footer.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Modal from "./components/ui/Modal.jsx";
+import TermsAndConditions from "./pages/TermsAndConditions.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import AboutSGSpots from "./pages/About.jsx";
 
 
 const App = () => {
@@ -30,14 +33,13 @@ const App = () => {
 			<Navbar openModal={openModal} />
 			<Modal isModalOpen={isModalOpen} closeModal={closeModal} modalType={modalType} />
 
-			<Routes>
+			<AboutSGSpots />
+			{/* <Routes>
 				<Route path='/' element={<Landing />}></Route>
 				<Route path='/home' element={<Homepage />}>
 					<Route path=':id' element={<AttractionPage />}></Route>
 				</Route >
-				<Route path='/auth' element={<LogIn />}></Route>
-			</Routes >
-			<LogIn />
+			</Routes > */}
 			<Footer />
 		</div >
 	);

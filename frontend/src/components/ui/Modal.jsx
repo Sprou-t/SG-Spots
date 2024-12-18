@@ -12,7 +12,7 @@ const Modal = ({ isModalOpen, closeModal, modalType }) => {
             onClick={closeModal} // Close the modal when clicking outside
         >
             <div
-                className="bg-white p-8 rounded-lg w-96 relative"
+                className="bg-white p-8 rounded-lg md:w-5/12 relative "
                 onClick={(e) => e.stopPropagation()} // Prevent closing on click inside the modal
             >
                 { /* Close button positioned at the top right corner */}
