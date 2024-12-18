@@ -6,7 +6,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdOutlineStarRate } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
 import Carousel from '../features/Carousell.jsx';
-import CommentSection from '../components/CommentSection.jsx';
+import CommentSection from '../components/ui/CommentSection.jsx';
 
 /* TODO:
 -comment section + make icons more colorful
