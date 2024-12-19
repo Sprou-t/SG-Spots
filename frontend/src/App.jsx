@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef, ref } from "react";
+import React, { useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage.jsx";
 import Landing from "./pages/Landing.jsx";
 import AttractionPage from "./pages/AttractionPage.jsx";
 import Navbar from "./components/ui/Navbar.jsx";
 import Footer from "./components/ui/Footer.jsx";
-import LogIn from "./pages/LogIn.jsx";
-import SignUp from "./pages/SignUp.jsx";
 import Modal from "./components/ui/Modal.jsx";
 import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import AboutSGSpots from "./pages/About.jsx";
 import Blog from "./pages/Blog.jsx";
+import { AuthFormContext } from "./context/context.auth.jsx";
 
 
 const App = () => {
@@ -28,11 +27,14 @@ const App = () => {
 	const closeModal = () => {
 		setIsModalOpen(false);
 	};
-
+	// app -> modal -> auth
 	return (
 		<div className="w-full">
 			<Navbar openModal={openModal} />
-			<Modal isModalOpen={isModalOpen} closeModal={closeModal} modalType={modalType} />
+
+			<AuthFormContext.Provider value={{ modalType, setModalType }}>
+				<Modal isModalOpen={isModalOpen} closeModal={closeModal} />
+			</AuthFormContext.Provider>
 
 			<Routes>
 				<Route path='/' element={<Landing />} />

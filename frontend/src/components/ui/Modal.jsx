@@ -1,9 +1,8 @@
 // Modal.jsx
 import React from 'react';
-import SignUp from './../../pages/SignUp.jsx';
-import LogIn from '../../pages/LogIn.jsx';
+import AuthForm from '../../pages/AuthForm.jsx';
 
-const Modal = ({ isModalOpen, closeModal, modalType }) => {
+const Modal = ({ isModalOpen, closeModal }) => {
     if (!isModalOpen) return null; // Don't render anything if modal is not open
 
     return (
@@ -24,10 +23,10 @@ const Modal = ({ isModalOpen, closeModal, modalType }) => {
                 </button>
 
                 { /* Add the respective forms */}
-                {modalType === 'signUp' ? <SignUp /> : <LogIn />}
+                <AuthForm />
             </div>
         </div>
     );
 };
 
-export default Modal;
+export default Modal
