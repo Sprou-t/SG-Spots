@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { FaLocationDot } from "react-icons/fa6";
-import { CgWebsite } from "react-icons/cg";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdOutlineStarRate } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
@@ -37,7 +36,6 @@ const AttractionPage = () => {
                 <div className='w-10/12 mx-auto my-14 gap-10 flex flex-col items-center'>
                     <div className='flex items-center text-4xl font-semibold text-gray-600 gap-6 justify-center gray-800'>
                         <h2>{attraction.title}</h2>
-                        <CgWebsite />
                     </div>
                     <div className='md:flex gap-16 text-xl justify-center  border-2 xs:p-2 md:p-10'>
                         <div className='flex-col gap-6 flex mb-6 md:mb-0'>
@@ -61,8 +59,8 @@ const AttractionPage = () => {
                             </div>
                         </div>
                     </div>
-                    <p className='text-lg w-7/12 leading-relaxed'>{attraction.description}</p>
-                    <a href={attraction.website} target="_blank" rel="noopener noreferrer">
+                    <p className='text-lg w-7/12 leading-relaxed '>{attraction.description}</p>
+                    <a href={attraction.website} target="_blank" rel="noopener noreferrer" className='text-red-600 hover:text-customRed-light text-lg underline font-semibold'>
                         Find out more
                     </a>
                     <CommentSection />
