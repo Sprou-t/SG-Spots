@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
         <div className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full">
                 <h2 className="text-2xl font-bold mb-6 text-center">Privacy Policy</h2>
-                <p className="text-gray-700 mb-4">Last updated: October 7, 2024</p>
+                <p className="text-gray-700 mb-4">Last updated: December 19, 2024</p>
 
                 <div className=" text-gray-700 space-y-6">
                     <h3 className="font-semibold">1. Information We Collect</h3>
