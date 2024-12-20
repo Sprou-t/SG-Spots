@@ -1,13 +1,13 @@
 import bcrypt from "bcrypt";
-import User from "../models/models.users.js";
+import User from "../../models/models.users.js";
 import mongoose from "mongoose";
 
 export const getAllUser = async (req, res) => {
 	try {
-		const user = await User.find({}).populate('itenaries',{title: 1});
+		const user = await User.find({}).populate('itenaries', { title: 1 });
 		res.status(200).json({ success: true, data: user });
 	} catch (error) {
-        console.error(`error in obtaining users: ${error.message}`);
+		console.error(`error in obtaining users: ${error.message}`);
 		res.status(500).json({ success: false, message: "server error" });
 	}
 };
@@ -23,10 +23,10 @@ export const createUser = async (req, res) => {
 
 	const saltRounds = 10;
 	const passwordHash = await bcrypt.hash(password, saltRounds);
-    const newUser = new User({ // note that itenaries will be an empty array by default
+	const newUser = new User({ // note that itenaries will be an empty array by default
 		username,
 		name,
-		passwordHash,      
+		passwordHash,
 	});
 
 	try {
@@ -36,17 +36,18 @@ export const createUser = async (req, res) => {
 			message: `user created: ${newUser}`,
 		});
 	} catch (error) {
-        console.error(`error in user creation: ${error.message}`);
-        res.status(500).json({
-            success:false,
-            message:'internal server error'
-        })
-    }
+		console.error(`error in user creation: ${error.message}`);
+		res.status(500).json({
+			success: false,
+			message: 'internal server error'
+		})
+	}
+	// TODO: extend the function to log user in(import function in)
 };
 
 export const updateUser = async (req, res) => {
 	const { id } = req.params;
-    // more like updatedUserData
+	// more like updatedUserData
 	const updatedUserData = req.body; // this new update will be sent in using postman
 
 	if (!mongoose.Types.ObjectId.isValid(id)) {
