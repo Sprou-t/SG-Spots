@@ -14,7 +14,7 @@ const userSchema = new Schema({
 	},
 	//store hashed ver of password, thus must hash password first in controller
 	passwordHash: {
-		//TODO: make password req more robust
+		//TODO: make password req more robust(prob not for easy going website)
 		type: String,
 		required: true,
 		minlength: 3,
