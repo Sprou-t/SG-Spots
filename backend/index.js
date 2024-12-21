@@ -3,7 +3,7 @@ import express, { request, response } from "express";
 import dotenv from "dotenv";
 import connectDb from "./db.js";
 import cors from "cors";
-import itenaryRoutes from "./routes/routes.itenary.js";
+import commentRoutes from "./routes/routes.comment.js";
 import userRoutes from "./routes/routes.user.js";
 import apiRoutes from "./routes/routes.apiCall.js";
 
@@ -13,7 +13,7 @@ const app = express();
 // this line allow our express app to parse(read) requests with json payloads(data)
 app.use(express.json());
 app.use(cors());
-app.use("/itenary", itenaryRoutes);
+app.use("/comment", commentRoutes);
 app.use("/user", userRoutes);
 app.use("/api", apiRoutes);
 

@@ -19,9 +19,9 @@ const userSchema = new Schema({
 		required: true,
 		minlength: 3,
 	},
-	itenaries: {
+	comments: {
 		type: [mongoose.Schema.Types.ObjectId], // Array of ObjectIds
-		ref: "Itenary", // Reference to the Itenary model
+		ref: "Comment", // Reference to the Comment model
 		default: [], // Default value if no itineraries are provided
 	},
 });

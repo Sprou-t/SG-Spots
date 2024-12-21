@@ -11,7 +11,7 @@ const connectDb = async () => {
   } catch (error) {
     console.log(`Error: ${error.message}`); //access the msg prop of the error obj
     process.exit(1); //ensure process stops running to prevent unwanted behaviours
-  } dfd
+  }
 }
 
 export default connectDb;

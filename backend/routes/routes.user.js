@@ -1,11 +1,9 @@
-import { getAllUser,createUser,updateUser,deleteUser } from "../controller/controller.user.js";
+import { signUp, login } from '../controller/controller.user.js';
 import express from 'express';
 
 const router = express.Router();
 
-router.get("/", getAllUser);
-router.post("/", createUser);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+router.post('/signUp', signUp);
+router.post('/logIn', login)
 
 export default router; // to index.js
