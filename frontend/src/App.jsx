@@ -1,17 +1,16 @@
-import React, { useState, useContext } from "react";
-import { Routes, Route } from "react-router-dom";
-import Homepage from "./pages/Homepage.jsx";
-import Landing from "./pages/Landing.jsx";
-import AttractionPage from "./pages/AttractionPage.jsx";
-import Navbar from "./components/ui/Navbar.jsx";
-import Footer from "./components/ui/Footer.jsx";
-import Modal from "./components/ui/Modal.jsx";
-import TermsAndConditions from "./pages/TermsAndConditions.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
-import AboutSGSpots from "./pages/About.jsx";
-import Blog from "./pages/Blog.jsx";
-import { AuthFormContext } from "./context/context.auth.jsx";
-
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Homepage.jsx';
+import Landing from './pages/Landing.jsx';
+import AttractionPage from './pages/AttractionPage.jsx';
+import Navbar from './components/ui/Navbar.jsx';
+import Footer from './components/ui/Footer.jsx';
+import Modal from './components/ui/Modal.jsx';
+import TermsAndConditions from './pages/TermsAndConditions.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import AboutSGSpots from './pages/About.jsx';
+import Blog from './pages/Blog.jsx';
+import { AuthFormContext } from './context/context.auth.jsx';
 
 const App = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +28,7 @@ const App = () => {
 	};
 	// app -> modal -> auth
 	return (
-		<div className="w-full">
+		<div className='w-full'>
 			<Navbar openModal={openModal} />
 
 			<AuthFormContext.Provider value={{ modalType, setModalType }}>
@@ -41,13 +40,16 @@ const App = () => {
 				<Route path='/home' element={<Homepage />} />
 				<Route path='/home/:id' element={<AttractionPage />} />
 
-				<Route path="/blog" element={<Blog />} />
+				<Route path='/blog' element={<Blog />} />
 				<Route path='/privacyPolicy' element={<PrivacyPolicy />} />
-				<Route path='/termsAndConditions' element={<TermsAndConditions />} />
+				<Route
+					path='/termsAndConditions'
+					element={<TermsAndConditions />}
+				/>
 				<Route path='/about' element={<AboutSGSpots />} />
-			</Routes >
+			</Routes>
 			<Footer />
-		</div >
+		</div>
 	);
 };
 

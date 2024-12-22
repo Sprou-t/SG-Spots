@@ -1,163 +1,219 @@
 {
-    "attractions":[
-        {
-            "title":"Southern Albatross",
-            "id":1,
-            "type": " Leisure & Recreation",
-            "description":"Go On Exploration Aboard A Fast Craft Designed To Bring You Closer To The Water And Nearer To The Islands.Our Purpose And Goal To Creating The Southern Albatross Fast Craft Experience Was To Access Areas Where Her Elder Brother The Royal Albatross Couldn’t Achieve With It’s Massive Size. The Southern Albatross Was Meticulously Engineered To Be A Nimble And Efficient Vessel, Capable Of Carrying Up To 50 Passengers At A Time. Its Twin-Hull And Dual Onboard Motor Design Enable It To Reach Impressive Speeds Of Up To 26 Knots In The Water. The Southern Albatross, With Its Smaller Profile, Allows For Superior Maneuverability, Making It Adept At Navigating Closer To The Islands.Every Thursday To MondaySetting Sail Twice Daily1pm – 2pm 5pm – 6pmRWS Sentosa At Royal Albatross Home Berth.Special SailCOUNTDOWN ON THE SOUTHERN ALBATROSSlink: https://www.tallship.com.sg/events/nye-countdown/ ",
-            "rating": 0,
-            "pricing": "$45 / pax",
-            "address":  "8 Sentosa Gateway, 098136",
-            "openingTime":"09:00" ,
-            "closingTime":"18:00",
-            "imageURL": ["https://www.boatlagoonyachting.com/wp-content/uploads/2023/09/271880883_153510390363436_5462214142711888785_n.jpg","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHrSZl2KMA5pBksLkBu6LJn9aKrCplmTxDzA&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVArB1xPQv234L0xbqqb5xnXdx1qo0yFfUfw&s"],
-            "website": "https://speedboat.sg/",
-            "tags":["Activities", "Adults", "History", "Attractions", "Romantic"]
-        },
-        
-        {
-            "title": "Skyline Luge Sentosa",
-            "id":2,
-            "type": "Adventure & Activities",
-            "description": "Ride Downhill Thrills With The Skyline Luge Sentosa! Experience The Perfect Blend Of Adrenaline And Fun As You Glide Through Purpose-Built Tracks On A Luge Kart. With Four Unique Tracks Spanning Over 2.6KM, You’ll Enjoy Scenic Views During The Day And A Thrilling LED-Lit Experience At Night. The Adventure Begins With A Scenic Skyride That Takes You To The Start Point, Offering Stunning Views Of Sentosa Island.",
-            "rating": 0,
-            "pricing": "$25 / ride",
-            "address": "45 Siloso Beach Walk, Sentosa, 099003",
-            "openingTime": "10:00",
-            "closingTime": "21:30",
-            "imageURL": ["https://media.skyline.nz.beingbui.lt/sentosa/media/uploads/2024/04/19042859/Skyline-Luge-Singapore_family-ride-the-skyride-hands-up_M.jpg"],
-            "website":"https://sentosa.skylineluge.com/",
-            "tags": ["Adventure", "Family", "Outdoor", "Fun", "Night"]
-        },
-        {
-            "title": "Gardens by the Bay – Cloud Forest",
-            "id":3,
-            "type": "Nature & Attractions",
-            "description": "Step Into A Misty Wonderland At The Cloud Forest, A Spectacular Indoor Tropical Rainforest Dome In The Heart Of Singapore. Marvel At The Towering Indoor Waterfall, Exotic Plant Life, And Aerial Walkways. The Cloud Forest Brings Together Conservation And Beauty, Offering A Unique Opportunity To Explore Rare Plant Species And Stunning Views Of The Marina Bay Skyline.",
-            "rating": 0,
-            "pricing": "$20 / entry",
-            "address": "18 Marina Gardens Dr, 018953",
-            "openingTime": "09:00",
-            "closingTime": "21:00",
-            "imageURL": ["https://www.gardensbythebay.com.sg/content/dam/gbb-2021/image/things-to-do/attractions/cloud-forest/gallery/cloud-forest-02.jpg"],
-            "tags": ["Nature", "Indoor", "Scenic", "Educational", "Family"]
-        },
-        {
-            "title": "Sentosa Adventure Cove Waterpark",
-            "id":4,
-            "type": "Leisure & Recreation",
-            "description": "Dive Into Fun At Adventure Cove Waterpark! Enjoy Thrilling Water Slides, A Lazy River, And The Unique Opportunity To Snorkel With 20,000 Tropical Fish In The Rainbow Reef. Perfect For Families And Friends Looking For A Splashing Good Time. Don’t Miss The Exciting Hydro-Magnetic Coaster, Asia’s First Water-Based Roller Coaster!",
-            "rating": 0,
-            "pricing": "$38 / pax",
-            "address": "8 Sentosa Gateway, 098269",
-            "openingTime": "10:00",
-            "closingTime": "18:00",
-            "imageURL": ["https://www.sentosa.com.sg/-/media/sentosa/hero-asset/attractions/adventure-cove/2022/acw2389_adventureriver_1840x1035.jpg"],
-            "tags": ["Water Activities", "Family", "Thrills", "Outdoor", "Fun"]
-        },
-        {
-            "title": "Singapore Flyer",
-            "id":5,
-            "type": "Attractions",
-            "description": "Enjoy Unparalleled Views Of Singapore’s Iconic Skyline From The Singapore Flyer, One Of The World’s Largest Observation Wheels. Perfect For Couples, Families, Or Groups, The Flyer Offers Stunning Panoramic Views Of Marina Bay, Gardens by the Bay, And Even Neighboring Malaysia And Indonesia On A Clear Day.",
-            "rating": 0,
-            "pricing": "$33 / pax",
-            "address": "30 Raffles Ave, 039803",
-            "openingTime": "08:30",
-            "closingTime": "22:30",
-            "imageURL": ["https://www.singaporeflyer.com/storage/custom-menus/September2020/enKE8lC5tyqLHWZoHuPY.jpg"],
-            "tags": ["Romantic", "Scenic", "Family", "Iconic", "Photography"]
-        },
-        {
-            "title": "Pulau Ubin Cycling Adventure",
-            "id":6,
-            "type": "Outdoor Activities",
-            "description": "Escape The Hustle Of City Life With A Trip To Pulau Ubin. Rent A Bicycle And Explore This Rustic Island At Your Own Pace. Discover Hidden Trails, Mangroves, And Kampong Houses While Immersing Yourself In Singapore’s Heritage. Don’t Miss The Chek Jawa Wetlands For Stunning Biodiversity!",
-            "rating": 0,
-            "pricing": "$12 / bike rental",
-            "address": "Pulau Ubin Jetty, 508329",
-            "openingTime": "07:00",    
-            "closingTime": "19:00",
-            "imageURL": ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhP4y1U1Dp73q6MWVcROrSQ-e7ULKS9pA4aA&s"],
-            "tags": ["Adventure", "Nature", "Outdoor", "History", "Eco-friendly"]
-        },
-        {
-            "title": "Universal Studios Singapore",
-            "id":7,
-            "type": "Theme Parks",
-            "description": "Step Into A World Of Thrills At Universal Studios Singapore. Explore Seven Themed Zones Packed With Rides, Shows, And Entertainment For All Ages. From The Transformers Ride To Jurassic Park Rapids, Each Attraction Promises An Unforgettable Adventure. Great For Families And Movie Enthusiasts!",
-            "rating": 0,
-            "pricing": "$88 / pax",
-            "address": "8 Sentosa Gateway, 098269",
-            "openingTime": "10:00",
-            "closingTime": "19:00",
-            "imageURL": ["data:image/jpeg;base64,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"],
-            "tags": ["Family", "Thrills", "Movies", "Adventure", "Entertainment"]
-        },
-        {
-            "title": "Marina Bay Sands Infinity Pool",
-            "id":8,
-            "type": "Luxury Experience",
-            "description": "Take A Dip In The World’s Largest Rooftop Infinity Pool At Marina Bay Sands. Reserved Exclusively For Hotel Guests, This Iconic Pool Offers Stunning Views Of Singapore’s Skyline While Providing A Luxurious Relaxation Experience. Perfect For Romantic Getaways Or Indulgent Self-Care.",
-            "rating": 0,
-            "pricing": "$550 / night (hotel stay)",
-            "address": "10 Bayfront Ave, 018956",
-            "openingTime": "06:00",
-            "closingTime": "23:00",
-            "imageURL": ["https://cdn-imgix.headout.com/media/images/7d4ecb0759627c1c068661db95a208c8-1173-singapore--gardens-by-the-bay-02.jpg?auto=format&w=486&h=385.2&q=90&fit=crop&crop=faces"],
-            "tags": ["Luxury", "Romantic", "Scenic", "Relaxation", "Iconic"]
-        },
-        {
-            "title": "Changi Jurassic Mile",
-            "id":9,
-            "type": "Outdoor Attractions",
-            "description": "Walk Among Life-Sized Dinosaur Sculptures At The Changi Jurassic Mile, Singapore’s Longest Outdoor Display Of Prehistoric Creatures. Great For Families And Dino Enthusiasts, This Trail Is Accessible For Cyclists And Pedestrians Alike.",
-            "rating": 0,
-            "pricing": "Free",
-            "address": "Changi Airport Connector, 819666",
-            "openingTime": "24 Hours",
-            "closingTime": "24 Hours",
-            "imageURL": ["https://static.thehoneycombers.com/wp-content/uploads/sites/2/2024/05/attractions-in-singapore-wallace-heng-unsplash-900x643.jpg"],
-            "tags": ["Family", "Free", "Outdoor", "Adventure", "Fun"]
-        },
-        {
-            "title": "Singapore Botanic Gardens",
-            "id":10,
-            "type": "Nature & Recreation",
-            "description": "Relax And Reconnect With Nature At The Singapore Botanic Gardens, A UNESCO World Heritage Site. Home To The National Orchid Garden, Picturesque Lakes, And A Wide Variety Of Plant Species, This Garden Is Perfect For Picnics, Photography, And Leisurely Walks.",
-            "rating": 0,
-            "pricing": "Free (Orchid Garden: $5)",
-            "address": "1 Cluny Rd, 259569",
-            "openingTime": "05:00",
-            "closingTime": "00:00",
-            "imageURL": ["https://cdn-imgix.headout.com/mircobrands-content/image/f6fe0b7bc68f3e97050ea11690834ca9-Helix%20Bridge%20Singapore.jpg?auto=format&w=648&h=364.5&q=90&fit=crop&ar=16%3A9&crop=faces&exp=-10"],
-            "tags": ["Nature", "Free", "Scenic", "Relaxation", "UNESCO"]
-        },
-        {
-            "title": "The Night Safari",
-            "id":11,
-            "type": "Wildlife & Nightlife",
-            "description": "Embark On A Nocturnal Adventure At The World’s First Night Safari. Witness Over 1,000 Animals In Their Natural Habitats Across Seven Zones. Experience The Thrill Of Spotting Creatures Such As Leopards And Elephants In This One-Of-A-Kind Wildlife Park.",
-            "rating": 0,
-            "pricing": "$55 / pax",
-            "address": "80 Mandai Lake Rd, 729826",
-            "openingTime": "19:15",
-            "closingTime": "00:00",
-            "imageURL": ["https://res.klook.com/image/upload/q_85/c_fill,w_750/v1691379347/eoahvbzyyunpnuei0olz.jpg"],
-            "tags": ["Wildlife", "Adventure", "Nightlife", "Family", "Unique"]
-        },
-        {
-            "title": "Haw Par Villa",
-            "id":12,
-            "type": "Cultural & Historical",
-            "description": "Step Into The World Of Chinese Mythology At Haw Par Villa. This Unique Park Features Over 1,000 Statues And Dioramas Depicting Traditional Folklore, Myths, And Morals. Great For Those Seeking A Cultural And Offbeat Experience.",
-            "rating": 0,
-            "pricing": "Free",
-            "address": "262 Pasir Panjang Rd, 118628",
-            "openingTime": "09:00",
-            "closingTime": "19:00",
-            "imageURL": ["https://cdn-imgix.headout.com/mircobrands-content/image/3c73b49810351d9d29f76633fa8d97f6-AdobeStock_274717415.jpeg?auto=format&w=702.4499999999999&h=401.4&q=90&fit=crop&ar=7%3A4&crop=faces"],
-            "tags": ["Cultural", "Free", "Educational", "Offbeat", "History"]
-        }
-    ]
+	"user": [
+		{
+			"name": "John",
+			"username": "John Doe",
+			"isLoggedIn": true
+		},
+		{
+			"name": "Jack",
+			"email": "Jack Sparrow",
+			"isLoggedIn": false
+		}
+	],
+	"attractions": [
+		{
+			"title": "Southern Albatross",
+			"id": 1,
+			"type": " Leisure & Recreation",
+			"description": "Go On Exploration Aboard A Fast Craft Designed To Bring You Closer To The Water And Nearer To The Islands.Our Purpose And Goal To Creating The Southern Albatross Fast Craft Experience Was To Access Areas Where Her Elder Brother The Royal Albatross Couldn’t Achieve With It’s Massive Size. The Southern Albatross Was Meticulously Engineered To Be A Nimble And Efficient Vessel, Capable Of Carrying Up To 50 Passengers At A Time. Its Twin-Hull And Dual Onboard Motor Design Enable It To Reach Impressive Speeds Of Up To 26 Knots In The Water. The Southern Albatross, With Its Smaller Profile, Allows For Superior Maneuverability, Making It Adept At Navigating Closer To The Islands.Every Thursday To MondaySetting Sail Twice Daily1pm – 2pm 5pm – 6pmRWS Sentosa At Royal Albatross Home Berth.Special SailCOUNTDOWN ON THE SOUTHERN ALBATROSSlink: https://www.tallship.com.sg/events/nye-countdown/ ",
+			"rating": 0,
+			"pricing": "$45 / pax",
+			"address": "8 Sentosa Gateway, 098136",
+			"openingTime": "09:00",
+			"closingTime": "18:00",
+			"imageURL": [
+				"https://www.boatlagoonyachting.com/wp-content/uploads/2023/09/271880883_153510390363436_5462214142711888785_n.jpg",
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHrSZl2KMA5pBksLkBu6LJn9aKrCplmTxDzA&s",
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVArB1xPQv234L0xbqqb5xnXdx1qo0yFfUfw&s"
+			],
+			"website": "https://speedboat.sg/",
+			"tags": [
+				"Activities",
+				"Adults",
+				"History",
+				"Attractions",
+				"Romantic"
+			]
+		},
+
+		{
+			"title": "Skyline Luge Sentosa",
+			"id": 2,
+			"type": "Adventure & Activities",
+			"description": "Ride Downhill Thrills With The Skyline Luge Sentosa! Experience The Perfect Blend Of Adrenaline And Fun As You Glide Through Purpose-Built Tracks On A Luge Kart. With Four Unique Tracks Spanning Over 2.6KM, You’ll Enjoy Scenic Views During The Day And A Thrilling LED-Lit Experience At Night. The Adventure Begins With A Scenic Skyride That Takes You To The Start Point, Offering Stunning Views Of Sentosa Island.",
+			"rating": 0,
+			"pricing": "$25 / ride",
+			"address": "45 Siloso Beach Walk, Sentosa, 099003",
+			"openingTime": "10:00",
+			"closingTime": "21:30",
+			"imageURL": [
+				"https://media.skyline.nz.beingbui.lt/sentosa/media/uploads/2024/04/19042859/Skyline-Luge-Singapore_family-ride-the-skyride-hands-up_M.jpg"
+			],
+			"website": "https://sentosa.skylineluge.com/",
+			"tags": ["Adventure", "Family", "Outdoor", "Fun", "Night"]
+		},
+		{
+			"title": "Gardens by the Bay – Cloud Forest",
+			"id": 3,
+			"type": "Nature & Attractions",
+			"description": "Step Into A Misty Wonderland At The Cloud Forest, A Spectacular Indoor Tropical Rainforest Dome In The Heart Of Singapore. Marvel At The Towering Indoor Waterfall, Exotic Plant Life, And Aerial Walkways. The Cloud Forest Brings Together Conservation And Beauty, Offering A Unique Opportunity To Explore Rare Plant Species And Stunning Views Of The Marina Bay Skyline.",
+			"rating": 0,
+			"pricing": "$20 / entry",
+			"address": "18 Marina Gardens Dr, 018953",
+			"openingTime": "09:00",
+			"closingTime": "21:00",
+			"imageURL": [
+				"https://www.gardensbythebay.com.sg/content/dam/gbb-2021/image/things-to-do/attractions/cloud-forest/gallery/cloud-forest-02.jpg"
+			],
+			"tags": ["Nature", "Indoor", "Scenic", "Educational", "Family"]
+		},
+		{
+			"title": "Sentosa Adventure Cove Waterpark",
+			"id": 4,
+			"type": "Leisure & Recreation",
+			"description": "Dive Into Fun At Adventure Cove Waterpark! Enjoy Thrilling Water Slides, A Lazy River, And The Unique Opportunity To Snorkel With 20,000 Tropical Fish In The Rainbow Reef. Perfect For Families And Friends Looking For A Splashing Good Time. Don’t Miss The Exciting Hydro-Magnetic Coaster, Asia’s First Water-Based Roller Coaster!",
+			"rating": 0,
+			"pricing": "$38 / pax",
+			"address": "8 Sentosa Gateway, 098269",
+			"openingTime": "10:00",
+			"closingTime": "18:00",
+			"imageURL": [
+				"https://www.sentosa.com.sg/-/media/sentosa/hero-asset/attractions/adventure-cove/2022/acw2389_adventureriver_1840x1035.jpg"
+			],
+			"tags": ["Water Activities", "Family", "Thrills", "Outdoor", "Fun"]
+		},
+		{
+			"title": "Singapore Flyer",
+			"id": 5,
+			"type": "Attractions",
+			"description": "Enjoy Unparalleled Views Of Singapore’s Iconic Skyline From The Singapore Flyer, One Of The World’s Largest Observation Wheels. Perfect For Couples, Families, Or Groups, The Flyer Offers Stunning Panoramic Views Of Marina Bay, Gardens by the Bay, And Even Neighboring Malaysia And Indonesia On A Clear Day.",
+			"rating": 0,
+			"pricing": "$33 / pax",
+			"address": "30 Raffles Ave, 039803",
+			"openingTime": "08:30",
+			"closingTime": "22:30",
+			"imageURL": [
+				"https://www.singaporeflyer.com/storage/custom-menus/September2020/enKE8lC5tyqLHWZoHuPY.jpg"
+			],
+			"tags": ["Romantic", "Scenic", "Family", "Iconic", "Photography"]
+		},
+		{
+			"title": "Pulau Ubin Cycling Adventure",
+			"id": 6,
+			"type": "Outdoor Activities",
+			"description": "Escape The Hustle Of City Life With A Trip To Pulau Ubin. Rent A Bicycle And Explore This Rustic Island At Your Own Pace. Discover Hidden Trails, Mangroves, And Kampong Houses While Immersing Yourself In Singapore’s Heritage. Don’t Miss The Chek Jawa Wetlands For Stunning Biodiversity!",
+			"rating": 0,
+			"pricing": "$12 / bike rental",
+			"address": "Pulau Ubin Jetty, 508329",
+			"openingTime": "07:00",
+			"closingTime": "19:00",
+			"imageURL": [
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhP4y1U1Dp73q6MWVcROrSQ-e7ULKS9pA4aA&s"
+			],
+			"tags": [
+				"Adventure",
+				"Nature",
+				"Outdoor",
+				"History",
+				"Eco-friendly"
+			]
+		},
+		{
+			"title": "Universal Studios Singapore",
+			"id": 7,
+			"type": "Theme Parks",
+			"description": "Step Into A World Of Thrills At Universal Studios Singapore. Explore Seven Themed Zones Packed With Rides, Shows, And Entertainment For All Ages. From The Transformers Ride To Jurassic Park Rapids, Each Attraction Promises An Unforgettable Adventure. Great For Families And Movie Enthusiasts!",
+			"rating": 0,
+			"pricing": "$88 / pax",
+			"address": "8 Sentosa Gateway, 098269",
+			"openingTime": "10:00",
+			"closingTime": "19:00",
+			"imageURL": [
+				"data:image/jpeg;base64,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"
+			],
+			"tags": [
+				"Family",
+				"Thrills",
+				"Movies",
+				"Adventure",
+				"Entertainment"
+			]
+		},
+		{
+			"title": "Marina Bay Sands Infinity Pool",
+			"id": 8,
+			"type": "Luxury Experience",
+			"description": "Take A Dip In The World’s Largest Rooftop Infinity Pool At Marina Bay Sands. Reserved Exclusively For Hotel Guests, This Iconic Pool Offers Stunning Views Of Singapore’s Skyline While Providing A Luxurious Relaxation Experience. Perfect For Romantic Getaways Or Indulgent Self-Care.",
+			"rating": 0,
+			"pricing": "$550 / night (hotel stay)",
+			"address": "10 Bayfront Ave, 018956",
+			"openingTime": "06:00",
+			"closingTime": "23:00",
+			"imageURL": [
+				"https://cdn-imgix.headout.com/media/images/7d4ecb0759627c1c068661db95a208c8-1173-singapore--gardens-by-the-bay-02.jpg?auto=format&w=486&h=385.2&q=90&fit=crop&crop=faces"
+			],
+			"tags": ["Luxury", "Romantic", "Scenic", "Relaxation", "Iconic"]
+		},
+		{
+			"title": "Changi Jurassic Mile",
+			"id": 9,
+			"type": "Outdoor Attractions",
+			"description": "Walk Among Life-Sized Dinosaur Sculptures At The Changi Jurassic Mile, Singapore’s Longest Outdoor Display Of Prehistoric Creatures. Great For Families And Dino Enthusiasts, This Trail Is Accessible For Cyclists And Pedestrians Alike.",
+			"rating": 0,
+			"pricing": "Free",
+			"address": "Changi Airport Connector, 819666",
+			"openingTime": "24 Hours",
+			"closingTime": "24 Hours",
+			"imageURL": [
+				"https://static.thehoneycombers.com/wp-content/uploads/sites/2/2024/05/attractions-in-singapore-wallace-heng-unsplash-900x643.jpg"
+			],
+			"tags": ["Family", "Free", "Outdoor", "Adventure", "Fun"]
+		},
+		{
+			"title": "Singapore Botanic Gardens",
+			"id": 10,
+			"type": "Nature & Recreation",
+			"description": "Relax And Reconnect With Nature At The Singapore Botanic Gardens, A UNESCO World Heritage Site. Home To The National Orchid Garden, Picturesque Lakes, And A Wide Variety Of Plant Species, This Garden Is Perfect For Picnics, Photography, And Leisurely Walks.",
+			"rating": 0,
+			"pricing": "Free (Orchid Garden: $5)",
+			"address": "1 Cluny Rd, 259569",
+			"openingTime": "05:00",
+			"closingTime": "00:00",
+			"imageURL": [
+				"https://cdn-imgix.headout.com/mircobrands-content/image/f6fe0b7bc68f3e97050ea11690834ca9-Helix%20Bridge%20Singapore.jpg?auto=format&w=648&h=364.5&q=90&fit=crop&ar=16%3A9&crop=faces&exp=-10"
+			],
+			"tags": ["Nature", "Free", "Scenic", "Relaxation", "UNESCO"]
+		},
+		{
+			"title": "The Night Safari",
+			"id": 11,
+			"type": "Wildlife & Nightlife",
+			"description": "Embark On A Nocturnal Adventure At The World’s First Night Safari. Witness Over 1,000 Animals In Their Natural Habitats Across Seven Zones. Experience The Thrill Of Spotting Creatures Such As Leopards And Elephants In This One-Of-A-Kind Wildlife Park.",
+			"rating": 0,
+			"pricing": "$55 / pax",
+			"address": "80 Mandai Lake Rd, 729826",
+			"openingTime": "19:15",
+			"closingTime": "00:00",
+			"imageURL": [
+				"https://res.klook.com/image/upload/q_85/c_fill,w_750/v1691379347/eoahvbzyyunpnuei0olz.jpg"
+			],
+			"tags": ["Wildlife", "Adventure", "Nightlife", "Family", "Unique"]
+		},
+		{
+			"title": "Haw Par Villa",
+			"id": 12,
+			"type": "Cultural & Historical",
+			"description": "Step Into The World Of Chinese Mythology At Haw Par Villa. This Unique Park Features Over 1,000 Statues And Dioramas Depicting Traditional Folklore, Myths, And Morals. Great For Those Seeking A Cultural And Offbeat Experience.",
+			"rating": 0,
+			"pricing": "Free",
+			"address": "262 Pasir Panjang Rd, 118628",
+			"openingTime": "09:00",
+			"closingTime": "19:00",
+			"imageURL": [
+				"https://cdn-imgix.headout.com/mircobrands-content/image/3c73b49810351d9d29f76633fa8d97f6-AdobeStock_274717415.jpeg?auto=format&w=702.4499999999999&h=401.4&q=90&fit=crop&ar=7%3A4&crop=faces"
+			],
+			"tags": ["Cultural", "Free", "Educational", "Offbeat", "History"]
+		}
+	]
 }

@@ -1,6 +1,6 @@
 // Modal.jsx
 import React from 'react';
-import AuthForm from '../../pages/AuthForm.jsx';
+import AuthForm from './AuthForm.jsx';
 
 const Modal = ({ isModalOpen, closeModal }) => {
     if (!isModalOpen) return null; // Don't render anything if modal is not open

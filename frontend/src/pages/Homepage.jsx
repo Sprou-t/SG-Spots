@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+/*TODO: follow airbnb: make image prop bigger and words closer, make img border round */
 const AttractionCard = ({ attraction }) => {
     return (
         <div className="xs:w-10/12 border-gray-300 border-solid border-2 flex flex-col gap-4 shadow-lg rounded-lg h-full bg-white">
@@ -30,6 +31,7 @@ const Homepage = () => {
             .then(response => setAttractions(response.data))
             .catch(error => console.log(error));
     }, []);
+    console.log(attractions)
 
     return (
         <div className="xs:w-full md:w-11/12 xl:w-3/4 mb-20 xs:mt-56 md:mt-32 mx-auto xl:translate-x-4 grid lg:grid-cols-3 md:grid-cols-2 gap-10 place-items-center">

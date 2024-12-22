@@ -22,7 +22,7 @@ export default {
         },
       },
       backgroundImage: {
-        'customRed-gradient': 'radial-gradient(circle, rgb(255, 56, 92), transparent)',
+        'custom-gradient': 'linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%)',
       },
     },
   },
