@@ -3,7 +3,7 @@ TODO:
 at least 5 days
 
 2. navbar:
-    - add: do conditional rendering of user's initial alphabets + sign out. follow airbnb profile - add pic + blog + translation + search icon + sign out.
+    - add: do conditional rendering of user's initial alphabets + sign out. follow airbnb profile - add pic + blog + search icon + sign out.
 3. add the comment feature
 
     - design the comment component
