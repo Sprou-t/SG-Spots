@@ -6,8 +6,8 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
 import axios from 'axios';
 
-/*TODO: note that for mobile side, remove the 3 lines and add the word
-login/signup for 2 icons*/
+/*TODO tmr: do conditional rendering of user's initial alphabets + their details. follow airbnb
+extra: create a profile page for them to configure settings*/
 const Navbar = ({ openModal }) => {
   const [direction, setDirection] = useState('up');
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
@@ -41,8 +41,12 @@ const Navbar = ({ openModal }) => {
 
   const clickOutsideAndCloseDropDown = (event) => {
     // if current navbarRef is not null(user clicked on sth) && current ref does not contain target(user clicks outside)
-    if (profileRef.current && !profileRef.current.contains(event.target) && isDropdownOpen) {
-      toggleDropdown()
+    if (
+      profileRef.current &&
+      !profileRef.current.contains(event.target) &&
+      isDropdownOpen
+    ) {
+      toggleDropdown();
     }
   };
 
@@ -60,7 +64,7 @@ const Navbar = ({ openModal }) => {
   useEffect(() => {
     axios
       .get('http://localhost:3001/user')
-      .then((response) => setUserLoggedIn(response.data[0]))
+      .then((response) => setUserLoggedIn(response.data[1]))
       .catch((err) =>
         console.log(`error in retrieving user data: ${err}`)
       );
@@ -101,54 +105,84 @@ const Navbar = ({ openModal }) => {
         <div className='hidden md:flex gap-8 items-center'>
           <Searchbox />
 
-          <div className='relative' >
-            <button
+          <div className='relative'>
+
+            {/* use conditional rendering */}
+            {userLoggedInState.isLoggedIn ? <button
               className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
               onClick={toggleDropdown}
-            >
-              <GiHamburgerMenu className='size-7' />
-              <CgProfile className='size-9' />
+            > <GiHamburgerMenu className='size-7' />
+              <div className=' size-10 text-2xl border-2 border-solid border-white rounded-full'>{userLoggedInState.name.charAt(0)}</div>
+            </button> : <button
+              className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
+              onClick={toggleDropdown}
+            > <GiHamburgerMenu className='size-7' />
+              <CgProfile className='size-10' />
             </button>
+            }
+
             {/*dropdown menu */}
             {isDropdownOpen && (
-              <div className='absolute top-full left-0 flex flex-col bg-white shadow-lg rounded-md mt-1 md:w-24 ' ref={profileRef} onClick={toggleDropdown}>
-                <button
-                  onClick={() => openModal('login')}
-                  className='group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold'
-                >
-                  Log In
-                </button>
-                <button
-                  onClick={() => openModal('signUp')}
-                  className='group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold rounded-xl'
-                >
-                  Sign Up
-                </button>
+              <div
+                className="absolute top-full left-0 flex flex-col bg-white shadow-lg rounded-md mt-1 md:w-28"
+                ref={profileRef}
+                onClick={toggleDropdown}
+              >
+                {userLoggedInState.isLoggedIn ? (
+                  <div className='flex flex-col gap-1 p-1 '>
+                    <button className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
+                      Notification
+                    </button>
+                    <button className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
+                      Setting
+                    </button>
+                    <button className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
+                      Log Out
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => openModal('login')}
+                      className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold"
+                    >
+                      Log In
+                    </button>
+                    <button
+                      onClick={() => openModal('signUp')}
+                      className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold rounded-xl"
+                    >
+                      Sign Up
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>
         </div>
 
         {/* Mobile Menu: only visible below md screen w isMenuOpen */}
-        {isMenuOpen && (
-          <div className='absolute top-full left-0 w-full hover:text-black bg-white shadow-md flex flex-col items-center gap-4 py-4 md:hidden'>
-            <Searchbox />
-            <button
-              onClick={() => openModal('login')}
-              className='w-full text-center py-2   font-bold'
-            >
-              Log In
-            </button>
-            <button
-              onClick={() => openModal('signUp')}
-              className='w-full text-center py-2  font-bold'
-            >
-              Sign Up
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+        {
+          isMenuOpen && (
+            <div className='absolute top-full left-0 w-full hover:text-black bg-white shadow-md flex flex-col items-center gap-4 py-4 md:hidden'>
+              <Searchbox />
+              <button
+                onClick={() => openModal('login')}
+                className='w-full text-center py-2   font-bold'
+              >
+                Log In
+              </button>
+              <button
+                onClick={() => openModal('signUp')}
+                className='w-full text-center py-2  font-bold'
+              >
+                Sign Up
+              </button>
+            </div>
+          )
+        }
+      </div >
+    </div >
   );
 };
 
