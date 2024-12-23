@@ -5,11 +5,11 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdOutlineStarRate } from "react-icons/md";
 import { MdAccessTimeFilled } from "react-icons/md";
 import Carousel from '../components/animation/Carousell.jsx';
-import CommentSection from '../components/ui/CommentSection.jsx';
+import ReviewSection from '../components/ui/ReviewSection.jsx';
 import { useParams } from 'react-router-dom';
 
 /* TODO:
--comment section + make icons more colorful
+-Review section + make icons more colorful
  */
 
 const AttractionPage = () => {
@@ -63,7 +63,7 @@ const AttractionPage = () => {
                     <a href={attraction.website} target="_blank" rel="noopener noreferrer" className='text-red-600 hover:text-customRed-light text-lg underline font-semibold'>
                         Find out more
                     </a>
-                    <CommentSection />
+                    <ReviewSection />
                 </div >
 
 

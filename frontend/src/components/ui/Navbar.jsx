@@ -68,7 +68,7 @@ const Navbar = ({ openModal }) => {
       .catch((err) =>
         console.log(`error in retrieving user data: ${err}`)
       );
-  }, [setUserLoggedIn]);
+  }, []);
   console.log(userLoggedInState);
 
   const toggleMenu = () => {
@@ -77,10 +77,10 @@ const Navbar = ({ openModal }) => {
   return (
     <div
       ref={navbarRef}
-      className={`md:hover:bg-white md:hover:text-black  text-black md:text-white group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : '-translate-y-full'
+      className={` md:hover:bg-white md:hover:text-black  text-black md:text-white group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : '-translate-y-full'
         }`}
     >
-      <div className='relative flex justify-between items-center px-4 py-1'>
+      <div className=' h-24 relative flex justify-between items-center px-4 py-1'>
         {/* Logo */}
         <Link to='/home' className='flex gap-2 items-center'>
           <img
@@ -101,23 +101,24 @@ const Navbar = ({ openModal }) => {
           <GiHamburgerMenu />
         </button>
 
+        <Searchbox />
+
         {/* Desktop Navigation */}
         <div className='hidden md:flex gap-8 items-center'>
-          <Searchbox />
-
+          <button className='text-lg'>Blogs</button>
           <div className='relative'>
 
             {/* use conditional rendering */}
             {userLoggedInState.isLoggedIn ? <button
-              className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
+              className='relative flex gap-2 items-center border-white border-2 px-3 py-1 rounded-full'
               onClick={toggleDropdown}
-            > <GiHamburgerMenu className='size-7' />
+            > <GiHamburgerMenu className='size-5' />
               <div className=' size-10 text-2xl border-2 border-solid border-white rounded-full'>{userLoggedInState.name.charAt(0)}</div>
             </button> : <button
-              className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
+              className='relative flex gap-2 items-center border-white border-2 px-3 py-1 rounded-full'
               onClick={toggleDropdown}
-            > <GiHamburgerMenu className='size-7' />
-              <CgProfile className='size-10' />
+            > <GiHamburgerMenu className='size-5' />
+              <CgProfile className='size-9' />
             </button>
             }
 
@@ -130,13 +131,13 @@ const Navbar = ({ openModal }) => {
               >
                 {userLoggedInState.isLoggedIn ? (
                   <div className='flex flex-col gap-1 p-1 '>
-                    <button className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
+                    <button className="text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
                       Notification
                     </button>
-                    <button className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
+                    <button className="text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
                       Setting
                     </button>
-                    <button className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
+                    <button className="text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100">
                       Log Out
                     </button>
                   </div>
@@ -144,13 +145,13 @@ const Navbar = ({ openModal }) => {
                   <>
                     <button
                       onClick={() => openModal('login')}
-                      className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold"
+                      className="text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold"
                     >
                       Log In
                     </button>
                     <button
                       onClick={() => openModal('signUp')}
-                      className="group-hover:text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold rounded-xl"
+                      className="text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold rounded-xl"
                     >
                       Sign Up
                     </button>

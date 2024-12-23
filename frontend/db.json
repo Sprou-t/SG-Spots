@@ -34,6 +34,22 @@
 				"History",
 				"Attractions",
 				"Romantic"
+			],
+			"reviews": [
+				{
+					"name": "Alice Johnson",
+					"date": "2024-08-23",
+					"stars": 5,
+					"description": "This place is absolutely amazing! The ambiance is perfect for a relaxing evening, and the staff were incredibly friendly. I highly recommend the signature dish; it’s worth every penny.",
+					"image": "https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg"
+				},
+				{
+					"name": "Michael Lee",
+					"date": "2024-08-20",
+					"stars": 3,
+					"description": "The food was decent, but the service could have been better. We had to wait a long time for our order. However, the view was stunning, which made up for some of the shortcomings.",
+					"image": null
+				}
 			]
 		},
 
