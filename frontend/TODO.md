@@ -1,16 +1,19 @@
 TODO:
-
-at least 5 days
-
-2. navbar:
-    - add: do conditional rendering of user's initial alphabets + sign out. follow airbnb profile - add pic + blog + search icon + sign out.
+- create the following if conditions
+    - if active(review or auth)
+        -if auth -> login or signup
 3. add the comment feature
 
     - design the comment component
-    - connect frontend action to backend: use buttons for create, edit, and delete (finish until at least here)
+    - connect frontend action to backend: use buttons for create, edit, and delete
     - do auth based operation
+    - change the review textarea part into a modal
+    - do not need to use useContext
+        - use the auth form as template to create review form and put it in a modal. modal render when clicked by a button in attraction page(research navbar)
 
-- max until thurs need to finish
+- finish bf tmr gym
+
+    3.2 add functions to send button, file button,login/sign in button, logout button, search bar
 
 4. deal with api call
 
