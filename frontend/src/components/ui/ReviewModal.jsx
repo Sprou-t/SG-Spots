@@ -7,11 +7,11 @@ const ReviewModal = ({ children }) => {
 
     return (
         <div
-            className='w-full fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 '
+            className=' fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 '
             onClick={closeModal} // Close the modal when clicking outside
         >
             <div
-                className='bg-white rounded-lg w-full  relative '
+                className='bg-white rounded-lg  relative w-11/12 '
                 onClick={(e) => e.stopPropagation()} // Prevent closing on click inside the modal
             >
                 {/* Close button positioned at the top right corner */}

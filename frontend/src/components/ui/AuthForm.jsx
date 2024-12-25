@@ -5,7 +5,7 @@ import { PropsContext } from '../../context/context.props.jsx';
 /*TODO: check that URL is correct */
 
 const AuthForm = () => {
-	const { authType, setAuthType} = useContext(PropsContext);
+	const { modalState, setModalState } = useContext(PropsContext);
 	const logInUrl = '/user/logIn';
 	const signUpUrl = '/user/signUp';
 	// className = "mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900"
@@ -14,7 +14,7 @@ const AuthForm = () => {
 			<div className='flex min-h-full flex-1 flex-col justify-center px-6 w-full lg:px-8'>
 				<div className='sm:mx-auto sm:w-full sm:max-w-sm'>
 					<h2 className='mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900'>
-						{authType === 'logIn'
+						{modalState.authType === 'logIn'
 							? 'Log in to your account'
 							: 'Sign up for an account'}
 					</h2>
@@ -75,7 +75,7 @@ const AuthForm = () => {
 								Data='submit'
 								className='flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-customRed-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
 							>
-								{authType === 'logIn'
+								{modalState.authType === 'logIn'
 									? 'Log In'
 									: 'Sign up'}
 							</button>
@@ -83,7 +83,7 @@ const AuthForm = () => {
 						<div class='flex items-center my-4'>
 							<div class='flex-grow border-t border-gray-300'></div>
 							<span class='mx-4 text-gray-500 text-sm'>
-								{authType === 'logIn'
+								{modalState.authType === 'logIn'
 									? 'Or log in with'
 									: 'Or sign up with'}
 							</span>
@@ -106,12 +106,15 @@ const AuthForm = () => {
 						</div>
 					</form>
 
-					{authType === 'logIn' && (
+					{modalState.authType === 'logIn' && (
 						<p className='mt-10 text-center text-sm/6 text-gray-500 flex gap-2 justify-center'>
 							Don't have an account?{' '}
 							<button
 								onClick={() =>
-									setAuthType('signUp')
+									setModalState({
+										...modalState,
+										authType: 'signUp',
+									})
 								}
 								className='font-semibold text-red-500 hover:text-customRed-light'
 							>

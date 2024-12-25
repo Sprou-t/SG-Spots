@@ -1,22 +1,20 @@
 TODO:
-- create the following if conditions
-    - if active(review or auth)
-        -if auth -> login or signup
-3. add the comment feature
+3. add functions to send button, file button,login/sign in button, logout button, search bar(finish by thurs latest)
+  auth buttons
+  -log in
+  -sign up
+  - or sign up with (google & facebook) ***
+  - forgot password ***
 
-    - design the comment component
-    - connect frontend action to backend: use buttons for create, edit, and delete
-    - do auth based operation
-    - change the review textarea part into a modal
-    - do not need to use useContext
-        - use the auth form as template to create review form and put it in a modal. modal render when clicked by a button in attraction page(research navbar)
+  navbar search functions
 
-- finish bf tmr gym
+  review 
+  - attach file button(show file attached w checks)
+  - submit button
 
-    3.2 add functions to send button, file button,login/sign in button, logout button, search bar
+  * learn how to anipulate json database
 
 4. deal with api call
-
     - dateline: try monday
 
 5. improve upon product: ui and add blog feature compulsory (optional: zustand and write tests)

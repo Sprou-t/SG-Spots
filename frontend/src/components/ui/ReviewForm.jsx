@@ -16,10 +16,10 @@ const ReviewForm = () => {
     };
 
 	return (
-		<form action='' >
+		<form action='' className='p-5 items-center' >
 			<textarea
 				rows='4'
-				className='my-8 w-64 xsm:w-80 md:w-11/12 h-80 mb-4 px-3 py-2 border-2 border-gray-300 rounded-lg outline-none focus:border-blue-300'
+				className='my-8 w-full  h-80 mb-4 px-3 py-2 border-2 border-gray-300 rounded-lg outline-none focus:border-blue-300'
 				name='comment'
 				placeholder='Leave a review'
 				value={userReview}

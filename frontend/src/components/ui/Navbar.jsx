@@ -166,17 +166,13 @@ const Navbar = () => {
 								) : (
 									<>
 										<button
-											onClick={() =>
-												openLoginForm()
-											}
+											onClick={() => openLoginForm()}
 											className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold'
 										>
 											Log In
 										</button>
 										<button
-											onClick={() =>
-												openSignUpForm()
-											}
+											onClick={() => openSignUpForm()}
 											className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold rounded-xl'
 										>
 											Sign Up
