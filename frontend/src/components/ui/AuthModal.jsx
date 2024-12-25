@@ -11,7 +11,7 @@ const AuthModal = ({ children }) => {
 			onClick={closeModal} // Close the modal when clicking outside
 		>
 			<div
-				className='bg-white p-8 rounded-lg md:w-5/12 xl:w-1/3   relative '
+				className='bg-white p-8 rounded-lg w-11/12 md:w-1/2 xl:w-1/3   relative '
 				onClick={(e) => e.stopPropagation()} // Prevent closing on click inside the modal
 			>
 				{/* Close button positioned at the top right corner */}
