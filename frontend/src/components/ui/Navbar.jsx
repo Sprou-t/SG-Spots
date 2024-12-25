@@ -14,7 +14,6 @@ const Navbar = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
 	const [userLoggedInState, setUserLoggedIn] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const [searchQuery, setSearchQuery] = useState('');
 	const oldScrollY = useRef(window.scrollY);
 	const navbarRef = useRef(null);
 	const profileRef = useRef(null);
@@ -65,14 +64,14 @@ const Navbar = () => {
 		};
 	}, []);
 
-	useEffect(() => {
-		axios
-			.get('http://localhost:3001/user')
-			.then((response) => setUserLoggedIn(response.data[1]))
-			.catch((err) =>
-				console.log(`error in retrieving user data: ${err}`)
-			);
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.get('http://localhost:3000/user')
+	// 		.then((response) => setUserLoggedIn(response.data))
+	// 		.catch((err) =>
+	// 			console.log(`error in retrieving user data: ${err}`)
+	// 		);
+	// }, []);
 	// console.log(userLoggedInState);
 
 	const toggleMenu = () => {

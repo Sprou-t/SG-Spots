@@ -1,11 +1,12 @@
 TODO:
+- first useUseEffect to connect to backend db before continuing w the rest
 3. add functions to send button, file button,login/sign in button, logout button, search bar(finish by thurs latest)
   auth buttons
   -log in
   -sign up
-  - or sign up with (google & facebook) ***
+  - or sign up with (google & facebook) 
   - forgot password ***
-
+(1hr)
   navbar search functions
 
   review 
@@ -13,6 +14,7 @@ TODO:
   - submit button
 
   * learn how to anipulate json database
+  * to connect to mongodb, simply change the url based on what i defined in index.js
 
 4. deal with api call
     - dateline: try monday

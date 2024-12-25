@@ -3,7 +3,7 @@ import express, { request, response } from "express";
 import dotenv from "dotenv";
 import connectDb from "./db.js";
 import cors from "cors";
-import commentRoutes from "./routes/routes.comment.js";
+import commentRoutes from "./routes/routes.review.js";
 import userRoutes from "./routes/routes.user.js";
 import apiRoutes from "./routes/routes.apiCall.js";
 

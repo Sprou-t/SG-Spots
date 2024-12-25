@@ -5,7 +5,7 @@ import Landing from './pages/Landing.jsx';
 import AttractionPage from './pages/AttractionPage.jsx';
 import Navbar from './components/ui/Navbar.jsx';
 import Footer from './components/ui/Footer.jsx';
-import AuthModal from './components/ui/AuthModal.jsx';
+import AuthModal from './components/ui/authModal.jsx';
 import ReviewModal from './components/ui/reviewModal.jsx';
 import TermsAndConditions from './pages/TermsAndConditions.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';

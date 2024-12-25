@@ -1,4 +1,4 @@
-import Comment from '../models/models.comment.js';
+import Comment from '../models/models.review.js';
 import User from '../models/models.users.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
