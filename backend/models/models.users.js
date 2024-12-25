@@ -3,15 +3,12 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
 	// username is used for logging so it must be unique
-	username: {
+	email: {
 		type: String,
 		required: true,
 		unique: true,
 	},
-	name: {
-		type: String,
-		required: true,
-	},
+	
 	//store hashed ver of password, thus must hash password first in controller
 	passwordHash: {
 		//TODO: make password req more robust(prob not for easy going website)
@@ -21,7 +18,7 @@ const userSchema = new Schema({
 	},
 	comments: {
 		type: [mongoose.Schema.Types.ObjectId], // Array of ObjectIds
-		ref: "Comment", // Reference to the Comment model
+		ref: "Review", // Reference to the Comment model
 		default: [], // Default value if no itineraries are provided
 	},
 });
@@ -33,7 +30,7 @@ userSchema.set("toJSON", {
 	},
 });
 
-const user = mongoose.model('User', userSchema);
-export default user;
+const User = mongoose.model('User', userSchema);
+export default User;
 
 

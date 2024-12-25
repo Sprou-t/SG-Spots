@@ -11,12 +11,12 @@ const ReviewModal = ({ children }) => {
             onClick={closeModal} // Close the modal when clicking outside
         >
             <div
-                className='bg-white rounded-lg  relative w-11/12 '
+                className='bg-white rounded-lg  relative w-11/12 md:px-5'
                 onClick={(e) => e.stopPropagation()} // Prevent closing on click inside the modal
             >
                 {/* Close button positioned at the top right corner */}
                 <button
-                    className=' absolute  right-0 text-4xl font-bold text-gray-700 hover:text-red-500 '
+                    className=' absolute  right-2 text-4xl font-bold text-gray-700 hover:text-red-500 '
                     onClick={closeModal} // Close the modal when clicking the close button
                 >
                     &times; {/* "X" symbol */}

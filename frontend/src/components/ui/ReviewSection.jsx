@@ -6,7 +6,6 @@ import Modal from './AuthModal.jsx';
 import AddReview from './ReviewForm.jsx';
 import { PropsContext } from './../../context/context.props.jsx';
 
-
 const ReviewCard = ({ review }) => {
 	console.log('review card rendered');
 	const { name, date, stars, description, image } = review;
@@ -57,22 +56,18 @@ const ReviewCard = ({ review }) => {
 	);
 };
 
-const ReviewSection = () => {
+const ReviewSection = ({ id }) => {
 	const [reviews, setReviews] = useState([]);
-	const [userReview, setUserReview] = useState('');
 	const [averageRating, setAverageRating] = useState(0);
-	const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
-	const {openModal} = useContext(PropsContext)
-
-	const closeReviewForm = () => {
-		setIsReviewFormOpen(false);
-	};
+	const { openModal } = useContext(PropsContext);
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:3001/attractions')
+			.get(`http://localhost:3000/api/${id}`)
 			.then((response) => {
-				const fetchedReviews = response.data[0].reviews;
+				console.log('response ==> ', response);
+
+				const fetchedReviews = response.data.attractionData.reviews;
 				setReviews(fetchedReviews);
 
 				// Calculate the average rating
@@ -88,9 +83,9 @@ const ReviewSection = () => {
 			.catch((err) => console.log(`error in fetching reviews: ${err} `));
 	}, []);
 
-	const openReviewForm = () =>{
-		openModal({type: 'review', title:null})
-	}
+	const openReviewForm = () => {
+		openModal({ type: 'review', title: null });
+	};
 
 	return (
 		<div className='mt-10 w-11/12 p-2'>
@@ -126,13 +121,13 @@ const ReviewSection = () => {
 
 			<div className='flex flex-col p-4 mx-auto mt-2'>
 				<button
-				type='button'
+					type='button'
 					onClick={() => openReviewForm()}
 					className='bg-blue-500 text-white text-lg font-bold  h-12 rounded-md hover:scale-105'
 				>
 					Write a Review
 				</button>
-				
+
 				{reviews.map((review, index) => (
 					<ReviewCard key={index} review={review} />
 				))}

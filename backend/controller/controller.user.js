@@ -15,8 +15,8 @@ import jwt from 'jsonwebtoken';
 export const signUp = async (req, res) => {
 	// sieve out the data from req.body
 	// note username is for id purposes, name only as proxy id
-	const { username, name, password } = req.body;
-	if (!username || !name || !password) {
+	const { email, password } = req.body;
+	if (!email || !password) {
 		return res // immediately send a response back w/o creating user
 			.status(401)
 			.json({ success: false, message: 'missing user info' });
@@ -26,8 +26,7 @@ export const signUp = async (req, res) => {
 	const passwordHash = await bcrypt.hash(password, saltRounds);
 	const newUser = new User({
 		// note that itenaries will be an empty array by default
-		username,
-		name,
+		email,
 		passwordHash,
 	});
 
@@ -47,10 +46,10 @@ export const signUp = async (req, res) => {
 
 export const login = async (req, res) => {
 	let passwordCorrect = false;
-	const { username, password } = req.body;
+	const { email, password } = req.body;
 	// check if username nad password matches
 	// need {} bcoz we are finding w obj key
-	const user = await User.findOne({ username });
+	const user = await User.findOne({ email });
 	if (!user) {
 		res.status(401).json({ success: false, message: 'incorrect username' });
 	} else {
@@ -66,23 +65,19 @@ export const login = async (req, res) => {
 	}
 	// else if correct create a token for user: token use to verify their identity on sub request w/o checking agn
 	const userInfoForToken = {
-		username: user.username,
-		name: user.name,
+		email: user.email,
 		id: user._id,
 	};
 
 	const token = jwt.sign(userInfoForToken, process.env.SECRET, {
-		expiresIn: 48 * 60 * 60
+		expiresIn: 48 * 60 * 60,
 	});
-	console.log("loggged in!")
+	console.log('loggged in!');
 	res.status(200).json({
 		token, // token: token
-		username: user.username,
-		name: user.name,
+		email: user.email,
 	});
 };
-
-
 
 // export const updateUser = async (req, res) => {
 // 	const { id } = req.params;
