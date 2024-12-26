@@ -1,17 +1,17 @@
 // define the routes w/o the separation of logics that is only foound in controlelr file
 import express from "express";
 import {
-	getAllComment,
-	createComment,
-	updateComment,
-	deleteComment,
-} from "../controller/controller.comment.js";
+	getAllReview,
+	createReview,
+	updateReview,
+	deleteReview,
+} from "../controller/controller.review.js";
 
 const router = express.Router();
 
-router.get("/", getAllComment);
-router.post("/", createComment);
-router.put("/:id", updateComment);
-router.delete("/:id", deleteComment);
+router.get("/", getAllReview);
+router.post("/", createReview);
+router.put("/:id", updateReview);
+router.delete("/:id", deleteReview);
 
 export default router; // to index.js

@@ -21,7 +21,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.7.2"
+    "mongoose": "^8.7.2",
+    "set-error-message": "^3.0.0"
   },
   "devDependencies": {
     "globals": "^15.14.0",

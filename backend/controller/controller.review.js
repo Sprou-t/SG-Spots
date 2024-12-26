@@ -1,4 +1,4 @@
-import Comment from '../models/models.review.js';
+import Review from '../models/models.review.js';
 import User from '../models/models.users.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
@@ -28,17 +28,17 @@ const verifyToken = (req, secret) => {
 	}
 };
 
-export const getAllComment = async (req, res) => {
+export const getAllReview = async (req, res) => {
 	try {
-		const comment = await Comment.find({});
-		res.status(200).json({ success: true, data: comment });
+		const review = await Review.find({});
+		res.status(200).json({ success: true, data: review });
 	} catch (error) {
 		console.error(`error in obtaining itenaries: ${error.message}`);
 		res.status(500).json({ success: false, message: 'server error' });
 	}
 };
 
-export const createComment = async (req, res) => {
+export const createReview = async (req, res) => {
 	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
 
 	if (error) {
@@ -48,46 +48,46 @@ export const createComment = async (req, res) => {
 		});
 	}
 
-	// else continue to create the comment
+	// else continue to create the review
 	const user = await User.findById(decodedToken.id);
 
-	const commentData = req.body;
+	const reviewData = req.body;
 	//check if req data is sent correctly
-	if (!commentData.rating || !commentData.description) {
+	if (!reviewData.rating || !reviewData.description) {
 		return res
 			.status(400)
 			.json({ success: false, message: 'please input required fields!' });
 	}
 
-	const newComment = new Comment({
+	const newReview = new Review({
 		authorId: user._id,
-		rating: commentData.rating,
-		description: commentData.description,
+		rating: reviewData.rating,
+		description: reviewData.description,
 	});
 
 	try {
-		const savedComment = await newComment.save();
-		user.comments = user.comments.concat(savedComment._id);
+		const savedReview = await newReview.save();
+		user.reviews = user.reviews.concat(savedReview._id);
 		await user.save();
 		res.status(201).json({
 			success: true,
-			message: `Comment created: ${newComment}`,
+			message: `Review created: ${newReview}`,
 		});
 	} catch (error) {
-		console.error(`error in comment creation: ${error.message}`);
+		console.error(`error in review creation: ${error.message}`);
 		res.status(500).json({ success: false, message: 'server error' });
 	}
 };
 
-export const updateComment = async (req, res) => {
+export const updateReview = async (req, res) => {
 	const { id } = req.params;
-	const commentData = req.body;
+	const reviewData = req.body;
 
-	// Validate the comment ID
+	// Validate the review ID
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res
 			.status(404)
-			.json({ success: false, message: 'Invalid comment ID' });
+			.json({ success: false, message: 'Invalid review ID' });
 	}
 
 	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
@@ -99,40 +99,40 @@ export const updateComment = async (req, res) => {
 		});
 	}
 
-	// Find the comment to be updated
-	const comment = await Comment.findById(id);
-	if (!comment) {
+	// Find the review to be updated
+	const review = await Review.findById(id);
+	if (!review) {
 		return res
 			.status(404)
-			.json({ success: false, message: 'Comment not found' });
+			.json({ success: false, message: 'Review not found' });
 	}
 
-	// Verify if the logged-in user is the author of the comment
-	if (comment.authorId.toString() !== decodedToken.id) {
+	// Verify if the logged-in user is the author of the review
+	if (review.authorId.toString() !== decodedToken.id) {
 		return res.status(403).json({
 			success: false,
-			message: 'You are not authorized to update this comment',
+			message: 'You are not authorized to update this review',
 		});
 	}
 
-	// Proceed to update the comment
+	// Proceed to update the review
 	try {
-		const updatedComment = await Comment.findByIdAndUpdate(
+		const updatedReview = await Review.findByIdAndUpdate(
 			id,
-			commentData,
+			reviewData,
 			{
 				new: true, // Return the updated document
 				runValidators: true, // Ensure the updated data adheres to schema validation
 			}
 		);
-		res.status(200).json({ success: true, data: updatedComment });
+		res.status(200).json({ success: true, data: updatedReview });
 	} catch (error) {
-		console.error(`Error in updating comment: ${error.message}`);
+		console.error(`Error in updating review: ${error.message}`);
 		res.status(500).json({ success: false, message: 'Server error' });
 	}
 };
 
-export const deleteComment = async (req, res) => {
+export const deleteReview = async (req, res) => {
 	// Verify the token
 	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
 
@@ -146,28 +146,28 @@ export const deleteComment = async (req, res) => {
 	const { id } = req.params;
 
 	try {
-		// Find the comment by ID
-		const comment = await Comment.findById(id);
+		// Find the review by ID
+		const review = await Review.findById(id);
 
-		if (!comment) {
-			// If the comment is not found
+		if (!review) {
+			// If the review is not found
 			return res
 				.status(404)
-				.json({ success: false, message: 'Comment not found' });
+				.json({ success: false, message: 'Review not found' });
 		}
 
-		// Check if the user is the author of the comment
-		if (comment.authorId.toString() !== decodedToken.id) {
+		// Check if the user is the author of the review
+		if (review.authorId.toString() !== decodedToken.id) {
 			return res
 				.status(403)
-				.json({ success: false, message: 'Unauthorized to delete this comment' });
+				.json({ success: false, message: 'Unauthorized to delete this review' });
 		}
 
-		// Delete the comment
-		await comment.deleteOne();
+		// Delete the review
+		await review.deleteOne();
 
 		// Send success response
-		res.status(200).json({ success: true, message: 'Comment deleted' });
+		res.status(200).json({ success: true, message: 'Review deleted' });
 	} catch (error) {
 		// Handle server errors
 		res.status(500).json({ success: false, message: 'Server Error' });
