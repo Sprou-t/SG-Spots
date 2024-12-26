@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -8,7 +8,12 @@ const userSchema = new Schema({
 		required: true,
 		unique: true,
 	},
-	
+	usename: {
+		type: String,
+		unique: true,
+		sparse: true, // Allows multiple `null` or `undefined` values
+	},
+
 	//store hashed ver of password, thus must hash password first in controller
 	passwordHash: {
 		//TODO: make password req more robust(prob not for easy going website)
@@ -16,14 +21,17 @@ const userSchema = new Schema({
 		required: true,
 		minlength: 3,
 	},
-	comments: {
+	reviews: {
 		type: [mongoose.Schema.Types.ObjectId], // Array of ObjectIds
-		ref: "Review", // Reference to the Comment model
+		ref: 'Review', // Reference to the Review model
 		default: [], // Default value if no itineraries are provided
 	},
 });
 
-userSchema.set("toJSON", {
+// Explicitly create an index for the `username` field to ensure sparse and unique constraints
+
+
+userSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		// passwordHash should not be revealed to client side when converted to JSON
 		delete returnedObject.passwordHash;
@@ -32,5 +40,3 @@ userSchema.set("toJSON", {
 
 const User = mongoose.model('User', userSchema);
 export default User;
-
-

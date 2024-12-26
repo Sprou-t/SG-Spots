@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 1. link to userdb and find a way to upload image either thru api or by download
 2. link to attraction */
 
-const commentSchema = new Schema(
+const reviewSchema = new Schema(
 	{
 		createdAt: {
 			type: Date,
@@ -33,6 +33,6 @@ const commentSchema = new Schema(
 	{ timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
 
-//creates an comments collection
-const comment = mongoose.model('Review', commentSchema);
-export default comment;
+//creates an reviews collection
+const review = mongoose.model('Review', reviewSchema);
+export default review;
