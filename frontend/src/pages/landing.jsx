@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import mainImg1 from "../assets/landingImages/pexels-alaric-sim-380461-1029188.jpg"
 import mainImg2 from "../assets/landingImages/Singapore-Bird-Paradise-8a764bb0-aaa3-407f-a934-d594dee2bf10.jpeg"
 import mainImg3 from "../assets/landingImages/sentosa-island-singapore-23-1440x1920.webp"

@@ -20,7 +20,10 @@ export const getAttractionById = async (req, res) => {
 	const { id } = req.params; // Extract the id from the request parameters
 
 	try {
-		const attraction = await Attraction.findById(id); // Fetch the attraction by ID from the database
+		const attraction = await Attraction.findById(id).populate({
+			path: 'reviews',
+			populate: { path: 'authorId', select: 'username' },
+		}); // Fetch the attraction by ID from the database
 
 		if (!attraction) {
 			return res.status(404).json({
@@ -87,13 +90,11 @@ export const createAttraction = async (req, res) => {
 		!attractionData.address ||
 		!attractionData.pricing
 	) {
-		return res
-			.status(400)
-			.json({
-				success: false,
-				message:
-					'Please input required fields: title, address, and pricing!',
-			});
+		return res.status(400).json({
+			success: false,
+			message:
+				'Please input required fields: title, address, and pricing!',
+		});
 	}
 
 	const newAttraction = new Attraction({

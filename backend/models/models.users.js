@@ -8,10 +8,10 @@ const userSchema = new Schema({
 		required: true,
 		unique: true,
 	},
-	usename: {
+	username: {
 		type: String,
 		unique: true,
-		sparse: true, // Allows multiple `null` or `undefined` values
+		required: true
 	},
 
 	//store hashed ver of password, thus must hash password first in controller

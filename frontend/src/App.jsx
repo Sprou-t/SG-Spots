@@ -5,7 +5,7 @@ import Landing from './pages/Landing.jsx';
 import AttractionPage from './pages/AttractionPage.jsx';
 import Navbar from './components/ui/Navbar.jsx';
 import Footer from './components/ui/Footer.jsx';
-import AuthModal from './components/ui/authModal.jsx';
+import AuthModal from './components/ui/AuthModal.jsx';
 import ReviewModal from './components/ui/reviewModal.jsx';
 import TermsAndConditions from './pages/TermsAndConditions.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
@@ -16,12 +16,13 @@ import { PropsContext } from './context/context.props.jsx';
 import ReviewForm from './components/ui/ReviewForm.jsx';
 
 const App = () => {
+	const [user, setUser] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalState, setModalState] = useState({ type: null, authType: null }); // Combined state
 
-	useEffect(() => {
-		console.log('Updated modal state: ', modalState);
-	}, [modalState]);
+	// useEffect(() => {
+	// 	console.log('Updated modal state: ', modalState);
+	// }, [modalState]);
 
 	// Function to open the modal (Login or SignUp)
 	const openModal = ({type, authType}) => {
@@ -38,7 +39,7 @@ const App = () => {
 
 	return (
 		<PropsContext.Provider
-			value={{ modalState, openModal, closeModal, setModalState }}
+			value={{ user, modalState, isModalOpen, setUser, openModal, closeModal, setModalState }}
 		>
 			<div className='w-full h-full'>
 				<Navbar />
@@ -48,12 +49,6 @@ const App = () => {
 						<AuthForm/>
 					</AuthModal>	
 				)}
-				{isModalOpen && modalState.type === 'review' && (
-					<ReviewModal>
-						<ReviewForm />
-					</ReviewModal>
-				)}
-				
 
 				<Routes>
 					<Route path='/' element={<Landing />} />

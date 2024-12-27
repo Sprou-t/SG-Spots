@@ -15,8 +15,8 @@ import jwt from 'jsonwebtoken';
 export const signUp = async (req, res) => {
 	// sieve out the data from req.body
 	// note username is for id purposes, name only as proxy id
-	const { email, password } = req.body;
-	if (!email || !password) {
+	const { email,username, password } = req.body;
+	if (!email || !username || !password) {
 		return res // immediately send a response back w/o creating user
 			.status(401)
 			.json({ success: false, message: 'missing user info' });
@@ -27,6 +27,7 @@ export const signUp = async (req, res) => {
 	const newUser = new User({
 		// note that itenaries will be an empty array by default
 		email,
+		username,
 		passwordHash,
 	});
 
@@ -66,6 +67,7 @@ export const login = async (req, res) => {
 	// else if correct create a token for user: token use to verify their identity on sub request w/o checking agn
 	const userInfoForToken = {
 		email: user.email,
+		username: user.username,
 		id: user._id,
 	};
 
