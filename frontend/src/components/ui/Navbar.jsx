@@ -12,18 +12,18 @@ extra: create a profile page for them to configure settings*/
 const Navbar = () => {
 	const [direction, setDirection] = useState('up');
 	const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
-	const [userLoggedInState, setUserLoggedIn] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const oldScrollY = useRef(window.scrollY);
 	const navbarRef = useRef(null);
 	const profileRef = useRef(null);
 
-	const { user, setUser, openModal } = useContext(PropsContext);
+	const { setSearchQuery, user, setUser, openModal } = useContext(PropsContext);
 	
 
 	const controlDirection = () => {
 		if (window.scrollY > oldScrollY.current) {
 			setDirection('down');
+			setSearchQuery('')
 		} else {
 			setDirection('up');
 		}
@@ -36,6 +36,7 @@ const Navbar = () => {
 		if (navbarRef.current && !navbarRef.current.contains(event.target)) {
 			setIsMenuOpen(false);
 			setIsDropdownOpen(false);
+			setSearchQuery('')
 		}
 	};
 

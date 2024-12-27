@@ -17,15 +17,20 @@ import ReviewForm from './components/ui/ReviewForm.jsx';
 
 const App = () => {
 	const [user, setUser] = useState(null);
+	const [attractions, setAttractions] = useState([]);
+	const [searchQuery, setSearchQuery] = useState('');
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [modalState, setModalState] = useState({ type: null, authType: null }); // Combined state
+	const [modalState, setModalState] = useState({
+		type: null,
+		authType: null,
+	}); // Combined state
 
 	// useEffect(() => {
 	// 	console.log('Updated modal state: ', modalState);
 	// }, [modalState]);
 
 	// Function to open the modal (Login or SignUp)
-	const openModal = ({type, authType}) => {
+	const openModal = ({ type, authType }) => {
 		setIsModalOpen(true); // Open modal
 		setModalState({ type, authType }); // Update modal state
 	};
@@ -39,15 +44,27 @@ const App = () => {
 
 	return (
 		<PropsContext.Provider
-			value={{ user, modalState, isModalOpen, setUser, openModal, closeModal, setModalState }}
+			value={{
+				user,
+				modalState,
+				isModalOpen,
+				searchQuery,
+				attractions,
+				setAttractions,
+				setSearchQuery,
+				setUser,
+				openModal,
+				closeModal,
+				setModalState,
+			}}
 		>
 			<div className='w-full h-full'>
 				<Navbar />
 
 				{isModalOpen && modalState.type === 'authentication' && (
 					<AuthModal>
-						<AuthForm/>
-					</AuthModal>	
+						<AuthForm />
+					</AuthModal>
 				)}
 
 				<Routes>

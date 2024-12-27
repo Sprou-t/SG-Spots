@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { PropsContext } from "../context/context.props.jsx";
 
 /*TODO: follow airbnb: make image prop bigger and words closer, make img border round */
 const AttractionCard = ({ attraction }) => {
@@ -24,18 +25,24 @@ const AttractionCard = ({ attraction }) => {
 };
 
 const Homepage = () => {
-    const [attractions, setAttractions] = useState([]);
+    const {attractions,searchQuery, setAttractions} = useContext(PropsContext)
 
     useEffect(() => {
         axios.get('http://localhost:3000/api')
             .then(response => setAttractions(response.data.attractionData))
             .catch(error => console.log(error));
     }, []);
+    // Filter attractions based on the searchQuery
+    const filteredAttractions = attractions.filter(attraction => {
+        // Check if the search query matches any relevant field in the attraction data
+        return attraction.title.toLowerCase().includes(searchQuery.toLowerCase()) 
+        // ||attraction.description.toLowerCase().includes(searchQuery.toLowerCase());
+    });
     console.log('attraction data retrieved: ',attractions)
 
     return (
         <div className="xs:w-full md:w-11/12 xl:w-3/4 mb-20 xs:mt-56 md:mt-32 mx-auto xl:translate-x-4 grid lg:grid-cols-3 md:grid-cols-2 gap-10 place-items-center">
-            {attractions.map(attraction => (
+            {filteredAttractions.map(attraction => (
                 <AttractionCard key={attraction.id} attraction={attraction} />
             ))}
         </div>
