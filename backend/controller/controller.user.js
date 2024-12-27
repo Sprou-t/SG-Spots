@@ -76,6 +76,7 @@ export const login = async (req, res) => {
 	});
 	console.log('loggged in!');
 	res.status(200).json({
+		userId: user._id,
 		token, // token: token
 		email: user.email,
 	});
