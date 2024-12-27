@@ -16,7 +16,15 @@ const reviewSchema = new Schema(
 		authorId: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
+			required:true
 		},
+
+		attractionId:{
+			type: mongoose.Schema.Types.ObjectId,
+			ref:'Attraction',
+			required:true
+		},
+
 		rating: {
 			// control the rating to be /5 in frontend
 			type: Number,

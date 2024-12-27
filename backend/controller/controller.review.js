@@ -1,5 +1,6 @@
 import Review from '../models/models.review.js';
 import User from '../models/models.users.js';
+import Attraction from '../models/models.attraction.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
@@ -52,6 +53,7 @@ export const createReview = async (req, res) => {
 	const user = await User.findById(decodedToken.id);
 
 	const reviewData = req.body;
+	console.log('reviewData ==> ', reviewData);
 	//check if req data is sent correctly
 	if (!reviewData.rating || !reviewData.description) {
 		return res
@@ -59,16 +61,23 @@ export const createReview = async (req, res) => {
 			.json({ success: false, message: 'please input required fields!' });
 	}
 
+	const attraction = await Attraction.findById(reviewData.attractionId);
+
 	const newReview = new Review({
 		authorId: user._id,
+		attractionId: reviewData.attractionId,
 		rating: reviewData.rating,
 		description: reviewData.description,
 	});
+	console.log('new review obj: ', newReview);
 
 	try {
 		const savedReview = await newReview.save();
 		user.reviews = user.reviews.concat(savedReview._id);
 		await user.save();
+		attraction.reviews = attraction.reviews.concat(savedReview._id);
+		await attraction.save();
+
 		res.status(201).json({
 			success: true,
 			message: `Review created: ${newReview}`,
@@ -117,14 +126,10 @@ export const updateReview = async (req, res) => {
 
 	// Proceed to update the review
 	try {
-		const updatedReview = await Review.findByIdAndUpdate(
-			id,
-			reviewData,
-			{
-				new: true, // Return the updated document
-				runValidators: true, // Ensure the updated data adheres to schema validation
-			}
-		);
+		const updatedReview = await Review.findByIdAndUpdate(id, reviewData, {
+			new: true, // Return the updated document
+			runValidators: true, // Ensure the updated data adheres to schema validation
+		});
 		res.status(200).json({ success: true, data: updatedReview });
 	} catch (error) {
 		console.error(`Error in updating review: ${error.message}`);
@@ -158,9 +163,10 @@ export const deleteReview = async (req, res) => {
 
 		// Check if the user is the author of the review
 		if (review.authorId.toString() !== decodedToken.id) {
-			return res
-				.status(403)
-				.json({ success: false, message: 'Unauthorized to delete this review' });
+			return res.status(403).json({
+				success: false,
+				message: 'Unauthorized to delete this review',
+			});
 		}
 
 		// Delete the review
@@ -173,4 +179,3 @@ export const deleteReview = async (req, res) => {
 		res.status(500).json({ success: false, message: 'Server Error' });
 	}
 };
-

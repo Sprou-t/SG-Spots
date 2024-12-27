@@ -5,20 +5,22 @@ import { useFormStatus } from 'react-dom';
 import Modal from './AuthModal.jsx';
 import AddReview from './ReviewForm.jsx';
 import { PropsContext } from './../../context/context.props.jsx';
+import review from '../../../../backend/models/models.review.js';
 
 const ReviewCard = ({ review }) => {
-	console.log('review card rendered');
-	const { name, date, stars, description, image } = review;
+	console.log(' review ==> ', review);
+	const { authorId, updatedAt, rating, description,image } = review;
+	const username = authorId.username;
 
 	// Format the date to a readable format
-	const formattedDate = new Date(date).toLocaleDateString();
+	const formattedDate = new Date(updatedAt).toLocaleDateString();
 
 	return (
 		<div className='border-b-2 py-4'>
 			{/* Review Header with Name and Date */}
 			<div className='flex items-center justify-between'>
 				<div className='flex items-center'>
-					<h3 className='text-xl font-semibold'>{name}</h3>
+					<h3 className='text-xl font-semibold'>{username}</h3>
 					<span className='ml-2 text-gray-500'>{formattedDate}</span>
 				</div>
 
@@ -28,7 +30,7 @@ const ReviewCard = ({ review }) => {
 						<span
 							key={index}
 							className={
-								index < stars
+								index < rating
 									? 'text-yellow-500'
 									: 'text-gray-300'
 							}
@@ -56,32 +58,20 @@ const ReviewCard = ({ review }) => {
 	);
 };
 
-const ReviewSection = ({ id }) => {
-	const [reviews, setReviews] = useState([]);
+const ReviewSection = ({ id, reviews }) => {
 	const [averageRating, setAverageRating] = useState(0);
 	const { openModal } = useContext(PropsContext);
 
 	useEffect(() => {
-		axios
-			.get(`http://localhost:3000/api/${id}`)
-			.then((response) => {
-				console.log('response ==> ', response);
-
-				const fetchedReviews = response.data.attractionData.reviews;
-				setReviews(fetchedReviews);
-
-				// Calculate the average rating
-				const totalStars = fetchedReviews.reduce(
-					(acc, review) => acc + review.stars,
-					0
-				);
-				const avg = fetchedReviews.length
-					? totalStars / fetchedReviews.length
-					: 0;
-				setAverageRating(avg.toFixed(1)); // Round to 1 decimal place
-			})
-			.catch((err) => console.log(`error in fetching reviews: ${err} `));
-	}, []);
+		// Calculate the average rating
+		const totalStars = reviews.reduce(
+			(acc, review) => acc + review.rating,
+			0
+		);
+		console.log('total stars: ', totalStars);
+		const avg = reviews.length ? totalStars / reviews.length : 0;
+		setAverageRating(avg.toFixed(1)); // Round to 1 decimal place
+	});
 
 	const openReviewForm = () => {
 		openModal({ type: 'review', title: null });

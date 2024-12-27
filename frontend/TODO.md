@@ -1,20 +1,23 @@
 TODO:
-- first useUseEffect to connect to backend db before continuing w the rest
+LTR:
+- continue with submit button. make it such that it can submit the reviews
+
 3. add functions to send button, file button,login/sign in button, logout button, search bar(finish by thurs latest)
-  auth buttons
-  -log in
-  -sign up
+  auth buttons (priority 3)
+  - log in  done!!!
+  - sign up done!!!
   - or sign up with (google & facebook) 
   - forgot password ***
 (1hr)
-  navbar search functions
+  navbar search functions (priority 2)
 
-  review 
-  - attach file button(show file attached w checks)
-  - submit button
+  review (priority 1)
+  - attach file button(show file  that are already attached )
+  * also need to check if i need to change the model of the review becuase of the type of image(string?)
+  - submit button (do this first)
 
-  * learn how to anipulate json database
-  * to connect to mongodb, simply change the url based on what i defined in index.js
+  -edit button for review, as well as date section for creation of review
+
 
 4. deal with api call
     - dateline: try monday

@@ -18,7 +18,8 @@ const Navbar = () => {
 	const navbarRef = useRef(null);
 	const profileRef = useRef(null);
 
-	const { openModal } = useContext(PropsContext);
+	const { user, setUser, openModal } = useContext(PropsContext);
+	
 
 	const controlDirection = () => {
 		if (window.scrollY > oldScrollY.current) {
@@ -64,15 +65,13 @@ const Navbar = () => {
 		};
 	}, []);
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get('http://localhost:3000/user')
-	// 		.then((response) => setUserLoggedIn(response.data))
-	// 		.catch((err) =>
-	// 			console.log(`error in retrieving user data: ${err}`)
-	// 		);
-	// }, []);
-	// console.log(userLoggedInState);
+	useEffect(()=>{
+		const loggedInUser = window.localStorage.getItem('loggedInUser')
+		if(loggedInUser){
+			const user = JSON.parse(loggedInUser)
+			setUser(user)
+		}
+	},[])
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -82,9 +81,13 @@ const Navbar = () => {
 		openModal({ type: 'authentication', authType: 'logIn' });
 	};
 	const openSignUpForm = () => {
-		openModal({ type: 'authentication', authType: 'SignUp' });
+		openModal({ type: 'authentication', authType: 'signUp' });
 	};
-	// setStyle({ position: 'left', color: 'green' })
+
+	const logUserOut = ()=>{
+		window.localStorage.removeItem('loggedInUser')
+		setUser(null)
+	}
 
 	return (
 		<div
@@ -121,20 +124,20 @@ const Navbar = () => {
 					<button className='text-lg'>Blogs</button>
 					<div className='relative'>
 						{/* use conditional rendering */}
-						{userLoggedInState.isLoggedIn ? (
+						{user !== null ? (
 							<button
-								className='relative flex gap-2 items-center border-white border-2 px-3 py-1 rounded-full'
+								className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
 								onClick={toggleDropdown}
 							>
 								{' '}
 								<GiHamburgerMenu className='size-5' />
-								<div className=' size-10 text-2xl border-2 border-solid border-white rounded-full'>
-									{userLoggedInState.name.charAt(0)}
+								<div className=' size-10 text-2xl border-2 border-solid border-white rounded-full text-red-500 bg-white'>
+									{user.email.charAt(0)}
 								</div>
 							</button>
 						) : (
 							<button
-								className='relative flex gap-2 items-center border-white border-2 px-3 py-1 rounded-full'
+								className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
 								onClick={toggleDropdown}
 							>
 								{' '}
@@ -150,7 +153,7 @@ const Navbar = () => {
 								ref={profileRef}
 								onClick={toggleDropdown}
 							>
-								{userLoggedInState.isLoggedIn ? (
+								{user !== null ? (
 									<div className='flex flex-col gap-1 p-1 '>
 										<button className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
 											Notification
@@ -158,7 +161,7 @@ const Navbar = () => {
 										<button className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
 											Setting
 										</button>
-										<button className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
+										<button onClick={logUserOut} className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
 											Log Out
 										</button>
 									</div>

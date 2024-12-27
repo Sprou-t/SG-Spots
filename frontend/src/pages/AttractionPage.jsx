@@ -1,12 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { MdOutlineStarRate } from 'react-icons/md';
 import { MdAccessTimeFilled } from 'react-icons/md';
 import Carousel from '../components/animation/Carousell.jsx';
 import ReviewSection from '../components/ui/ReviewSection.jsx';
+import ReviewForm from '../components/ui/ReviewForm.jsx';
+import ReviewModal from '../components/ui/reviewModal.jsx';
 import { useParams } from 'react-router-dom';
+import { PropsContext } from '../context/context.props.jsx';
+import review from './../../../backend/models/models.review';
 
 /* TODO:
 -Review section + make icons more colorful
@@ -17,8 +21,10 @@ const AttractionPage = () => {
 	console.log('id ==> ', id);
 
 	const [attraction, setAttraction] = useState(null);
+	const { isModalOpen, modalState } = useContext(PropsContext);
 
-	useEffect(() => {
+	// Extract the fetch logic into a reusable function
+	const fetchAttractionData = () => {
 		axios
 			.get(`http://localhost:3000/api/${id}`)
 			.then((response) => {
@@ -27,8 +33,13 @@ const AttractionPage = () => {
 			.catch((error) => {
 				console.error('Error fetching attractions:', error);
 			});
-	}, []);
-	console.log(attraction);
+	};
+
+	// Initial fetch on component mount
+	useEffect(() => {
+		fetchAttractionData();
+	}, [id]);
+	console.log(attraction)
 
 	if (attraction != null) {
 		const imageCounter = attraction.imageURL.length;
@@ -39,6 +50,13 @@ const AttractionPage = () => {
 				) : (
 					<img src={attraction.imageURL[0]} alt='' />
 				)}
+
+				{isModalOpen && modalState.type === 'review' && (
+					<ReviewModal>
+						<ReviewForm attractionId={id} handleReviewSubmit = {fetchAttractionData} />
+					</ReviewModal>
+				)}
+
 				<div className='w-10/12 mx-auto my-14 gap-10 flex flex-col items-center'>
 					<div className='flex items-center text-4xl font-semibold text-gray-600 gap-6 justify-center gray-800'>
 						<h2>{attraction.title}</h2>
@@ -92,7 +110,7 @@ const AttractionPage = () => {
 					>
 						Find out more
 					</a>
-					<ReviewSection id={id} />
+					<ReviewSection id={id} reviews={attraction.reviews}/>
 				</div>
 			</div>
 		);
