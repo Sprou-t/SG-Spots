@@ -13,15 +13,16 @@ const ReviewCard = ({ review }) => {
 	const username = authorId.username;
 
 	// Format the date to a readable format
-	const formattedDate = new Date(updatedAt).toLocaleDateString();
+	const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+	const formattedDate = new Date(updatedAt).toLocaleDateString('en-GB', options);
 
 	return (
 		<div className='border-b-2 py-4'>
 			{/* Review Header with Name and Date */}
 			<div className='flex items-center justify-between'>
-				<div className='flex items-center'>
-					<h3 className='text-xl font-semibold'>{username}</h3>
-					<span className='ml-2 text-gray-500'>{formattedDate}</span>
+				<div className='flex items-center gap-4'>
+					<h3 className='text-2xl font-semibold'>{username}</h3>
+					<span className='ml-2 text-gray-500 text-lg'>{formattedDate}</span>
 				</div>
 
 				{/* Render stars */}
