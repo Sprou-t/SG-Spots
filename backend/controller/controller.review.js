@@ -147,7 +147,10 @@ export const deleteReview = async (req, res) => {
 			message: error,
 		});
 	}
-
+	/* where does id come from? the frontend sends a delete
+	req specifying the id in the http. it will be matched by 
+	the route in the backend ~/review/:id so :id would be the 
+	number sent and be extracted as id with req.params*/
 	const { id } = req.params;
 
 	try {
