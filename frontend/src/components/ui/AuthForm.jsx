@@ -19,7 +19,7 @@ const AuthForm = () => {
 	const handleAuth = async (event) => {
 		event.preventDefault();
 		let user;
-		if (modalState.authType === 'logIn') {
+		if (modalState.title === 'logIn') {
 			console.log('loging In');
 			try {
 				user = await logIn({
@@ -54,7 +54,7 @@ const AuthForm = () => {
 			<div className='flex min-h-full flex-1 flex-col justify-center px-6 w-full lg:px-8'>
 				<div className='sm:mx-auto sm:w-full sm:max-w-sm'>
 					<h2 className='mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900'>
-						{modalState.authType === 'logIn'
+						{modalState.title === 'logIn'
 							? 'Log in to your account'
 							: 'Sign up for an account'}
 					</h2>
@@ -67,7 +67,7 @@ const AuthForm = () => {
 						className='space-y-6'
 						onSubmit={handleAuth}
 					>
-						{modalState.authType === 'signUp' && (
+						{modalState.title === 'signUp' && (
 							<div>
 								<label
 									htmlFor='username'
@@ -150,7 +150,7 @@ const AuthForm = () => {
 								data='submit'
 								className='flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-customRed-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
 							>
-								{modalState.authType === 'logIn'
+								{modalState.title === 'logIn'
 									? 'Log In'
 									: 'Sign up'}
 							</button>
@@ -158,7 +158,7 @@ const AuthForm = () => {
 						<div className='flex items-center my-4'>
 							<div className='flex-grow border-t border-gray-300'></div>
 							<span className='mx-4 text-gray-500 text-sm'>
-								{modalState.authType === 'logIn'
+								{modalState.title === 'logIn'
 									? 'Or log in with'
 									: 'Or sign up with'}
 							</span>
@@ -181,14 +181,14 @@ const AuthForm = () => {
 						</div>
 					</form>
 
-					{modalState.authType === 'logIn' && (
+					{modalState.title === 'logIn' && (
 						<p className='mt-10 text-center text-sm/6 text-gray-500 flex gap-2 justify-center'>
 							Don't have an account?{' '}
 							<button
 								onClick={() =>
 									setModalState({
 										...modalState,
-										authType: 'signUp',
+										title: 'signUp',
 									})
 								}
 								className='font-semibold text-red-500 hover:text-customRed-light'

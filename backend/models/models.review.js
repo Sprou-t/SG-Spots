@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 /* TODO:
 1. link to userdb and find a way to upload image either thru api or by download
-2. link to attraction */
+*/
 
 const reviewSchema = new Schema(
 	{
@@ -34,10 +34,20 @@ const reviewSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		images: {
-			type: String,
-		},
+		image: {
+			fileName: {
+				type: String
+			},
+			mimeType: {
+				type: String
+			},
+			buffer:{
+				type: String
+			},
+			
+		}
 	},
+		
 	{ timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
 

@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { useFormStatus } from 'react-dom';
-import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { GoPaperclip } from 'react-icons/go';
-import { createReview } from '../../services/services.review.js';
+import { createReview, updateReview } from '../../services/services.review.js';
 import { PropsContext } from '../../context/context.props.jsx';
 import { FaStar } from 'react-icons/fa';
 
@@ -11,20 +10,54 @@ import { FaStar } from 'react-icons/fa';
 1. display review of all review attached to the specific attraction
 2. add functionality of attaching pictures */
 
+// haldleReviewSubmit will make a get req to fetch the attraction data
+// again whenever a form is submitted to create or edit a review
 const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 	const [userReview, setUserReview] = useState('');
 	const [rating, setRating] = useState(0);
+	const [file, setFile] = useState(null); // State to store the selected file
 	const { pending } = useFormStatus();
-	const { closeModal } = useContext(PropsContext);
+	const { modalState, closeModal } = useContext(PropsContext);
+	// console.log("modalState ==> ", modalState);
+
+	const reviewId = modalState.reviewId;
+	// console.log('reviewId ==> ', reviewId);
 
 	const submitReview = async (event) => {
 		event.preventDefault();
 		let newReview;
+		console.log('modalState ==> ', modalState);
+		const formData = new FormData(); // inbuilt js function to create form obj
+		// formData.append('authorId', )
+		formData.append('attractionId', attractionId);
+		formData.append('rating', rating);
+		formData.append('description', userReview);
+		
+
+		if (file) {
+			formData.append('avatar', file); // Append the file to formData
+		}
 		try {
-			newReview = await createReview({
+			newReview = await createReview(formData);
+		} catch (err) {
+			console.error(`error creating review: ${err}`);
+		}
+		setUserReview('');
+		setRating(0);
+		setFile(null);
+		closeModal();
+		handleReviewSubmit();
+		console.log('submitted: ', newReview);
+	};
+
+	const editReview = async (event) => {
+		event.preventDefault();
+		let updatedReview;
+		try {
+			updatedReview = await updateReview({
 				rating: rating,
 				description: userReview,
-				attractionId: attractionId,
+				reviewId: reviewId,
 			});
 		} catch (err) {
 			console.error(`error creating review: ${err}`);
@@ -33,11 +66,27 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 		setRating(0);
 		closeModal();
 		handleReviewSubmit();
-		console.log('submitted: ', newReview);
+		console.log('review edited: ', updatedReview);
+	};
+
+	const handleFileUploadClick = (event) => {
+		event.preventDefault();
+		document.getElementById('file-input').click(); // Trigger the hidden file input click
+	};
+
+	const handleFileChange = (event) => {
+		const selectedFile = event.target.files[0];
+		if (selectedFile) {
+			setFile(selectedFile); // Store the selected file
+		}
 	};
 
 	return (
-		<form onSubmit={submitReview} className='p-5 items-center'>
+		<form
+			onSubmit={modalState.title == 'submit' ? submitReview : editReview}
+			enctype='multipart/form-data'
+			className='p-5 items-center'
+		>
 			<div className='flex items-center justify-start my-4 gap-2'>
 				{/* Star Rating */}
 				<p className='text-2xl'>Rating: </p>
@@ -62,8 +111,30 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 			></textarea>
 
 			<div className='flex justify-end gap-4'>
+				{/* Hidden file input element */}
+				<input
+					type='file'
+					name='avatar'
+					id='file-input'
+					style={{ display: 'none' }} // Hide the file input
+					onChange={handleFileChange} // Handle file selection
+				/>
+
+				{/* Show the file name if a file is selected */}
+				{file && (
+					<div
+						onChange={handleFileChange}
+						className='text-xl font-semibold mt-2 text-blue-600'
+					>
+						<p>File selected!</p>
+					</div>
+				)}
 				<button>
-					<GoPaperclip className='size-6' type='button' />
+					<GoPaperclip
+						onClick={handleFileUploadClick}
+						className='size-6 hover:text-blue-600'
+						type='button'
+					/>
 				</button>
 				<button
 					type='submit'

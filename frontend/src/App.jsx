@@ -6,14 +6,12 @@ import AttractionPage from './pages/AttractionPage.jsx';
 import Navbar from './components/ui/Navbar.jsx';
 import Footer from './components/ui/Footer.jsx';
 import AuthModal from './components/ui/AuthModal.jsx';
-import ReviewModal from './components/ui/reviewModal.jsx';
 import TermsAndConditions from './pages/TermsAndConditions.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import AboutSGSpots from './pages/About.jsx';
 import Blog from './pages/Blog.jsx';
 import AuthForm from './components/ui/AuthForm.jsx';
 import { PropsContext } from './context/context.props.jsx';
-import ReviewForm from './components/ui/ReviewForm.jsx';
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -22,24 +20,27 @@ const App = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalState, setModalState] = useState({
 		type: null,
-		authType: null,
+		title: null,
+		reviewId:null,
 	}); // Combined state
 
 	// useEffect(() => {
 	// 	console.log('Updated modal state: ', modalState);
 	// }, [modalState]);
 
-	// Function to open the modal (Login or SignUp)
-	const openModal = ({ type, authType }) => {
+	// Function to open the modal 
+	// type: authentication/review
+	// title: auth(logIn or signUp), review(submit or edit)
+	const openModal = ({ type, title, reviewId }) => {
 		setIsModalOpen(true); // Open modal
-		setModalState({ type, authType }); // Update modal state
+		setModalState({ type, title, reviewId }); // Update modal state
 	};
 
 	// Function to close the modal
 	const closeModal = () => {
 		setIsModalOpen(false);
-		setModalState({ type: null, authType: null }); // Reset modal state
-		console.log('modalState after clearing', modalState);
+		setModalState({ type: null, title: null }); // Reset modal state
+		console.log('modalState after closing', modalState);
 	};
 
 	return (
