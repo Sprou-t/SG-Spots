@@ -10,7 +10,7 @@ import ReviewForm from '../components/ui/ReviewForm.jsx';
 import ReviewModal from '../components/ui/reviewModal.jsx';
 import { useParams } from 'react-router-dom';
 import { PropsContext } from '../context/context.props.jsx';
-import review from './../../../backend/models/models.review';
+import { token } from '../services/services.review.js';
 
 /* TODO:
 -Review section + make icons more colorful
@@ -19,10 +19,12 @@ import review from './../../../backend/models/models.review';
 const AttractionPage = () => {
 	const { id } = useParams();
 	console.log('id ==> ', id);
+	console.log('token: ',token)
 
 	const [attraction, setAttraction] = useState(null);
 	const { isModalOpen, modalState } = useContext(PropsContext);
 
+	console.log('attraction page renders')
 	// Extract the fetch logic into a reusable function
 	const fetchAttractionData = () => {
 		axios
@@ -39,7 +41,6 @@ const AttractionPage = () => {
 	useEffect(() => {
 		fetchAttractionData();
 	}, [id]);
-	console.log(attraction)
 
 	if (attraction != null) {
 		const imageCounter = attraction.imageURL.length;

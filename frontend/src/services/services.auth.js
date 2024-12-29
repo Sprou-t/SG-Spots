@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const logInBaseUrl = 'http://localhost:3000/user/login';
+const logInBaseUrl = 'http://localhost:3000/user/logIn';
 const signUpBaseUrl = 'http://localhost:3000/user/signUp';
 
 const logIn = async (credentials) => {

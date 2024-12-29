@@ -3,6 +3,15 @@ import User from '../models/models.users.js';
 import Attraction from '../models/models.attraction.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
+import multer from 'multer'
+
+// these 2 lines save the file in RAM,only by saving it in RAM can we 
+// ltr access the file as buffer and save it to mongodb  
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+// Add multer middleware to handle file uploads
+export const uploadMiddleware = upload.single('avatar');
 
 const getTokenFrom = (request) => {
 	// get token from auth header of req
@@ -13,6 +22,7 @@ const getTokenFrom = (request) => {
 	return null;
 };
 
+// verify whether token is valid
 const verifyToken = (req, secret) => {
 	try {
 		const token = getTokenFrom(req);
@@ -53,7 +63,10 @@ export const createReview = async (req, res) => {
 	const user = await User.findById(decodedToken.id);
 
 	const reviewData = req.body;
-	console.log('reviewData ==> ', reviewData);
+	console.log("Request Headers:", req.headers);  // Log headers
+	console.log("Request Body:", req.body);        // Log body to see if data is being parsed
+	console.log("Request File:", req.file);        // Log file to check if file is available
+
 	//check if req data is sent correctly
 	if (!reviewData.rating || !reviewData.description) {
 		return res
@@ -69,6 +82,21 @@ export const createReview = async (req, res) => {
 		rating: reviewData.rating,
 		description: reviewData.description,
 	});
+
+	if(req.file){
+		// convert buffer data into b64 for rendering in frontend
+		const b64 = new Buffer.from(req.file.buffer).toString('base64')
+		newReview.image= {
+			fileName:req.file.originalname,
+			mimeType: req.file.mimetype,
+			buffer: b64,
+		}
+		console.log("req.file.buffer ==> ", req.file.buffer);
+	}else{
+		console.log('no file.buffer')
+	}
+
+
 	console.log('new review obj: ', newReview);
 
 	try {

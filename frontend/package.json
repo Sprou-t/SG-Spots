@@ -16,6 +16,7 @@
     "@material-tailwind/react": "^2.1.10",
     "eslint": "^8.57.1",
     "framer-motion": "^11.13.5",
+    "imagefrombuffer": "^1.0.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-inview": "^4.5.1",

@@ -1,20 +1,31 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import { GoPaperclip } from 'react-icons/go';
-import { useFormStatus } from 'react-dom';
-import Modal from './AuthModal.jsx';
-import AddReview from './ReviewForm.jsx';
 import { PropsContext } from './../../context/context.props.jsx';
 import { HiDotsVertical } from 'react-icons/hi';
-import review from '../../../../backend/models/models.review.js';
+import { deleteReview } from '../../services/services.review.js';
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
+	const [imagePath, setImagePath] = useState('');
 	let currentUserId;
-	if (window.localStorage.getItem('loggedInUser')){
-		currentUserId = JSON.parse(window.localStorage.getItem('loggedInUser')).userId;
+	if (window.localStorage.getItem('loggedInUser')) {
+		currentUserId = JSON.parse(
+			window.localStorage.getItem('loggedInUser')
+		).userId;
 	}
-	
-	const { authorId, updatedAt, rating, description, image } = review;
+	console.log(currentUserId);
+	const { _id, authorId, updatedAt, rating, description, image } = review;
+	console.log("image ==> ", image);
+	// console.log('image content type ==> ', image.mimeType);
+	// console.log('image buffer ==>', image.buffer);
+
+	const assignImagePath = () => {
+		if (image && image.mimeType && image.buffer) {
+			setImagePath(`data:${image.mimeType};base64,${image.buffer}`);
+		}
+	};
+	useEffect(() => {
+		assignImagePath();
+	}, [review]);
+	console.log('img path: ', imagePath);
 	const username = authorId.username;
 
 	// Dropdown state
@@ -33,21 +44,36 @@ const ReviewCard = ({ review }) => {
 
 	// Handle actions
 	const handleEdit = () => {
+		openModal({ type: 'review', title: 'edit', reviewId: _id });
 		console.log('Edit clicked for review:', review._id);
-		// Add logic to edit the review
+		setDropdownOpen((prevState) => !prevState);
 	};
+
 	const handleDelete = () => {
-		console.log('Delete clicked for review:', review._id);
-		// Add logic to delete the review
-	};
-	const handleReport = () => {
-		console.log('Report clicked for review:', review._id);
-		// Add logic to report the review
+		deleteReview(_id);
+		setReviewList((prev) => {
+			const updatedReviews = prev.filter((review) => review._id !== _id);
+
+			// Recalculate average rating based on the updated list
+			const totalStars = updatedReviews.reduce(
+				(acc, review) => acc + review.rating,
+				0
+			);
+			const avg = updatedReviews.length
+				? totalStars / updatedReviews.length
+				: 0;
+			setAverageRating(avg.toFixed(1)); // Update the average rating state
+
+			return updatedReviews; // Return the updated list
+		});
 	};
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(event.target)
+			) {
 				setDropdownOpen(false); // Close the dropdown if clicked outside
 			}
 		};
@@ -96,42 +122,33 @@ const ReviewCard = ({ review }) => {
 					</div>
 
 					{/* 3-dots menu */}
-					<div className='ml-4' ref={dropdownRef}>
-						<button
-							className='text-gray-500 hover:text-gray-800 flex items-center'
-							onClick={toggleDropdown}
-						>
-							<HiDotsVertical className='size-6' />
-						</button>
-						{/* Dropdown menu */}
-						{dropdownOpen && (
-							<div className='absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md'>
-								{currentUserId === authorId._id ? (
-									<>
-										<button
-											className='block w-full px-4 py-2 text-left hover:bg-gray-100'
-											onClick={handleEdit}
-										>
-											Edit
-										</button>
-										<button
-											className='block w-full px-4 py-2 text-left hover:bg-gray-100 text-red-500'
-											onClick={handleDelete}
-										>
-											Delete
-										</button>
-									</>
-								) : (
+					{currentUserId === authorId._id && (
+						<div className='ml-4' ref={dropdownRef}>
+							<button
+								className='text-gray-500 hover:text-gray-800 flex items-center'
+								onClick={toggleDropdown}
+							>
+								<HiDotsVertical className='size-6' />
+							</button>
+							{/* Dropdown menu */}
+							{dropdownOpen && (
+								<div className='absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md'>
 									<button
 										className='block w-full px-4 py-2 text-left hover:bg-gray-100'
-										onClick={handleReport}
+										onClick={handleEdit}
 									>
-										Report
+										Edit
 									</button>
-								)}
-							</div>
-						)}
-					</div>
+									<button
+										className='block w-full px-4 py-2 text-left hover:bg-gray-100 text-red-500'
+										onClick={handleDelete}
+									>
+										Delete
+									</button>
+								</div>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 
@@ -139,12 +156,12 @@ const ReviewCard = ({ review }) => {
 			<p className='mt-2 text-gray-700'>{description}</p>
 
 			{/* Conditionally render an image if available */}
-			{image && (
+			{image && imagePath && (
 				<div className='mt-4'>
 					<img
-						src={image}
+						src={imagePath}
 						alt='Review Image'
-						className='w-full h-auto rounded-md'
+						className='size-72 h-auto rounded-md'
 					/>
 				</div>
 			)}
@@ -152,22 +169,35 @@ const ReviewCard = ({ review }) => {
 	);
 };
 
-const ReviewSection = ({  reviews }) => {
+const ReviewSection = ({ reviews }) => {
+
+	const [reviewList, setReviewList] = useState(null);
 	const [averageRating, setAverageRating] = useState(0);
 	const { openModal } = useContext(PropsContext);
+	const isUserLoggedIn = window.localStorage.getItem('loggedInUser');
 
 	useEffect(() => {
+		// console.log('reviews ==> ', reviews);
 		// Calculate the average rating
+		setReviewList(reviews);
 		const totalStars = reviews.reduce(
 			(acc, review) => acc + review.rating,
 			0
 		);
 		const avg = reviews.length ? totalStars / reviews.length : 0;
 		setAverageRating(avg.toFixed(1)); // Round to 1 decimal place
-	});
+	}, [reviews]);
 
 	const openReviewForm = () => {
-		openModal({ type: 'review', title: null });
+		openModal({ type: 'review', title: 'submit', reviewId: null });
+	};
+
+	const openAuthForm = () => {
+		openModal({
+			type: 'authentication',
+			title: 'logIn',
+			reviewId: null,
+		});
 	};
 
 	return (
@@ -203,17 +233,34 @@ const ReviewSection = ({  reviews }) => {
 			</div>
 
 			<div className='flex flex-col p-4 mx-auto mt-2'>
-				<button
-					type='button'
-					onClick={() => openReviewForm()}
-					className='bg-blue-500 text-white text-lg font-bold  h-12 rounded-md hover:scale-105'
-				>
-					Write a Review
-				</button>
+				{isUserLoggedIn ? (
+					<button
+						type='button'
+						onClick={() => openReviewForm()}
+						className='bg-blue-500 text-white text-lg font-bold  h-12 rounded-md hover:scale-105'
+					>
+						Write a Review
+					</button>
+				) : (
+					<button
+						type='button'
+						onClick={() => openAuthForm()}
+						className='bg-blue-500 text-white text-lg font-bold  h-12 rounded-md hover:scale-105'
+					>
+						Sign In and Write a Review
+					</button>
+				)}
 
-				{reviews.length > 0 &&
-					reviews.map((review, index) => (
-						<ReviewCard key={index} review={review} />
+				{reviewList &&
+					reviewList.length > 0 &&
+					reviewList.map((review, index) => (
+						<ReviewCard
+							key={index}
+							review={review}
+							setReviewList={setReviewList}
+							openModal={openModal}
+							setAverageRating={setAverageRating}
+						/>
 					))}
 			</div>
 		</div>

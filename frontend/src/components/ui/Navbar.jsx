@@ -17,13 +17,13 @@ const Navbar = () => {
 	const navbarRef = useRef(null);
 	const profileRef = useRef(null);
 
-	const { setSearchQuery, user, setUser, openModal } = useContext(PropsContext);
-	
+	const { setSearchQuery, user, setUser, openModal } =
+		useContext(PropsContext);
 
 	const controlDirection = () => {
 		if (window.scrollY > oldScrollY.current) {
 			setDirection('down');
-			setSearchQuery('')
+			setSearchQuery('');
 		} else {
 			setDirection('up');
 		}
@@ -36,7 +36,7 @@ const Navbar = () => {
 		if (navbarRef.current && !navbarRef.current.contains(event.target)) {
 			setIsMenuOpen(false);
 			setIsDropdownOpen(false);
-			setSearchQuery('')
+			setSearchQuery('');
 		}
 	};
 
@@ -66,29 +66,37 @@ const Navbar = () => {
 		};
 	}, []);
 
-	useEffect(()=>{
-		const loggedInUser = window.localStorage.getItem('loggedInUser')
-		if(loggedInUser){
-			const user = JSON.parse(loggedInUser)
-			setUser(user)
+	useEffect(() => {
+		const loggedInUser = window.localStorage.getItem('loggedInUser');
+		if (loggedInUser) {
+			const user = JSON.parse(loggedInUser);
+			setUser(user);
 		}
-	},[])
+	}, []);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
 	const openLoginForm = () => {
-		openModal({ type: 'authentication', authType: 'logIn' });
+		openModal({
+			type: 'authentication',
+			title: 'logIn',
+			reviewId: null,
+		});
 	};
 	const openSignUpForm = () => {
-		openModal({ type: 'authentication', authType: 'signUp' });
+		openModal({
+			type: 'authentication',
+			title: 'signUp',
+			reviewId: null,
+		});
 	};
 
-	const logUserOut = ()=>{
-		window.localStorage.removeItem('loggedInUser')
-		setUser(null)
-	}
+	const logUserOut = () => {
+		window.localStorage.removeItem('loggedInUser');
+		setUser(null);
+	};
 
 	return (
 		<div
@@ -162,7 +170,10 @@ const Navbar = () => {
 										<button className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
 											Setting
 										</button>
-										<button onClick={logUserOut} className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
+										<button
+											onClick={logUserOut}
+											className='text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'
+										>
 											Log Out
 										</button>
 									</div>
@@ -195,7 +206,7 @@ const Navbar = () => {
 							onClick={() =>
 								openAuthForm({
 									type: 'authentication',
-									authType: 'logIn',
+									title: 'logIn',
 								})
 							}
 							className='w-full text-center py-2   font-bold'
@@ -206,7 +217,7 @@ const Navbar = () => {
 							onClick={() =>
 								openAuthForm({
 									type: 'authentication',
-									authType: 'signUp',
+									title: 'signUp',
 								})
 							}
 							className='w-full text-center py-2  font-bold'

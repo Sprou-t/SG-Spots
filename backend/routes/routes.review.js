@@ -5,13 +5,14 @@ import {
 	createReview,
 	updateReview,
 	deleteReview,
+	uploadMiddleware
 } from "../controller/controller.review.js";
 
 const router = express.Router();
 
 router.get("/", getAllReview);
-router.post("/", createReview);
-router.put("/:id", updateReview);
+router.post("/",uploadMiddleware, createReview);
+router.put("/:id",uploadMiddleware, updateReview);
 router.delete("/:id", deleteReview);
 
 export default router; // to index.js
