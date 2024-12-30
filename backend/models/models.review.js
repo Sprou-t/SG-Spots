@@ -16,13 +16,13 @@ const reviewSchema = new Schema(
 		authorId: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
-			required:true
+			required: true,
 		},
 
-		attractionId:{
+		attractionId: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref:'Attraction',
-			required:true
+			ref: 'Attraction',
+			required: true,
 		},
 
 		rating: {
@@ -36,18 +36,17 @@ const reviewSchema = new Schema(
 		},
 		image: {
 			fileName: {
-				type: String
+				type: String,
 			},
 			mimeType: {
-				type: String
+				type: String,
 			},
-			buffer:{
-				type: String
+			buffer: {
+				type: String,
 			},
-			
-		}
+		},
 	},
-		
+
 	{ timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
 

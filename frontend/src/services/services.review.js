@@ -25,8 +25,8 @@ const ensureUserIsLoggedInAndTokenIsSet = () => {
 const createReview = async (newReview) => {
 	ensureUserIsLoggedInAndTokenIsSet();
 	const config = {
-		headers: { 
-			Authorization: token, 
+		headers: {
+			Authorization: token,
 		},
 	};
 	console.log('config ', config);
@@ -35,33 +35,60 @@ const createReview = async (newReview) => {
 	return response.data;
 };
 
-// TODO: update review with user token
-const updateReview = async (updatedReviewData) => {
+const updateReview = async (data) => {
+console.log("data ==> ", data);
+	// Ensure user is logged in and token is set
 	ensureUserIsLoggedInAndTokenIsSet();
-	{
+
+	// Destructure the input data
+	const { reviewId, attractionId, rating, description, avatar } = data;
+
+	// Validate required fields
+	if (!reviewId) {
+		console.error('Review ID is missing');
+		return;
 	}
+
+	// Create the FormData object and append data
+	const formData = new FormData();
+	formData.append('reviewId', reviewId);
+	formData.append('attractionId', attractionId);
+	formData.append('rating', rating);
+	formData.append('description', description);
+
+	// Append the file only if it exists
+	if (avatar) {
+		formData.append('avatar', avatar);
+	}
+
+	// Debugging: Log the FormData contents
+	for (let [key, value] of formData.entries()) {
+		console.log(`${key}:`, value);
+	}
+
+	// Set up config with Authorization token
 	const config = {
-		headers: { Authorization: token },
-	};
-	const updatedReviewContent = {
-		rating: updatedReviewData.rating,
-		description: updatedReviewData.description,
+		headers: {
+			Authorization: token, // Ensure the token is valid
+			'Content-Type': 'multipart/form-data', // Correct format
+		},
 	};
 
-	const updatedReviewId = updatedReviewData.reviewId;
-	let response;
+	// Construct the URL for updating the review
+	const updateReviewUrl = `${reviewBaseUrl}/${reviewId}`;
+	console.log('Update Review URL:', updateReviewUrl);
+
 	try {
-		response = await axios.put(
-			`${reviewBaseUrl}/${updatedReviewId}`,
-			updatedReviewContent,
-			config
-		);
+		// Make the PUT request with FormData
+		const response = await axios.put(updateReviewUrl, formData, config);
+		console.log('Update response:', response.data);
+		return response.data; // Return the response data
 	} catch (err) {
-		console.error('error: ', err);
+		console.error('Error updating review: ', err.response?.data || err.message);
+		return null;
 	}
-
-	return response.data;
 };
+
 
 const deleteReview = async (reviewId) => {
 	ensureUserIsLoggedInAndTokenIsSet();

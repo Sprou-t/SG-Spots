@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "http://api.stb.gov.sg";
-const END_POINT = "/cruises";
+const BASE_URL = 'http://api.stb.gov.sg';
+const END_POINT = '/cruises';
 
 const fetchTIHData = async () => {
 	try {
 		const response = await axios.fetch(`${BASE_URL}${END_POINT}`, {
 			headers: {
-				Accept: "application/json",
-				"X-Content-Language": "en",
-				"X-API-Key": TIH_API_KEY,
+				Accept: 'application/json',
+				'X-Content-Language': 'en',
+				'X-API-Key': TIH_API_KEY,
 			},
 		});
 	} catch (error) {
@@ -18,4 +18,4 @@ const fetchTIHData = async () => {
 	return response.data;
 };
 
-export default fetchTIHData
+export default fetchTIHData;

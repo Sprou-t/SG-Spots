@@ -11,7 +11,7 @@ const userSchema = new Schema({
 	username: {
 		type: String,
 		unique: true,
-		required: true
+		required: true,
 	},
 
 	//store hashed ver of password, thus must hash password first in controller
@@ -29,7 +29,6 @@ const userSchema = new Schema({
 });
 
 // Explicitly create an index for the `username` field to ensure sparse and unique constraints
-
 
 userSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
