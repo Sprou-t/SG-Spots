@@ -15,7 +15,7 @@ import jwt from 'jsonwebtoken';
 export const signUp = async (req, res) => {
 	// sieve out the data from req.body
 	// note username is for id purposes, name only as proxy id
-	const { email,username, password } = req.body;
+	const { email, username, password } = req.body;
 	if (!email || !username || !password) {
 		return res // immediately send a response back w/o creating user
 			.status(401)

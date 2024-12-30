@@ -21,7 +21,7 @@ const App = () => {
 	const [modalState, setModalState] = useState({
 		type: null,
 		title: null,
-		reviewId:null,
+		reviewId: null,
 	}); // Combined state
 
 	// useEffect(() => {
@@ -40,7 +40,7 @@ const App = () => {
 	const closeModal = () => {
 		setIsModalOpen(false);
 		setModalState({ type: null, title: null }); // Reset modal state
-		console.log('modalState after closing', modalState);
+		// console.log('modalState after closing', modalState);
 	};
 
 	return (

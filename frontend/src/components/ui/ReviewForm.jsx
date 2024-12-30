@@ -6,7 +6,7 @@ import { createReview, updateReview } from '../../services/services.review.js';
 import { PropsContext } from '../../context/context.props.jsx';
 import { FaStar } from 'react-icons/fa';
 
-/*TODO: 
+/*TODO:
 1. display review of all review attached to the specific attraction
 2. add functionality of attaching pictures */
 
@@ -21,18 +21,15 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 	// console.log("modalState ==> ", modalState);
 
 	const reviewId = modalState.reviewId;
-	// console.log('reviewId ==> ', reviewId);
+	console.log("reviewId ==> ", reviewId);
 
 	const submitReview = async (event) => {
 		event.preventDefault();
 		let newReview;
-		console.log('modalState ==> ', modalState);
 		const formData = new FormData(); // inbuilt js function to create form obj
-		// formData.append('authorId', )
 		formData.append('attractionId', attractionId);
 		formData.append('rating', rating);
 		formData.append('description', userReview);
-		
 
 		if (file) {
 			formData.append('avatar', file); // Append the file to formData
@@ -52,22 +49,33 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 
 	const editReview = async (event) => {
 		event.preventDefault();
-		let updatedReview;
+
+		// Create an object with the input data
+		const updatedReviewData = {
+			reviewId,
+			attractionId,
+			rating,
+			description: userReview,
+			avatar: file, // This can be null if no file is selected
+		};
+
 		try {
-			updatedReview = await updateReview({
-				rating: rating,
-				description: userReview,
-				reviewId: reviewId,
-			});
+			// Pass the input data object to the updateReview function
+			const updatedReview = await updateReview(updatedReviewData);
+
+			// Reset state and close modal
+			setUserReview('');
+			setRating(0);
+			setFile(null);
+			closeModal();
+			handleReviewSubmit();
+			console.log('Review edited: ', updatedReview);
 		} catch (err) {
-			console.error(`error creating review: ${err}`);
+			console.error('Error updating review: ', err);
 		}
-		setUserReview('');
-		setRating(0);
-		closeModal();
-		handleReviewSubmit();
-		console.log('review edited: ', updatedReview);
 	};
+
+
 
 	const handleFileUploadClick = (event) => {
 		event.preventDefault();
@@ -84,7 +92,7 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 	return (
 		<form
 			onSubmit={modalState.title == 'submit' ? submitReview : editReview}
-			enctype='multipart/form-data'
+			encType='multipart/form-data'
 			className='p-5 items-center'
 		>
 			<div className='flex items-center justify-start my-4 gap-2'>
@@ -93,9 +101,8 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 				{[1, 2, 3, 4, 5].map((star) => (
 					<FaStar
 						key={star}
-						className={`cursor-pointer text-3xl ${
-							star <= rating ? 'text-yellow-500' : 'text-gray-300'
-						}`}
+						className={`cursor-pointer text-3xl ${star <= rating ? 'text-yellow-500' : 'text-gray-300'
+							}`}
 						onClick={() => setRating(star)}
 					/>
 				))}

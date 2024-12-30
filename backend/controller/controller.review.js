@@ -3,10 +3,10 @@ import User from '../models/models.users.js';
 import Attraction from '../models/models.attraction.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import multer from 'multer'
+import multer from 'multer';
 
-// these 2 lines save the file in RAM,only by saving it in RAM can we 
-// ltr access the file as buffer and save it to mongodb  
+// these 2 lines save the file in RAM,only by saving it in RAM can we
+// ltr access the file as buffer and save it to mongodb
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -60,12 +60,17 @@ export const createReview = async (req, res) => {
 	}
 
 	// else continue to create the review
-	const user = await User.findById(decodedToken.id);
+	let user;
+	try {
+		user = await User.findById(decodedToken.id);
+	} catch (err) {
+		console.error('error in finding user: ', err);
+	}
 
 	const reviewData = req.body;
-	console.log("Request Headers:", req.headers);  // Log headers
-	console.log("Request Body:", req.body);        // Log body to see if data is being parsed
-	console.log("Request File:", req.file);        // Log file to check if file is available
+	console.log('Request Headers:', req.headers); // Log headers
+	console.log('Request Body:', req.body); // Log body to see if data is being parsed
+	console.log('Request File:', req.file); // Log file to check if file is available
 
 	//check if req data is sent correctly
 	if (!reviewData.rating || !reviewData.description) {
@@ -83,20 +88,16 @@ export const createReview = async (req, res) => {
 		description: reviewData.description,
 	});
 
-	if(req.file){
+	if (req.file) {
+		console.log('there is req.file!');
 		// convert buffer data into b64 for rendering in frontend
-		const b64 = new Buffer.from(req.file.buffer).toString('base64')
-		newReview.image= {
-			fileName:req.file.originalname,
+		const b64 = new Buffer.from(req.file.buffer).toString('base64');
+		newReview.image = {
+			fileName: req.file.originalname,
 			mimeType: req.file.mimetype,
 			buffer: b64,
-		}
-		console.log("req.file.buffer ==> ", req.file.buffer);
-	}else{
-		console.log('no file.buffer')
+		};
 	}
-
-
 	console.log('new review obj: ', newReview);
 
 	try {
@@ -117,17 +118,28 @@ export const createReview = async (req, res) => {
 };
 
 export const updateReview = async (req, res) => {
-	const { id } = req.params;
+	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
+	const { id } = req.params; // must be id bcoz in route i set :id
+	const reviewObjId = id;
 	const reviewData = req.body;
+	console.log('Uploaded file info:', req.file);
+
+	// Log the request body to check other fields
+	console.log('Request body:', req.body);
 
 	// Validate the review ID
-	if (!mongoose.Types.ObjectId.isValid(id)) {
+	if (!mongoose.Types.ObjectId.isValid(reviewObjId)) {
 		return res
 			.status(404)
 			.json({ success: false, message: 'Invalid review ID' });
 	}
 
-	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
+	if (!reviewData.rating || !reviewData.description) {
+		return res.status(400).json({
+			success: false,
+			message: 'missing rating or description!',
+		});
+	}
 
 	if (error) {
 		return res.status(401).json({
@@ -135,9 +147,9 @@ export const updateReview = async (req, res) => {
 			message: error,
 		});
 	}
-
+	// find the user and the attraction to update the review there
 	// Find the review to be updated
-	const review = await Review.findById(id);
+	const review = await Review.findById(reviewObjId);
 	if (!review) {
 		return res
 			.status(404)
@@ -152,17 +164,36 @@ export const updateReview = async (req, res) => {
 		});
 	}
 
+	const updatedReviewObj = {
+		rating: reviewData.rating,
+		description: reviewData.description,
+	};
+
+	if (req.file) {
+		const b64 = new Buffer.from(req.file.buffer).toString('base64');
+		updatedReviewObj.image = {
+			fileName: req.file.originalname,
+			mimeType: req.file.mimetype,
+			buffer: b64,
+		};
+	}
 	// Proceed to update the review
 	try {
-		const updatedReview = await Review.findByIdAndUpdate(id, reviewData, {
-			new: true, // Return the updated document
-			runValidators: true, // Ensure the updated data adheres to schema validation
-		});
+		const updatedReview = await Review.findByIdAndUpdate(
+			reviewObjId,
+			updatedReviewObj,
+			{
+				new: true, // Return the updated document
+				runValidators: true, // Ensure the updated data adheres to schema validation
+			}
+		);
+
 		res.status(200).json({ success: true, data: updatedReview });
 	} catch (error) {
 		console.error(`Error in updating review: ${error.message}`);
 		res.status(500).json({ success: false, message: 'Server error' });
 	}
+
 };
 
 export const deleteReview = async (req, res) => {
@@ -176,14 +207,16 @@ export const deleteReview = async (req, res) => {
 		});
 	}
 	/* where does id come from? the frontend sends a delete
-	req specifying the id in the http. it will be matched by 
-	the route in the backend ~/review/:id so :id would be the 
+	req specifying the id in the http. it will be matched by
+	the route in the backend ~/review/:id so :id would be the
 	number sent and be extracted as id with req.params*/
 	const { id } = req.params;
+	console.log(' id  ==> ', id);
 
 	try {
 		// Find the review by ID
 		const review = await Review.findById(id);
+		console.log('review ==> ', review);
 
 		if (!review) {
 			// If the review is not found
@@ -199,6 +232,22 @@ export const deleteReview = async (req, res) => {
 				message: 'Unauthorized to delete this review',
 			});
 		}
+
+		// remove the review from both user and attraction
+		// note that in attraction and user doc, only review ID is stored
+		// .toString() is necessary in this context because MongoDB's ObjectId type is a special BSON object
+		const user = await User.findById(review.authorId);
+		console.log('user ==> ', user);
+		const attraction = await Attraction.findById(review.attractionId);
+		console.log('attraction ==> ', attraction);
+		user.reviews = user.reviews.filter(
+			(reviewId) => reviewId.toString() !== id
+		);
+		attraction.reviews = attraction.reviews.filter(
+			(reviewId) => reviewId.toString() !== id
+		);
+		await user.save();
+		await attraction.save();
 
 		// Delete the review
 		await review.deleteOne();

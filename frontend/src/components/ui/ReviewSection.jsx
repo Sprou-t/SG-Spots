@@ -3,6 +3,7 @@ import { PropsContext } from './../../context/context.props.jsx';
 import { HiDotsVertical } from 'react-icons/hi';
 import { deleteReview } from '../../services/services.review.js';
 
+
 const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	const [imagePath, setImagePath] = useState('');
 	let currentUserId;
@@ -11,11 +12,12 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 			window.localStorage.getItem('loggedInUser')
 		).userId;
 	}
-	console.log(currentUserId);
+	// console.log(currentUserId);
 	const { _id, authorId, updatedAt, rating, description, image } = review;
-	console.log("image ==> ", image);
+	// console.log("image ==> ", image);
 	// console.log('image content type ==> ', image.mimeType);
 	// console.log('image buffer ==>', image.buffer);
+
 
 	const assignImagePath = () => {
 		if (image && image.mimeType && image.buffer) {
@@ -25,12 +27,14 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	useEffect(() => {
 		assignImagePath();
 	}, [review]);
-	console.log('img path: ', imagePath);
+	// console.log('img path: ', imagePath);
 	const username = authorId.username;
+
 
 	// Dropdown state
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
+
 
 	// Format the date to a readable format
 	const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -39,8 +43,10 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		options
 	);
 
+
 	// Toggle the dropdown menu
 	const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
 
 	// Handle actions
 	const handleEdit = () => {
@@ -49,10 +55,12 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		setDropdownOpen((prevState) => !prevState);
 	};
 
-	const handleDelete = () => {
-		deleteReview(_id);
+
+	const handleDelete = async () => {
+		await deleteReview(_id);
 		setReviewList((prev) => {
 			const updatedReviews = prev.filter((review) => review._id !== _id);
+
 
 			// Recalculate average rating based on the updated list
 			const totalStars = updatedReviews.reduce(
@@ -64,9 +72,11 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 				: 0;
 			setAverageRating(avg.toFixed(1)); // Update the average rating state
 
+
 			return updatedReviews; // Return the updated list
 		});
 	};
+
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -78,12 +88,15 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 			}
 		};
 
+
 		const handleScroll = () => {
 			setDropdownOpen(false); // Close dropdown if the user scrolls
 		};
 
+
 		document.addEventListener('click', handleClickOutside);
 		window.addEventListener('scroll', handleScroll);
+
 
 		// Clean up event listeners
 		return () => {
@@ -91,6 +104,7 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, []);
+
 
 	return (
 		<div className='border-b-2 py-4 relative'>
@@ -103,6 +117,7 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 					</span>
 				</div>
 
+
 				{/* Stars and 3-dots menu */}
 				<div className='flex items-center relative gap-5'>
 					{/* Render stars */}
@@ -110,16 +125,16 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 						{[...Array(5)].map((_, index) => (
 							<span
 								key={index}
-								className={` text-2xl ${
-									index < rating
-										? 'text-yellow-500'
-										: 'text-gray-300'
-								}`}
+								className={` text-2xl ${index < rating
+									? 'text-yellow-500'
+									: 'text-gray-300'
+									}`}
 							>
 								&#9733;
 							</span>
 						))}
 					</div>
+
 
 					{/* 3-dots menu */}
 					{currentUserId === authorId._id && (
@@ -152,8 +167,10 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 				</div>
 			</div>
 
+
 			{/* Review Description */}
 			<p className='mt-2 text-gray-700'>{description}</p>
+
 
 			{/* Conditionally render an image if available */}
 			{image && imagePath && (
@@ -169,12 +186,13 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	);
 };
 
-const ReviewSection = ({ reviews }) => {
 
+const ReviewSection = ({ reviews }) => {
 	const [reviewList, setReviewList] = useState(null);
 	const [averageRating, setAverageRating] = useState(0);
 	const { openModal } = useContext(PropsContext);
 	const isUserLoggedIn = window.localStorage.getItem('loggedInUser');
+
 
 	useEffect(() => {
 		// console.log('reviews ==> ', reviews);
@@ -188,9 +206,11 @@ const ReviewSection = ({ reviews }) => {
 		setAverageRating(avg.toFixed(1)); // Round to 1 decimal place
 	}, [reviews]);
 
+
 	const openReviewForm = () => {
 		openModal({ type: 'review', title: 'submit', reviewId: null });
 	};
+
 
 	const openAuthForm = () => {
 		openModal({
@@ -200,9 +220,11 @@ const ReviewSection = ({ reviews }) => {
 		});
 	};
 
+
 	return (
 		<div className='mt-10 w-11/12 p-2'>
 			<h2 className='text-4xl border-b-2'>Reviews</h2>
+
 
 			{/* Average Rating Section */}
 			<div className='my-6'>
@@ -214,10 +236,9 @@ const ReviewSection = ({ reviews }) => {
 							<span
 								key={index}
 								className={`
-                                    ${
-										index < Math.round(averageRating)
-											? 'text-yellow-500'
-											: 'text-gray-300'
+                                    ${index < Math.round(averageRating)
+										? 'text-yellow-500'
+										: 'text-gray-300'
 									}
                                         text-3xl
                                 `}
@@ -231,6 +252,7 @@ const ReviewSection = ({ reviews }) => {
 					</span>
 				</div>
 			</div>
+
 
 			<div className='flex flex-col p-4 mx-auto mt-2'>
 				{isUserLoggedIn ? (
@@ -251,20 +273,24 @@ const ReviewSection = ({ reviews }) => {
 					</button>
 				)}
 
-				{reviewList &&
-					reviewList.length > 0 &&
-					reviewList.map((review, index) => (
-						<ReviewCard
-							key={index}
-							review={review}
-							setReviewList={setReviewList}
-							openModal={openModal}
-							setAverageRating={setAverageRating}
-						/>
-					))}
+
+				<div className="flex flex-col gap-4">
+					{reviewList &&
+						reviewList.length > 0 &&
+						reviewList.map((review, index) => (
+							<ReviewCard
+								key={index}
+								review={review}
+								setReviewList={setReviewList}
+								openModal={openModal}
+								setAverageRating={setAverageRating}
+							/>
+						))}
+				</div>
 			</div>
 		</div>
 	);
 };
+
 
 export default ReviewSection;

@@ -18,13 +18,13 @@ import { token } from '../services/services.review.js';
 
 const AttractionPage = () => {
 	const { id } = useParams();
-	console.log('id ==> ', id);
-	console.log('token: ',token)
+	// console.log('id ==> ', id);
+	// console.log('token: ', token)
 
 	const [attraction, setAttraction] = useState(null);
 	const { isModalOpen, modalState } = useContext(PropsContext);
 
-	console.log('attraction page renders')
+	// console.log('attraction page renders')
 	// Extract the fetch logic into a reusable function
 	const fetchAttractionData = () => {
 		axios
@@ -54,7 +54,7 @@ const AttractionPage = () => {
 
 				{isModalOpen && modalState.type === 'review' && (
 					<ReviewModal>
-						<ReviewForm attractionId={id} handleReviewSubmit = {fetchAttractionData} />
+						<ReviewForm attractionId={id} handleReviewSubmit={fetchAttractionData} />
 					</ReviewModal>
 				)}
 
@@ -111,7 +111,7 @@ const AttractionPage = () => {
 					>
 						Find out more
 					</a>
-					<ReviewSection id={id} reviews={attraction.reviews}/>
+					<ReviewSection id={id} reviews={attraction.reviews} />
 				</div>
 			</div>
 		);
