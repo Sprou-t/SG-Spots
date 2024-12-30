@@ -176,6 +176,8 @@ export const updateReview = async (req, res) => {
 			mimeType: req.file.mimetype,
 			buffer: b64,
 		};
+	} else {
+		updatedReviewObj.image = null;
 	}
 	// Proceed to update the review
 	try {
