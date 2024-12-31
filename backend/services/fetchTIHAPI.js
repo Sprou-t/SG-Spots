@@ -1,21 +1,25 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://api.stb.gov.sg';
-const END_POINT = '/cruises';
+const TIH_BASE_URL = 'https://api.stb.gov.sg';
 
-const fetchTIHData = async () => {
+
+const fetchTIHAttractionData = async (endPoint) => {
 	try {
-		const response = await axios.fetch(`${BASE_URL}${END_POINT}`, {
+		const TIH_API_KEY = process.env.TIH_API_KEY
+		console.log("TIH_API_KEY ==> ", TIH_API_KEY);
+		const url = `${TIH_BASE_URL}/${endPoint}`;
+		console.log("Request URL: ", url);  // Log full URL
+		const response = await axios.get(url, {
 			headers: {
-				Accept: 'application/json',
 				'X-Content-Language': 'en',
 				'X-API-Key': TIH_API_KEY,
 			},
 		});
+		return response.data;
 	} catch (error) {
 		console.error(`error in fetching TIH data: ${error}`);
 	}
-	return response.data;
+
 };
 
-export default fetchTIHData;
+export default fetchTIHAttractionData;
