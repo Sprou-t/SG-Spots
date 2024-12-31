@@ -39,15 +39,15 @@ const verifyToken = (req, secret) => {
 	}
 };
 
-export const getAllReview = async (req, res) => {
-	try {
-		const review = await Review.find({});
-		res.status(200).json({ success: true, data: review });
-	} catch (error) {
-		console.error(`error in obtaining itenaries: ${error.message}`);
-		res.status(500).json({ success: false, message: 'server error' });
-	}
-};
+// export const getAllReview = async (req, res) => {
+// 	try {
+// 		const review = await Review.find({});
+// 		res.status(200).json({ success: true, data: review });
+// 	} catch (error) {
+// 		console.error(`error in obtaining itenaries: ${error.message}`);
+// 		res.status(500).json({ success: false, message: 'server error' });
+// 	}
+// };
 
 export const createReview = async (req, res) => {
 	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
