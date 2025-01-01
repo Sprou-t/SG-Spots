@@ -11,3 +11,5 @@ TODO:
 
 - refactor: add middleware
 - create tests
+
+- check if secret key is correct

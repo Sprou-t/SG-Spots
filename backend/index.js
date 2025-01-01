@@ -1,29 +1,41 @@
-// this is the most fundamental file used to build the express app. it listens to port in dev mode
-import express, { request, response } from 'express';
+// Import necessary modules
+import express from 'express';
 import dotenv from 'dotenv';
 import connectDb from './db.js';
 import cors from 'cors';
 import reviewRoutes from './routes/routes.review.js';
 import userRoutes from './routes/routes.user.js';
 import apiRoutes from './routes/routes.apiCall.js';
-import TIHDataRoutes from './routes/routes.TIH.js'
+import TIHDataRoutes from './routes/routes.tih.js';
 
+// Load environment variables from .env file
 dotenv.config();
-const app = express();
-const TIH_key = process.env.TIH_API_KEY
-// console.log("TIH_key ==> ", TIH_key);
 
-// this line allow our express app to parse(read) requests with json payloads(data)
+// Initialize express app
+const app = express();
+
+// Middleware to parse JSON payloads
 app.use(express.json());
 app.use(cors());
+
+// Define routes
 app.use('/review', reviewRoutes);
 app.use('/user', userRoutes);
 app.use('/api', apiRoutes);
-app.use('/TIHData', TIHDataRoutes)
+app.use('/TIHData', TIHDataRoutes);
 
+// Set the port
 const PORT = process.env.PORT;
 
+// Start the server and connect to the database
 app.listen(PORT, () => {
-	connectDb();
-	console.log('server listening on Port:', PORT);
+    // Connect to MongoDB
+    connectDb()
+        .then(() => {
+            console.log('MongoDB connected successfully');
+            console.log('Server is listening on Port:', PORT);
+        })
+        .catch((error) => {
+            console.log('MongoDB connection error:', error.message);
+        });
 });
