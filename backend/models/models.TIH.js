@@ -7,8 +7,12 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 // Define the Attraction schema
-const TIHDataSchema = new Schema(
+const TIHDocumentSchema = new Schema(
     {
+        uuid: {
+            type: String,
+            required: true,
+        },
         name: {
             type: String,
             required: true,
@@ -34,16 +38,7 @@ const TIHDataSchema = new Schema(
             type: String,
             required: true,
         },
-        // for timing, need to make further adjustments
-        openTime: {
-            type: String,
-            required: true,
-        },
-        closeTime: {
-            type: String,
-            required: true,
-        },
-        imageURL: [
+        imagesUuid: [
             {
                 type: String,
             },
@@ -57,7 +52,7 @@ const TIHDataSchema = new Schema(
         //         type: String,
         //     },
         // ],
-        reviews: {
+        userReviews: {
             type: [mongoose.Schema.Types.ObjectId],
             ref: 'Review',
             default: [],
@@ -67,6 +62,6 @@ const TIHDataSchema = new Schema(
 );
 
 // Create and export the Attraction model
-const TIHData = model('TIHData', TIHDataSchema);
+const TIHDocument = model('TIHData', TIHDocumentSchema);
 
-export default TIHData;
+export default TIHDocument;

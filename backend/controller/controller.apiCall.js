@@ -1,4 +1,3 @@
-import fetchTIHData from '../services/fetchTIHAPI.js';
 import Attraction from '../models/models.attraction.js';
 /*TODO: change the implementation of getTIHdata and createTIHData in the 
 future such that we are calling the api and not setting up a proxy db */

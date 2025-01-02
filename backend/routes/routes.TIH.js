@@ -3,5 +3,5 @@ import express from 'express';
 import { getTihData } from '../controller/controller.tih.js';
 const router = express.Router();
 
-router.use("/", getTihData)
+router.post("/", getTihData)
 export default router; // to index.js
