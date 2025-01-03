@@ -90,7 +90,8 @@ export const createReview = async (req, res) => {
 
 	if (req.file) {
 		console.log('there is req.file!');
-		// convert buffer data into b64 for rendering in frontend
+		// req.file.buffer is technically a buffer data type, so there's redundancy to convert it again
+		// convert buffer data into b64. base64 string used to safely transmit binary data over text-based protocols like JSON or HTTP to eg. frontend
 		const b64 = new Buffer.from(req.file.buffer).toString('base64');
 		newReview.image = {
 			fileName: req.file.originalname,

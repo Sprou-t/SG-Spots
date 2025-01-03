@@ -46,12 +46,6 @@ const TIHDocumentSchema = new Schema(
         officialWebsite: {
             type: String,
         },
-        // reserved for after mvp
-        // tags: [
-        //     {
-        //         type: String,
-        //     },
-        // ],
         userReviews: {
             type: [mongoose.Schema.Types.ObjectId],
             ref: 'Review',
