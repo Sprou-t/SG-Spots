@@ -5,9 +5,12 @@ const Searchbox = () => {
     const { attractions, searchQuery, setSearchQuery } = useContext(PropsContext);
 
     // Filter attractions based on the searchQuery
-    const filteredSearchResult = attractions.filter(attraction => {
-        return attraction.title.toLowerCase().includes(searchQuery.toLowerCase());
-    });
+    if (attractions) {
+        const filteredSearchResult = attractions.filter(attraction => {
+            return attraction.name.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+    }
+    
 
     return (
         <div className="relative">

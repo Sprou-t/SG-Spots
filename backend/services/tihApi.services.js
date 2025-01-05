@@ -31,6 +31,7 @@ export const fetchTIHAttractionImage = async (imageUuid) => {
 				'X-Content-Language': 'en',
 				'X-API-Key': TIH_API_KEY,
 			},
+			responseType: 'arraybuffer',
 		});
 		return response.data;
 	} catch (err) {

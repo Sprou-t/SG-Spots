@@ -1,15 +1,14 @@
-// Import necessary modules
-import express from 'express';
+
 import dotenv from 'dotenv';
+// Load environment variables from .env file
+dotenv.config();
+import express from 'express';
 import connectDb from './db.js';
 import cors from 'cors';
 import reviewRoutes from './routes/routes.review.js';
 import userRoutes from './routes/routes.user.js';
 import apiRoutes from './routes/routes.apiCall.js';
 import TIHDataRoutes from './routes/routes.tih.js';
-
-// Load environment variables from .env file
-dotenv.config();
 
 // Initialize express app
 const app = express();

@@ -1,9 +1,9 @@
 import {
 	fetchTIHAttractionData,
 	fetchTIHAttractionImage,
-} from '../services/tih.services.js';
+} from '../services/tihApi.services.js';
 import TIHDocument from '../models/models.TIH.js';
-import { uploadImageToR2 } from '../services/r2.services.js';
+import { extractImageFromS3, uploadImageToS3 } from '../services/s3.services.js';
 
 // TODO: 1. save the image to cloudflare 2. display the data into UI
 
@@ -17,12 +17,13 @@ import { uploadImageToR2 } from '../services/r2.services.js';
  promise.all where the function waits for all promise fulfillment or the first rejection
  however, the promises wont be fulfilled in the same order they are executed in. 
  for that, use for loop     */
-export const getAndUploadTihData = async (req, res) => {
+export const uploadTihDataToMongoAndS3 = async (req, res) => {
 	try {
 		// Fetch TIH data
 		const tihResponse = await fetchTIHAttractionData();
 		const tihData = tihResponse.data;
-		if (!tihResponse || !tihResponse.data) { // this is not redundant to the catch block as it gives specificity to error
+		if (!tihResponse || !tihResponse.data) {
+			// this is not redundant to the catch block as it gives specificity to error
 			return res.status(500).json({
 				success: false,
 				message: 'Failed to fetch TIH data',
@@ -54,7 +55,6 @@ export const getAndUploadTihData = async (req, res) => {
 
 					await newTIHObject.save();
 
-
 					// request for image data from another url
 					const imagePromises = attraction.images.map(
 						async (image) => {
@@ -62,7 +62,7 @@ export const getAndUploadTihData = async (req, res) => {
 							try {
 								const imageData =
 									await fetchTIHAttractionImage(imageUuid);
-								await uploadImageToR2(imageUuid, imageData); // upload to r2
+								await uploadImageToS3(imageUuid, imageData); // upload to S3
 								return {
 									success: true,
 									imageUuid: imageUuid,
@@ -78,9 +78,9 @@ export const getAndUploadTihData = async (req, res) => {
 						}
 					);
 
-					const r2UploadResult = await Promise.all(imagePromises);
+					const S3UploadResult = await Promise.all(imagePromises);
 
-					const failedUploads = r2UploadResult.filter(
+					const failedUploads = S3UploadResult.filter(
 						(result) => !result.success
 					);
 					if (failedUploads.length !== 0) {
@@ -132,20 +132,77 @@ export const getAndUploadTihData = async (req, res) => {
 	}
 };
 
-// export const uploadTihImage = async (req, res) => {
-// 	const fetchedImage = await fetchTIHAttractionImage(
-// 		'101ffc63dfe013848d39f6511f8848ff923'
+export const retrieveTihDataFromMongoAndS3 = async (req, res) => {
+	// retrieve data from mongo
+	// retrieve image from S3
+	// use a for loop to iterate thru every attraction
+	// iterate thru the image array for each attraction to get the individual images
+	try {
+		const tihData = await TIHDocument.find();
+
+		if (!tihData) {
+			res.status(400).json({
+				success: false,
+				message: 'tihData not found in mongodb',
+			});
+		}
+		// create an array that contains a new obj that has the image data
+		// for display instead of uuid
+		const tihArray = [];
+
+		for (const attraction of tihData) {
+			// for each attraction, create a new object and push to array
+			const tihObjectForClientRender = {
+				id: attraction.uuid, // From uuid field
+				name: attraction.name, // From name field
+				categoryDescription: attraction.categoryDescription, // From categoryDescription field
+				description: attraction.description, // From description field
+				rating: attraction.rating, // From rating field
+				pricing: attraction.pricing, // From pricing field
+				address: attraction.address, // From address field
+				userReviews: attraction.userReviews, // From userReviews field (currently empty)
+				images: [] // contains all the iamge data to be rendered in client
+			};
+			for (const imageUuid of attraction.imagesUuid) {
+				// console.log("imageUuid ==> ", imageUuid);
+				// loop thru images array and retrieve the images
+				const extractedImgInfo = await extractImageFromS3(imageUuid)
+				tihObjectForClientRender.images.push({
+					imageUrl: extractedImgInfo
+				})
+			};
+			tihArray.push(tihObjectForClientRender);
+		};
+
+		res.status(200).json({
+			success: true,
+			data: tihArray,
+		});
+	} catch (err) {
+		console.error(
+			'system error in retrieving data from mongo and S3: ',
+			err
+		);
+		res.status(500).json({
+			success: false,
+			message: 'tihData not found in mongodb',
+		});
+	}
+};
+
+export const testExtractSingleImgFromS3 = async (req, res) => {
+	const extractedImgInfo = await extractImageFromS3('101140f88a40e1941f19bff29c833c29590')
+	console.log("extractedImgInfo ==> ", extractedImgInfo.slice(0, 40));
+	res.status(200).json({ success: true })
+}
+
+// export const testSingleImageData = async (req, res) => {
+// 	const imageData = await fetchTIHAttractionImage(
+// 		'101140f88a40e1941f19bff29c833c29590'
 // 	);
-// 	try {
-// 		const uploadToR2Result = await uploadImageToR2(
-// 			'101ffc63dfe013848d39f6511f8848ff923',
-// 			fetchedImage
-// 		);
-// 		res.status(200).json({ success: true, image: fetchedImage });
-// 	} catch (err) {
-// 		res.status(500).json({ success: false, message: 'upload image to r2 unsuccessful' });
-// 	}
-
+// 	const previewData = imageData.slice(0, 50);
+// 	console.log('Is imageData a Buffer:', Buffer.isBuffer(imageData));
+// 	console.log('Preview of imageData (buffer) ==> ', Buffer.from(imageData));
+// 	await uploadImageToAws('101ffc63dfe013848d39f6511f8848ff923', imageData)
+// 	res.status(200).json({ success: ' i guess?' })
 // };
-
-// export const displayTihData = () => { };

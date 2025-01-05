@@ -1,25 +1,29 @@
 TODO:
-LTR:
+tmr: write a get function for getting data from mongo and getting image from r2
 
 3. add functions to send button, file button,login/sign in button, logout button, search bar(finish by thurs latest)
-  auth buttons (priority 3)
-  - or sign up with (google & facebook) 
-  - forgot password ***
-(1hr)
-  
+   auth buttons (priority 3)
 
-  * review 
-  - attach file button(show file  that are already attached )
-  - also need to check if i need to change the model of the review becuase of the type of image(string?)
+- or sign up with (google & facebook)
+- forgot password \*\*\*
+  (1hr)
 
-  -edit button for review, as well as date section for creation of review
+* review
 
+- attach file button(show file that are already attached )
+- also need to check if i need to change the model of the review becuase of the type of image(string?)
 
-4. deal with api call
+-edit button for review, as well as date section for creation of review
+
+4. deal with api call for both tih data and review image
+
     - dateline: try monday
 
-5. improve upon product: ui and add blog feature compulsory (optional: zustand and write tests)
-6. after mvp:
+4.5 improve upon ui and deploy(remember to set a file to ignore .env when deploying) 5. write documentation about using cloudflare
+
+6. improve upon product: ui and add blog feature compulsory (optional: zustand and write tests)
+7. after mvp:
+
 - do authentication with google and facebook(use firebase)
 - rewrite review to store photo somewhere else
 - find a way to make the main content of some pages to get the correct margin that can avoid the nav height
@@ -30,8 +34,10 @@ LTR:
 - navbar being transparent with white text is not ok for homepage wtf!
 
 7. bugs
+
 - deleting review does not trigger reset of rating
 - empty string passed when uploading image
 
 8. clarifications
+
 - why doesnt handleDelete cause a rerender to review section
