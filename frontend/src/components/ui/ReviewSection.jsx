@@ -4,6 +4,8 @@ import { HiDotsVertical } from 'react-icons/hi';
 import { deleteReview } from '../../services/services.review.js';
 
 
+
+
 const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	const [imagePath, setImagePath] = useState('');
 	let currentUserId;
@@ -19,6 +21,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	// console.log('image buffer ==>', image.buffer);
 
 
+
+
 	const assignImagePath = () => {
 		if (image && image.mimeType && image.buffer) {
 			setImagePath(`data:${image.mimeType};base64,${image.buffer}`);
@@ -31,9 +35,13 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	const username = authorId.username;
 
 
+
+
 	// Dropdown state
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
+
+
 
 
 	// Format the date to a readable format
@@ -44,8 +52,12 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	);
 
 
+
+
 	// Toggle the dropdown menu
 	const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+
 
 
 	// Handle actions
@@ -56,10 +68,14 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	};
 
 
+
+
 	const handleDelete = async () => {
 		await deleteReview(_id);
 		setReviewList((prev) => {
 			const updatedReviews = prev.filter((review) => review._id !== _id);
+
+
 
 
 			// Recalculate average rating based on the updated list
@@ -73,9 +89,13 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 			setAverageRating(avg.toFixed(1)); // Update the average rating state
 
 
+
+
 			return updatedReviews; // Return the updated list
 		});
 	};
+
+
 
 
 	useEffect(() => {
@@ -89,13 +109,19 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		};
 
 
+
+
 		const handleScroll = () => {
 			setDropdownOpen(false); // Close dropdown if the user scrolls
 		};
 
 
+
+
 		document.addEventListener('click', handleClickOutside);
 		window.addEventListener('scroll', handleScroll);
+
+
 
 
 		// Clean up event listeners
@@ -104,6 +130,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, []);
+
+
 
 
 	return (
@@ -116,6 +144,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 						{formattedDate}
 					</span>
 				</div>
+
+
 
 
 				{/* Stars and 3-dots menu */}
@@ -134,6 +164,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 							</span>
 						))}
 					</div>
+
+
 
 
 					{/* 3-dots menu */}
@@ -168,8 +200,12 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 			</div>
 
 
+
+
 			{/* Review Description */}
 			<p className='mt-2 text-gray-700'>{description}</p>
+
+
 
 
 			{/* Conditionally render an image if available */}
@@ -187,11 +223,15 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 };
 
 
+
+
 const ReviewSection = ({ reviews }) => {
 	const [reviewList, setReviewList] = useState(null);
 	const [averageRating, setAverageRating] = useState(0);
 	const { openModal } = useContext(PropsContext);
 	const isUserLoggedIn = window.localStorage.getItem('loggedInUser');
+
+
 
 
 	useEffect(() => {
@@ -207,9 +247,13 @@ const ReviewSection = ({ reviews }) => {
 	}, [reviews]);
 
 
+
+
 	const openReviewForm = () => {
 		openModal({ type: 'review', title: 'submit', reviewId: null });
 	};
+
+
 
 
 	const openAuthForm = () => {
@@ -221,9 +265,13 @@ const ReviewSection = ({ reviews }) => {
 	};
 
 
+
+
 	return (
 		<div className='mt-10 w-11/12 p-2'>
 			<h2 className='text-4xl border-b-2'>Reviews</h2>
+
+
 
 
 			{/* Average Rating Section */}
@@ -254,6 +302,8 @@ const ReviewSection = ({ reviews }) => {
 			</div>
 
 
+
+
 			<div className='flex flex-col p-4 mx-auto mt-2'>
 				{isUserLoggedIn ? (
 					<button
@@ -274,6 +324,8 @@ const ReviewSection = ({ reviews }) => {
 				)}
 
 
+
+
 				<div className="flex flex-col gap-4">
 					{reviewList &&
 						reviewList.length > 0 &&
@@ -291,6 +343,4 @@ const ReviewSection = ({ reviews }) => {
 		</div>
 	);
 };
-
-
 export default ReviewSection;
