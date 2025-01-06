@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+
 const TIH_BASE_URL = 'https://api.stb.gov.sg';
 
-export const fetchTIHAttractionData = async () => {
+
+export const fetchTIHData = async (dataset) => {
 	const TIH_API_KEY = process.env.TIH_API_KEY;
-	const endPoint = 'content/common/v2/search?dataset=attractions';
+	const endPoint = `content/common/v2/search?dataset=${dataset}`;
 	const url = `${TIH_BASE_URL}/${endPoint}`;
 	console.log("TIH_API_KEY ==> ", TIH_API_KEY);
 	console.log('Request URL: ', url); // Log full URL
@@ -21,7 +23,8 @@ export const fetchTIHAttractionData = async () => {
 	}
 };
 
-export const fetchTIHAttractionImage = async (imageUuid) => {
+
+export const fetchTIHImage = async (imageUuid) => {
 	const TIH_API_KEY = process.env.TIH_API_KEY;
 	const endPoint = 'media/download/v2';
 	const url = `${TIH_BASE_URL}/${endPoint}/${imageUuid}`;
@@ -38,4 +41,3 @@ export const fetchTIHAttractionImage = async (imageUuid) => {
 		console.error('error in fetching image: ', err);
 	}
 };
-
