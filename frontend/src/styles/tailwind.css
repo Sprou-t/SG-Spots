@@ -1,18 +1,22 @@
+/* Add the font import */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif; /* Apply Open Sans globally */
 }
 
 #root {
-  display: grid;
-  height: 100%;
-  width: 100%;
-  grid-template-rows:80px 1fr 300px; 
+	display: grid;
+	height: 100%;
+	width: 100%;
+	grid-template-rows: 80px 1fr 300px;
 }

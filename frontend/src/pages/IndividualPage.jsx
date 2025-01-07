@@ -54,7 +54,7 @@ const IndividualPage = () => {
 				{imageCounter > 1 ? (
 					<Carousel images={attraction.images} />
 				) : (
-					<img src={attraction.images[0]} alt='' />
+					<img src={attraction.images[0]} alt='' className='w-full' />
 				)}
 
 
