@@ -9,8 +9,8 @@ import github from '../../assets/footerImages/github-142-svgrepo-com.svg'
 
 const footer = () => {
     return (
-        <div className=' flex flex-col gap-5 items-center bg-gray-300  p-12 text-center'>
-            <Link to='/home' className='text-red-600 text-5xl font-bold'>SG<span className='text-black'> SPOTS</span></Link>
+        <div className='text-white flex flex-col gap-5 items-center bg-customBlack  p-12 text-center'>
+            <Link to='/home' className='text-5xl font-bold'><span className='text-red-600'>SG</span> SPOTS</Link>
 
             <ul className='flex gap-5'>
                 <li>
@@ -20,7 +20,7 @@ const footer = () => {
                 </li>
                 <li>
                     <a>
-                        <img src={github} alt="GitHub" className='size-10 hover:scale-110' href="https://github.com/Sprou-t/SG-Spots" target="_blank" rel="noopener noreferrer" />
+                        <img src={github} alt="GitHub" className='size-10 hover:scale-110 bg-white' href="https://github.com/Sprou-t/SG-Spots" target="_blank" rel="noopener noreferrer" />
                     </a>
                 </li>
             </ul>

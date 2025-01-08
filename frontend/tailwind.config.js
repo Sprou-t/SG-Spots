@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         'open-sans': ['"Open Sans"', 'serif'],
+        bagel: ['"Bagel Fat One"', 'cursive'],
       },
       fontWeight: {
         300: '300',
@@ -30,9 +31,12 @@ export default {
           light: 'rgb(255, 102, 102)',    // Slightly lighter red
           dark: 'rgb(153, 0, 0)',         // Slightly darker red
         },
+        customBlack: 'rgb(24, 24, 56)',  // Define custom black color
+        customYellow: '#FACC15', // Define custom yellow color
       },
       backgroundImage: {
-        'parallax': 'url("./src/assets/landingImages/garden-by-bay-night-scene-singapore.jpg")'
+        'parallax1': 'url("./src/assets/landingImages/pexels-palumalerba-2426546.jpg")',
+        'parallax2': 'url("./src/assets/landingImages/pexels-simo-3544415.jpg")'
       },
       // Custom font-variation-settings utility
       fontVariationSettings: {
