@@ -32,7 +32,7 @@ export default {
         },
       },
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%)',
+        'parallax': 'url("./src/assets/landingImages/garden-by-bay-night-scene-singapore.jpg")'
       },
       // Custom font-variation-settings utility
       fontVariationSettings: {

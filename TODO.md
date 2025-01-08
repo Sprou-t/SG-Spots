@@ -1,5 +1,18 @@
 TODO:
-tmr: write a get function for getting data from mongo and getting image from r2
+TLDR:
+only use 2 datasets first
+
+- make the design nice first
+    - wed:settle homepage
+        - before gym: look for example and settle on a theme(nav bar, footer and homepage)
+        - start working on landing page
+          -follow the website,navbar would be in white bg, words black,find a color scheme(white, bluish black,red)
+    - thurs: settle landing page/ other pages
+- deploy
+- add auth
+- slowly optimise for performance: use 1080 and compress the file, optionally think about using 2 versions of the same image file(nah stick to pagination). lastly, try memoization(see if need esp for fetching in homepage)
+
+- tmr: write a get function for getting data from mongo and getting image from r2
 
 3. add functions to send button, file button,login/sign in button, logout button, search bar(finish by thurs latest)
    auth buttons (priority 3)

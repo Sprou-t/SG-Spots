@@ -32,38 +32,36 @@ export const uploadImageToS3 = async (folder, imageUuid, imageData) => {
                 Key: `${folder}/${imageUuid}`, // id of the uploaded file used in bucket
                 Body: imageBuffer, // actual data of obj uploaded, usually in Buffer, Stream or Blob
                 ContentType: contentType, // type of content
+                CacheControl: 'public, max-age=31536000, immutable',
             };
             // procced w uploading
             await s3.send(new PutObjectCommand(uploadParams));
-            console.log('image successfully uploaded to cloudflare R2');
+            console.log('image successfully uploaded to aws');
             return true;
         } else {
-            console.error('unable to upload to r2');
+            console.error('unable to upload to aws');
             return false
         }
     } catch (err) {
-        console.error('Error uploading image:', err);
+        console.error(`Error uploading image ${imageUuid} :, ${err}`);
         return false
     }
-
-
 };
 
 
-export const extractImageFromS3 = (folder, imgUuid) => {
+export const extractImageFromS3 = async (folder, imgUuid) => {
     // Define parameters for the image (bucket and object key)
     const bucket = 'sgspots'
     const key = `${folder}/${imgUuid}`
-
 
     try {
         // Get the public URL of the image
         const imageUrl = `https://${bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
 
-
         // Return the public URL of the image
-        return imageUrl;
+        return imageUrl
+
     } catch (err) {
-        console.error('Error fetching image from R2:', err);
+        console.error(`Error fetching imageUuid: ${imgUuid}  from aws:, ${err}`);
     }
 };
