@@ -7,8 +7,7 @@ import { CgProfile } from 'react-icons/cg';
 import axios from 'axios';
 import { PropsContext } from '../../context/context.props.jsx';
 
-/*TODO tmr: do conditional rendering of user's initial alphabets + their details. follow airbnb
-extra: create a profile page for them to configure settings*/
+/*TODO  add about, then in homepage, add the scrollable thingy*/
 const Navbar = () => {
 	const [direction, setDirection] = useState('up');
 	const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
@@ -101,11 +100,10 @@ const Navbar = () => {
 	return (
 		<div
 			ref={navbarRef}
-			className={` md:hover:bg-white md:hover:text-black  text-black md:text-white group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${
-				direction === 'up' ? 'translate-y-0' : '-translate-y-full'
-			}`}
+			className={` md:hover:bg-white   text-black group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : '-translate-y-full'
+				}`}
 		>
-			<div className=' h-24 relative flex justify-between items-center px-4 py-1'>
+			<div className='text-lg h-24 relative flex justify-between items-center px-4 py-1'>
 				{/* Logo */}
 				<Link to='/home' className='flex gap-2 items-center'>
 					<img
@@ -113,7 +111,7 @@ const Navbar = () => {
 						alt='SG SPOTS'
 						className='h-16 rounded-lg'
 					/>
-					<h1 className='md:text-white md:group-hover:text-black'>
+					<h1 >
 						<span className='text-red-600'>SG</span> SPOTS
 					</h1>
 				</Link>
@@ -130,23 +128,26 @@ const Navbar = () => {
 
 				{/* Desktop Navigation */}
 				<div className='hidden md:flex gap-8 items-center'>
-					<button className='text-lg'>Blogs</button>
+					<Link to='/about'>
+						<p className='uppercase'>About</p>
+					</Link>
+					<button className='uppercase'>Blogs</button>
 					<div className='relative'>
 						{/* use conditional rendering */}
 						{user !== null ? (
 							<button
-								className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
+								className='relative flex gap-2 items-center white border-2 px-3 py-2 rounded-full'
 								onClick={toggleDropdown}
 							>
 								{' '}
 								<GiHamburgerMenu className='size-5' />
-								<div className=' size-10 text-2xl border-2 border-solid border-white rounded-full text-red-500 bg-white'>
+								<div className=' size-10 text-2xl border-2 border-solid  rounded-full text-red-500 bg-white'>
 									{user.email.charAt(0)}
 								</div>
 							</button>
 						) : (
 							<button
-								className='relative flex gap-2 items-center border-white border-2 px-3 py-2 rounded-full'
+								className='relative flex gap-2 items-center  border-2 px-3 py-2 rounded-full'
 								onClick={toggleDropdown}
 							>
 								{' '}
@@ -227,7 +228,7 @@ const Navbar = () => {
 					</div>
 				)}
 			</div>
-		</div>
+		</div >
 	);
 };
 
