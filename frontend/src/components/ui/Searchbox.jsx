@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { PropsContext } from '../../context/context.props.jsx';
+import { Link } from 'react-router-dom';
 
 const Searchbox = () => {
     const { attractions, searchQuery, setSearchQuery } =
@@ -14,6 +15,10 @@ const Searchbox = () => {
                 .includes(searchQuery.toLowerCase());
         });
     }
+    const handleOptionClick = (name) => {
+        setSearchQuery(name); // Set the query to the selected result
+        setTimeout(() => setSearchQuery(''), 300); // Clear the query after a short delay
+    };
 
     return (
         <div className='relative'>
@@ -29,15 +34,15 @@ const Searchbox = () => {
             {searchQuery && filteredSearchResult.length > 0 && (
                 <ul className='absolute left-0 w-full bg-white border border-gray-300 mt-1 rounded-lg shadow-lg max-h-60 overflow-y-auto'>
                     {filteredSearchResult.map((attraction) => (
-                        <li
+                        <Link to={`/home/${attraction.id}`}
                             key={attraction.id}
-                            className='p-2 cursor-pointer hover:bg-gray-200'
+                            className='h-7 px-2 cursor-pointer text-sm hover:bg-gray-200 mt-2 block truncate'
                             onClick={() => {
-                                setSearchQuery(attraction.name); // Optionally set the query to the selected result
+                                handleOptionClick(attraction.name)
                             }}
                         >
                             {attraction.name}
-                        </li>
+                        </Link>
                     ))}
                 </ul>
             )}

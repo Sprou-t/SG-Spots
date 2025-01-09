@@ -86,7 +86,7 @@ const CategoryBar = ({
                         className='flex gap-2 items-center text-lg border-2 p-2 rounded-lg hover:bg-customBlack hover:text-white active:bg-customBlack active:text-white'
                     >
                         <TbFilterCog />
-                        <p>Filter</p>
+                        <p>Sort By</p>
                     </button>
 
                     {isDropdownOpen && (

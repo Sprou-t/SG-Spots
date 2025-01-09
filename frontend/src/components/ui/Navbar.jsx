@@ -101,7 +101,7 @@ const Navbar = () => {
 	return (
 		<div
 			ref={navbarRef}
-			className={` md:hover:bg-white   text-black group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : '-translate-y-full'
+			className={` md:hover:bg-white text-black group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : '-translate-y-full'
 				}`}
 		>
 			<div className='text-lg h-24 relative flex justify-between items-center px-4 py-1'>

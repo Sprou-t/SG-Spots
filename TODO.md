@@ -37,6 +37,7 @@ only use 2 datasets first
 6. improve upon product: ui and add blog feature compulsory (optional: zustand and write tests)
 7. after mvp:
 
+- make the searchbar only for filtered attractions
 - do authentication with google and facebook(use firebase)
 - rewrite review to store photo somewhere else
 - find a way to make the main content of some pages to get the correct margin that can avoid the nav height
