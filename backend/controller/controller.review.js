@@ -39,15 +39,15 @@ const verifyToken = (req, secret) => {
 	}
 };
 
-// export const getAllReview = async (req, res) => {
-// 	try {
-// 		const review = await Review.find({});
-// 		res.status(200).json({ success: true, data: review });
-// 	} catch (error) {
-// 		console.error(`error in obtaining itenaries: ${error.message}`);
-// 		res.status(500).json({ success: false, message: 'server error' });
-// 	}
-// };
+export const getAllReview = async (req, res) => {
+	try {
+		const review = await Review.find({});
+		res.status(200).json({ success: true, data: review });
+	} catch (error) {
+		console.error(`error in obtaining itenaries: ${error.message}`);
+		res.status(500).json({ success: false, message: 'server error' });
+	}
+};
 
 export const createReview = async (req, res) => {
 	const { error, decodedToken } = verifyToken(req, process.env.SECRET);
@@ -63,6 +63,7 @@ export const createReview = async (req, res) => {
 	let user;
 	try {
 		user = await User.findById(decodedToken.id);
+		console.log('user ==> ', user);
 	} catch (err) {
 		console.error('error in finding user: ', err);
 	}
@@ -79,11 +80,19 @@ export const createReview = async (req, res) => {
 			.json({ success: false, message: 'please input required fields!' });
 	}
 
-	const attraction = await TIHDocument.findById(reviewData.attractionId);
+	const attraction = await TIHDocument.findOne({
+		uuid: reviewData.attractionUuid,
+	});
+	if (!attraction) {
+		return res
+			.status(404)
+			.json({ success: false, message: 'Attraction not found' });
+	}
+	console.log('attraction ==> ', attraction);
 
 	const newReview = new Review({
 		authorId: user._id,
-		attractionId: reviewData.attractionId,
+		attractionUuid: reviewData.attractionUuid,
 		rating: reviewData.rating,
 		description: reviewData.description,
 	});
@@ -105,7 +114,7 @@ export const createReview = async (req, res) => {
 		const savedReview = await newReview.save();
 		user.reviews = user.reviews.concat(savedReview._id);
 		await user.save();
-		attraction.reviews = attraction.reviews.concat(savedReview._id);
+		attraction.userReviews = attraction.userReviews.concat(savedReview._id);
 		await attraction.save();
 
 		res.status(201).json({
@@ -196,7 +205,6 @@ export const updateReview = async (req, res) => {
 		console.error(`Error in updating review: ${error.message}`);
 		res.status(500).json({ success: false, message: 'Server error' });
 	}
-
 };
 
 export const deleteReview = async (req, res) => {

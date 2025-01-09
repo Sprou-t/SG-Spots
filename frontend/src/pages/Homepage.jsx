@@ -116,6 +116,7 @@ const AttractionCard = ({ attraction }) => {
     if (!attraction.images[0]) {
         return null;
     }
+    
     const handleImageError = (event) => {
         event.target.src = fallBackImage; // Set fallback image when an error occurs
     };

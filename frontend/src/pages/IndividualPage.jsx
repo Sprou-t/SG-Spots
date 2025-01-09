@@ -10,6 +10,7 @@ import ReviewForm from '../components/ui/ReviewForm.jsx';
 import ReviewModal from '../components/ui/reviewModal.jsx';
 import { useParams } from 'react-router-dom';
 import { PropsContext } from '../context/context.props.jsx';
+import fallBackImage from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg'
 
 
 /* TODO:
@@ -18,13 +19,16 @@ import { PropsContext } from '../context/context.props.jsx';
 
 
 const IndividualPage = () => {
-	const { id } = useParams();
-	console.log('id ==> ', id);
+	const { id } = useParams(); // uuid
+	console.log('uuid ==> ', id);
 	// console.log('token: ', token)
 
 	const [attraction, setAttraction] = useState(null);
 	const { isModalOpen, modalState } = useContext(PropsContext);
 
+	const handleImageError = (event) => {
+		event.target.src = fallBackImage; // Set fallback image when an error occurs
+	};
 
 	// console.log('attraction page renders')
 	// Extract the fetch logic into a reusable function
@@ -55,7 +59,7 @@ const IndividualPage = () => {
 					{imageCounter > 1 ? (
 						<Carousel images={attraction.images} />
 					) : (
-						<img src={attraction.images[0]} alt='' className='w-full h-full max-h-[800px] object-contain' />
+						<img src={attraction.images[0]} onError={handleImageError} className='w-full h-full max-h-[800px] object-contain' />
 					)}
 				</div >
 

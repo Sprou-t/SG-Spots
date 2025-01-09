@@ -19,9 +19,8 @@ const reviewSchema = new Schema(
 			required: true,
 		},
 
-		attractionId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Attraction',
+		attractionUuid: {
+			type: String,
 			required: true,
 		},
 
