@@ -39,16 +39,16 @@ const Main = () => {
 			<div className='h-[700px] relative bg-fixed bg-parallax2 bg-cover'>
 				<div className="absolute inset-0 bg-black opacity-50 z-0"></div>
 
-				<p className='uppercase font-open-sans text-[10rem] font-extrabold text-customYellow drop-shadow-md absolute top-0 left-4 z-10'>
+				<p className='uppercase font-open-sans text-[9rem] font-extrabold text-customYellow drop-shadow-md absolute top-0 left-4 z-10'>
 					Find
 				</p>
 				<p className='tracking-wide font-open-sans text-4xl font-extrabold text-customYellow drop-shadow-md absolute top-1/2 -translate-y-1/2 left-16 w-[650px] z-10'>
 					Join a community of Singapore lovers and share your favorite spots, uncover hidden gems, and enjoy unforgettable experiences.
 				</p>
-				<p className='uppercase font-open-sans text-[10rem] font-bold text-customYellow drop-shadow-md absolute top-40 right-20 z-10'>
+				<p className='uppercase font-open-sans text-[9rem] font-bold text-customYellow drop-shadow-md absolute top-40 right-20 z-10'>
 					And
 				</p>
-				<p className='uppercase font-open-sans text-[10rem] font-extrabold text-customYellow drop-shadow-md absolute bottom-0 right-10 z-10'>
+				<p className='uppercase font-open-sans text-[9rem] font-extrabold text-customYellow drop-shadow-md absolute bottom-0 right-10 z-10'>
 					Leave ratings
 				</p>
 			</div>

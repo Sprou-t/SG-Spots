@@ -1,9 +1,9 @@
 import Review from '../models/models.review.js';
 import User from '../models/models.users.js';
-import Attraction from '../models/models.attraction.js';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
+import TIHDocument from '../models/models.TIH.js';
 
 // these 2 lines save the file in RAM,only by saving it in RAM can we
 // ltr access the file as buffer and save it to mongodb
@@ -79,7 +79,7 @@ export const createReview = async (req, res) => {
 			.json({ success: false, message: 'please input required fields!' });
 	}
 
-	const attraction = await Attraction.findById(reviewData.attractionId);
+	const attraction = await TIHDocument.findById(reviewData.attractionId);
 
 	const newReview = new Review({
 		authorId: user._id,
@@ -241,7 +241,7 @@ export const deleteReview = async (req, res) => {
 		// .toString() is necessary in this context because MongoDB's ObjectId type is a special BSON object
 		const user = await User.findById(review.authorId);
 		console.log('user ==> ', user);
-		const attraction = await Attraction.findById(review.attractionId);
+		const attraction = await TIHDocument.findById(review.attractionId);
 		console.log('attraction ==> ', attraction);
 		user.reviews = user.reviews.filter(
 			(reviewId) => reviewId.toString() !== id

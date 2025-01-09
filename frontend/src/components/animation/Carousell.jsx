@@ -22,8 +22,8 @@ const Carousel = ({ images, autoSlide = true, autoSlideInterval = 5000 }) => {
     };
 
     return (
-        <div className="object-cover m-0 w-full">
-            <div className="overflow-hidden relative h-screen w-full">
+        <div className="object-cover m-0 w-full h-[800px] max-h-[800px]">
+            <div className="overflow-hidden relative h-full w-full">
                 {images.map((image, index) => {
                     const isActive = index === currentIndex;
 
@@ -40,7 +40,7 @@ const Carousel = ({ images, autoSlide = true, autoSlideInterval = 5000 }) => {
 
             {/* Previous Button */}
             <button
-                className=" z-20 absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-900 bg-opacity-50 text-white p-2 rounded-full hover:scale-110 transition-all"
+                className=" z-20 absolute top-1/2 left-10 transform -translate-y-1/2 bg-gray-900 bg-opacity-50 text-white p-2 rounded-full hover:scale-110 transition-all"
                 onClick={prevSlide}
             >
                 <IoIosArrowBack className="text-4xl" />
@@ -48,7 +48,7 @@ const Carousel = ({ images, autoSlide = true, autoSlideInterval = 5000 }) => {
 
             {/* Next Button */}
             <button
-                className=" z-20 absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/3 bg-gray-900 bg-opacity-50 text-white p-2 rounded-full hover:scale-110 transition-all"
+                className=" z-20 absolute top-1/2 right-10 transform -translate-y-1/2  bg-gray-900 bg-opacity-50 text-white p-2 rounded-full hover:scale-110 transition-all"
                 onClick={nextSlide}
             >
                 <IoIosArrowForward className="text-4xl" />

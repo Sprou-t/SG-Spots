@@ -50,12 +50,14 @@ const IndividualPage = () => {
 	if (attraction != null) {
 		const imageCounter = attraction.images.length;
 		return (
-			<div>
-				{imageCounter > 1 ? (
-					<Carousel images={attraction.images} />
-				) : (
-					<img src={attraction.images[0]} alt='' className='w-full' />
-				)}
+			<div className='w-full '>
+				<div className='w-10/12 mx-auto'>
+					{imageCounter > 1 ? (
+						<Carousel images={attraction.images} />
+					) : (
+						<img src={attraction.images[0]} alt='' className='w-full h-full max-h-[800px] object-contain' />
+					)}
+				</div >
 
 
 				{isModalOpen && modalState.type === 'review' && (
@@ -120,7 +122,7 @@ const IndividualPage = () => {
 					</a>
 					<ReviewSection id={id} reviews={attraction.userReviews} />
 				</div>
-			</div>
+			</div >
 		);
 	}
 };

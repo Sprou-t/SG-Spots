@@ -43,8 +43,9 @@ const TIHDocumentSchema = new Schema(
                 type: String,
             },
         ],
-        officialWebsite: {
+        website: {
             type: String,
+            default: '',
         },
         userReviews: {
             type: [mongoose.Schema.Types.ObjectId],

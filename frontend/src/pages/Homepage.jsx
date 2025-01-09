@@ -11,6 +11,7 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { FaShop } from 'react-icons/fa6';
 import { TbFilterCog } from 'react-icons/tb';
+import  fallBackImage  from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg'
 
 const CategoryBar = ({
     selectedType,
@@ -115,6 +116,9 @@ const AttractionCard = ({ attraction }) => {
     if (!attraction.images[0]) {
         return null;
     }
+    const handleImageError = (event) => {
+        event.target.src = fallBackImage; // Set fallback image when an error occurs
+    };
 
     return (
         <div className='h-96 w-[320px] flex flex-col rounded-lg bg-white'>
@@ -125,6 +129,7 @@ const AttractionCard = ({ attraction }) => {
                         src={attraction.images[0]}
                         alt={attraction.title}
                         loading='lazy'
+                        onError={handleImageError}
                     />
                 </div>
                 <div className='flex flex-col flex-grow'>
@@ -171,6 +176,7 @@ const Homepage = () => {
             .catch((error) => console.log(error));
     }, []);
 
+    console.log('attraction:', attractions)
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

@@ -20,8 +20,8 @@ import {
 export const uploadTihDataToMongoAndS3 = async (req, res) => {
     try {
         // Fetch TIH data
-        const tihData = await fetchTIHData('accommodation');
-        console.log('tihData ==> ', tihData);
+        const tihData = await fetchTIHData('attractions');
+        // console.log('tihData ==> ', tihData);
         if (!tihData) {
             // this is not redundant to the catch block as it gives specificity to error
             return res.status(500).json({
@@ -49,7 +49,7 @@ export const uploadTihDataToMongoAndS3 = async (req, res) => {
                         imagesUuid: tihObject.images.map((image) => image.uuid),
                         website: tihObject.officialWebsite,
                     });
-                    console.log('Saving new TIH object:', newTIHObject);
+                    // console.log('Saving new TIH object:', newTIHObject);
 
                     await newTIHObject.save();
 
@@ -165,6 +165,7 @@ export const retrieveTihDataFromMongoAndS3 = async (req, res) => {
                 address: tihObject.address, // From address field
                 userReviews: tihObject.userReviews, // From userReviews field (currently empty)
                 images: [], // contains all the iamge data to be rendered in client
+                website: tihObject.website
             };
             for (const imageUuid of tihObject.imagesUuid) {
                 // console.log("imageUuid ==> ", imageUuid);
@@ -218,6 +219,7 @@ export const retrieveSingleTihDataFromMongoAndS3 = async (req, res) => {
             pricing: tihObject.pricing, // From pricing field
             address: tihObject.address, // From address field
             userReviews: tihObject.userReviews, // From userReviews field (currently empty)
+            website: tihObject.website,
             images: [], // contains all the iamge data to be rendered in client
         };
 
