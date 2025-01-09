@@ -20,7 +20,7 @@ import {
 export const uploadTihDataToMongoAndS3 = async (req, res) => {
     try {
         // Fetch TIH data
-        const tihData = await fetchTIHData('tours');
+        const tihData = await fetchTIHData('accommodation');
         console.log('tihData ==> ', tihData);
         if (!tihData) {
             // this is not redundant to the catch block as it gives specificity to error

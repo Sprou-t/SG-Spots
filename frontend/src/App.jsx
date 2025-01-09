@@ -12,6 +12,7 @@ import AboutSGSpots from './pages/About.jsx';
 import Blog from './pages/Blog.jsx';
 import AuthForm from './components/ui/AuthForm.jsx';
 import { PropsContext } from './context/context.props.jsx';
+import TestHomepage from './pages/TestHomepage.jsx';
 
 
 const App = () => {
@@ -64,7 +65,7 @@ const App = () => {
 				setModalState,
 			}}
 		>
-			<div className='w-full h-full'>
+			<div className=' h-full'>
 				<Navbar />
 
 
@@ -74,7 +75,7 @@ const App = () => {
 					</AuthModal>
 				)}
 
-
+				{/* <TestHomepage /> */}
 				<Routes>
 					<Route path='/' element={<Landing />} />
 					<Route path='/home' element={<Homepage />} />

@@ -34,9 +34,9 @@ export const fetchTIHImage = async (imageUuid) => {
 				'X-Content-Language': 'en',
 				'X-API-Key': TIH_API_KEY,
 			},
-			// params: {
-			// 	fileType: 'default', // Set the query parameter here
-			// },
+			params: {
+				fileType: 'Thumbnail 1080h', // Set the query parameter here
+			},
 			responseType: 'arraybuffer',
 		});
 		return response.data;

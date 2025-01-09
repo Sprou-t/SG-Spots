@@ -7,7 +7,6 @@ import connectDb from './db.js';
 import cors from 'cors';
 import reviewRoutes from './routes/routes.review.js';
 import userRoutes from './routes/routes.user.js';
-import apiRoutes from './routes/routes.apiCall.js';
 import TIHDataRoutes from './routes/routes.tih.js';
 
 // Initialize express app
@@ -20,7 +19,6 @@ app.use(cors());
 // Define routes
 app.use('/review', reviewRoutes);
 app.use('/user', userRoutes);
-app.use('/api', apiRoutes);
 app.use('/TIHData', TIHDataRoutes);
 
 // Set the port

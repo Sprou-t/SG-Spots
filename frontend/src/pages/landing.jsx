@@ -10,13 +10,11 @@ import {
 	SlideLeft,
 	SlideRight,
 } from '../components/animation/SlideInAnimation.jsx';
-import Carousel from '../components/animation/Carousell.jsx';
 import { Link } from 'react-router-dom';
 import gardensByTheBay from '../assets/landingImages/pexels-nextvoyage-3881761.jpg'
 
 /* TODO: 
 -format: image, brief explanation of website(go to homepage button),
--write a blog(share your experiences) 
 */
 
 const Main = () => {
@@ -34,7 +32,7 @@ const Main = () => {
 				<div className='uppercase flex flex-col gap-6'>
 					<h2 className='text-4xl font-bold w-[480px]'>explore what singapore has to offer</h2>
 					<p className='text-lg w-[480px] tracking-wide'>Look through our extensive collection of information to discover the <span className='font-bold'>best spots</span>, <span className='font-bold'>hidden gems</span>, and <span className='font-bold'>must-see attractions</span> across Singapore. Whether you're seeking breathtaking views, delicious food, or unforgettable experiences, we’ve got something for every kind of explorer.</p>
-					<button className='bg-customBlack rounded-xl text-white font-bold w-40 py-3'>go to homepage</button>
+					<Link to={'/home'}><button className='bg-customBlack rounded-xl text-white font-bold w-40 py-3'>go to homepage</button></Link>
 				</div>
 				<img src={gardensByTheBay} alt='gardens by the bay' className='size-[608px]' />
 			</div>
@@ -44,7 +42,7 @@ const Main = () => {
 				<p className='uppercase font-open-sans text-[10rem] font-extrabold text-customYellow drop-shadow-md absolute top-0 left-4 z-10'>
 					Find
 				</p>
-				<p className='tracking-wide font-open-sans text-4xl font-extrabold text-customYellow drop-shadow-md absolute top-1/2 -translate-y-1/2 left-7 w-[650px] z-10'>
+				<p className='tracking-wide font-open-sans text-4xl font-extrabold text-customYellow drop-shadow-md absolute top-1/2 -translate-y-1/2 left-16 w-[650px] z-10'>
 					Join a community of Singapore lovers and share your favorite spots, uncover hidden gems, and enjoy unforgettable experiences.
 				</p>
 				<p className='uppercase font-open-sans text-[10rem] font-bold text-customYellow drop-shadow-md absolute top-40 right-20 z-10'>

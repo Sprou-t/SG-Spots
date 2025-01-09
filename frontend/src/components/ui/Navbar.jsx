@@ -7,7 +7,8 @@ import { CgProfile } from 'react-icons/cg';
 import axios from 'axios';
 import { PropsContext } from '../../context/context.props.jsx';
 
-/*TODO  add about, then in homepage, add the scrollable thingy*/
+
+
 const Navbar = () => {
 	const [direction, setDirection] = useState('up');
 	const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
@@ -111,7 +112,7 @@ const Navbar = () => {
 						alt='SG SPOTS'
 						className='h-16 rounded-lg'
 					/>
-					<h1 >
+					<h1>
 						<span className='text-red-600'>SG</span> SPOTS
 					</h1>
 				</Link>
@@ -228,7 +229,8 @@ const Navbar = () => {
 					</div>
 				)}
 			</div>
-		</div >
+
+		</div>
 	);
 };
 
