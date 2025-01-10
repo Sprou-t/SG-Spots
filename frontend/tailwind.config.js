@@ -24,7 +24,8 @@ export default {
         'md': '768px',   // Medium screens
         'lg': '1024px',  // Large screens
         'xl': '1280px',  // Extra large screens
-        '2xl': '1536px', // 2 Extra large screens
+        '2xl': '1440px', // 2 Extra large screens
+        '3xl': '2000px'
       },
       colors: {
         customRed: {
@@ -45,6 +46,19 @@ export default {
     },
   },
   plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        /* Hide scrollbar for Chrome, Safari, and Opera */
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none',
+        },
+        /* Hide scrollbar for IE, Edge, and Firefox */
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none', // IE and Edge
+          'scrollbar-width': 'none', // Firefox
+        },
+      });
+    },
     function ({ addComponents }) {
       // Add custom component for font with variation settings
       addComponents({

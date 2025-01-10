@@ -11,20 +11,16 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import { MdOutlineFastfood } from 'react-icons/md';
 import { FaShop } from 'react-icons/fa6';
 import { TbFilterCog } from 'react-icons/tb';
-import  fallBackImage  from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg'
+import fallBackImage from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-const CategoryBar = ({
-    selectedType,
-    setSelectedType,
-    handleSelectAll,
-    handleRemoveAll,
-    handleSortChange,
-    dropdownRef,
-    isDropdownOpen,
-    setDropdownOpen,
-}) => {
+
+const CategoryBar = ({ selectedType, setSelectedType, handleSelectAll, handleRemoveAll, handleSortChange, dropdownRef, isDropdownOpen, setDropdownOpen }) => {
     const [selectedSort, setSelectedSort] = useState('none');
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const containerRef = useRef(null); // Reference to the scrollable container
 
+    // Check scroll position on scroll
     const handleSelectedTypeSetting = (type) => {
         setSelectedType((prevSelected) =>
             prevSelected.includes(type)
@@ -41,9 +37,46 @@ const CategoryBar = ({
         setDropdownOpen(false); // Close dropdown
     };
 
+    // Track scroll position
+    const handleScroll = () => {
+        if (containerRef.current) {
+            setScrollPosition(containerRef.current.scrollLeft);
+        }
+    };
+
+    useEffect(() => {
+        const container = containerRef.current;
+        container.addEventListener('scroll', handleScroll);
+        return () => {
+            container.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // Calculate gradient mask dynamically based on scroll position
+    const calculateMaskGradient = () => {
+        const container = containerRef.current;
+        if (container) {
+            const scrollMax = container.scrollWidth - container.clientWidth;
+            const remainingLeft = scrollPosition;
+            const remainingRight = scrollMax - scrollPosition;
+
+            // Apply a gradient only if there is remaining content to scroll
+            if (remainingLeft === 0) {
+                return 'linear-gradient(to right, transparent, black 0px, black calc(100% - 100px), transparent)';
+            } else if (remainingRight <= 0) {
+                return 'none'; // No blur on the right side when at the end
+            }
+            return 'linear-gradient(to right, transparent, black 64px, black calc(100% - 64px), transparent)';
+        }
+        return 'none'; // Default to no mask if no container found
+    };
+
     return (
-        <div className='flex border-t-2'>
-            <div className='flex gap-4 m-6 justify-around items-center w-4/6'>
+        <div className='border-t-gray-300 flex border-t-2 gap-6 md:text-sm justify-around no-scrollbar overflow-x-auto xs:max-w-80 xsm:max-w-[768px] md:max-w-[1024px] lg:max-w-[1439px] lg:pl-10  2xl:max-w-[2560px] md:w-full mx-auto md:mx-0'>
+            <div
+                ref={containerRef}
+                className='flex gap-4  my-6 md:justify-around items-center w-full pl-2 lg:gap-7'
+            >
                 <button
                     key="tours"
                     onClick={() => handleSelectedTypeSetting('tours')}
@@ -52,42 +85,62 @@ const CategoryBar = ({
                     <GiPathDistance className='text-3xl' />
                     <p>Tours</p>
                 </button>
-                <button onClick={() => handleSelectedTypeSetting('attractions')} className={`flex flex-col items-center ${isSelected('attractions') ? 'border-customBlack border-b-2' : ''}`}>
+                <button
+                    onClick={() => handleSelectedTypeSetting('attractions')}
+                    className={`flex flex-col items-center ${isSelected('attractions') ? 'border-customBlack border-b-2' : ''}`}
+                >
                     <MdOutlineAttractions className='text-3xl' />
                     <p>Attractions</p>
                 </button>
-                <button onClick={() => handleSelectedTypeSetting('accommodation')} className={`flex flex-col items-center ${isSelected('accommodation') ? 'border-customBlack border-b-2' : ''}`}>
+                <button
+                    onClick={() => handleSelectedTypeSetting('accommodation')}
+                    className={`flex flex-col items-center ${isSelected('accommodation') ? 'border-customBlack border-b-2' : ''}`}
+                >
                     <BsHouse className='text-3xl' />
                     <p>Accommodations</p>
                 </button>
-                <button onClick={() => handleSelectedTypeSetting('events')} className={`flex flex-col items-center ${isSelected('events') ? 'border-customBlack border-b-2' : ''}`}>
+                <button
+                    onClick={() => handleSelectedTypeSetting('events')}
+                    className={`flex flex-col items-center ${isSelected('events') ? 'border-customBlack border-b-2' : ''}`}
+                >
                     <IoCalendarClearOutline className='text-3xl' />
                     <p>Events</p>
                 </button>
-                <button onClick={() => handleSelectedTypeSetting('food_beverages')} className={`flex flex-col items-center ${isSelected('food_beverages') ? 'border-customBlack border-b-2' : ''}`}>
+                <button
+                    onClick={() => handleSelectedTypeSetting('food_beverages')}
+                    className={`flex flex-col min-w-28 items-center ${isSelected('food_beverages') ? 'border-customBlack border-b-2' : ''}`}
+                >
                     <MdOutlineFastfood className='text-3xl' />
                     <p>Food & Drinks</p>
                 </button>
-                <button onClick={() => handleSelectedTypeSetting('shops')} className={`flex flex-col items-center ${isSelected('shops') ? 'border-customBlack border-b-2' : ''}`}>
+                <button
+                    onClick={() => handleSelectedTypeSetting('shops')}
+                    className={`flex flex-col items-center ${isSelected('shops') ? 'border-customBlack border-b-2' : ''}`}
+                >
                     <FaShop className='text-3xl' />
                     <p>Shop</p>
                 </button>
-
             </div>
-            <div className='flex my-6 gap-6 justify-end items-center w-2/6 pr-20'>
-                <button onClick={handleSelectAll} className='justify-center w-24 flex text-customBlack border-2 p-2 rounded-lg hover:bg-customBlack hover:text-white active:bg-customBlack active:text-white'>
+
+            <div className='flex my-6 justify-between items-center w-full gap-4 ml-5  xsm:ml-0  mr-2 lg:justify-around'>
+                <button
+                    onClick={handleSelectAll}
+                    className='justify-center w-24 flex text-customBlack border-2 p-2 rounded-lg hover:bg-customBlack hover:text-white active:bg-customBlack active:text-white'
+                >
                     <p>Select All</p>
                 </button>
-                <button onClick={handleRemoveAll} className='justify-center w-28 flex text-red-700 p-2 rounded-lg border-2 border-red-600 hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white'>
+                <button
+                    onClick={handleRemoveAll}
+                    className='md:w-24 justify-center flex text-red-700 p-2 rounded-lg border-2 border-red-600 hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white'
+                >
                     <p>Remove All</p>
                 </button>
                 <div className='relative z-50' ref={dropdownRef}>
                     <button
                         onClick={() => setDropdownOpen((prev) => !prev)}
-                        className='flex gap-2 items-center text-lg border-2 p-2 rounded-lg hover:bg-customBlack hover:text-white active:bg-customBlack active:text-white'
+                        className='flex flex-col gap-2 items-center border-2 p-2 rounded-lg hover:bg-customBlack hover:text-white active:bg-customBlack active:text-white'
                     >
-                        <TbFilterCog />
-                        <p>Sort By</p>
+                        <p>Arrange</p>
                     </button>
 
                     {isDropdownOpen && (
@@ -96,8 +149,7 @@ const CategoryBar = ({
                                 <div
                                     key={option}
                                     onClick={() => handleSortOptionClick(option)}
-                                    className={`text-center p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${selectedSort === option ? 'bg-gray-100' : ''
-                                        }`}
+                                    className={`text-center p-2 rounded-lg cursor-pointer hover:bg-gray-200 ${selectedSort === option ? 'bg-gray-100' : ''}`}
                                 >
                                     {option.charAt(0).toUpperCase() + option.slice(1)}
                                 </div>
@@ -108,7 +160,10 @@ const CategoryBar = ({
             </div>
         </div>
     );
+
 };
+
+
 
 
 
@@ -116,13 +171,13 @@ const AttractionCard = ({ attraction }) => {
     if (!attraction.images[0]) {
         return null;
     }
-    
+
     const handleImageError = (event) => {
         event.target.src = fallBackImage; // Set fallback image when an error occurs
     };
 
     return (
-        <div className='h-96 w-[320px] flex flex-col rounded-lg bg-white'>
+        <div className='h-96 w-[300px] flex flex-col rounded-lg bg-white'>
             <Link to={`/home/${attraction.id}`} className='block'>
                 <div className='overflow-hidden'>
                     <img
@@ -259,7 +314,8 @@ const Homepage = () => {
     }
 
     return (
-        <div className='flex flex-col mt-24'>
+
+        <div className='flex flex-col w-full mt-24'>
             <CategoryBar
                 handleSelectAll={handleSelectAll}
                 handleRemoveAll={handleRemoveAll}
@@ -270,7 +326,7 @@ const Homepage = () => {
                 isDropdownOpen={isDropdownOpen}
                 setDropdownOpen={setDropdownOpen}
             />
-            <div className='mb-20 w-11/12 mx-auto xl:translate-x-4 flex flex-wrap justify-center gap-10'>
+            <div className='grid grid-cols-1 xsm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 mb-20 w-11/12 mx-auto justify-center place-items-center gap-10'>
                 {sortedAttractions().map((attraction) => (
                     <AttractionCard
                         key={attraction.id}

@@ -21,11 +21,11 @@ const Searchbox = () => {
     };
 
     return (
-        <div className='relative'>
+        <div className=' relative'>
             <input
                 placeholder='Search for events, attractions...'
                 type='text'
-                className='rounded-xl h-10 border-2 p-3 xs:w-2/5 md:w-80'
+                className='rounded-xl h-10 border-2 p-3 xs:w-full xsm:w-80'
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
             />

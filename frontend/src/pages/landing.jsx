@@ -32,7 +32,7 @@ const Main = () => {
 				<div className='uppercase flex flex-col gap-6'>
 					<h2 className='text-4xl font-bold w-[480px]'>explore what singapore has to offer</h2>
 					<p className='text-lg w-[480px] tracking-wide'>Look through our extensive collection of information to discover the <span className='font-bold'>best spots</span>, <span className='font-bold'>hidden gems</span>, and <span className='font-bold'>must-see attractions</span> across Singapore. Whether you're seeking breathtaking views, delicious food, or unforgettable experiences, we’ve got something for every kind of explorer.</p>
-					<Link to={'/home'}><button className='bg-customBlack rounded-xl text-white font-bold w-40 py-3'>go to homepage</button></Link>
+					<Link to={'/home'}><button className='bg-customBlack rounded-xl text-white font-bold w-40 py-3'>Go To Homepage</button></Link>
 				</div>
 				<img src={gardensByTheBay} alt='gardens by the bay' className='size-[608px]' />
 			</div>
