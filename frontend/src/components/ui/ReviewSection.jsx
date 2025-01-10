@@ -304,7 +304,7 @@ const ReviewSection = ({ reviews }) => {
 
 
 
-			<div className='flex flex-col p-4 mx-auto mt-2'>
+			<div className='flex flex-col mt-2'>
 				{isUserLoggedIn ? (
 					<button
 						type='button'

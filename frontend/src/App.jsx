@@ -65,7 +65,7 @@ const App = () => {
 				setModalState,
 			}}
 		>
-			<div className=' h-full'>
+			<div className=' h-full min-w-full'>
 				<Navbar />
 
 

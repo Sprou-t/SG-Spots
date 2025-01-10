@@ -1,3 +1,13 @@
+# Tailwind CSS notes
+
+- how to debug css?
+
+1. single out the issue: is it page specific? component specific? div specific? be as clear as possible
+
+2. use chrome devtool(wei sin's version)
+
+3. for more focused testing can also comment out specific areas while changing css
+
 # React Notes
 
 ## 1. Setting Up HMR for Vite

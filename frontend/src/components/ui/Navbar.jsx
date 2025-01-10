@@ -102,7 +102,7 @@ const Navbar = () => {
 			className={`text-lg md:hover:bg-white text-black group z-50 fixed top-0 w-full md:bg-custom-gradient bg-white backdrop-filter  font-bold transition-transform duration-300 ${direction === 'up' ? 'translate-y-0' : '-translate-y-full'
 				}`}
 		>
-			<div className='text-lg h-16 xsm:h-24 relative flex justify-between items-center px-4 pb-1 pt-3'>
+			<div className='text-lg h-full xsm:h-24 relative flex justify-between items-center px-4 pb-1 pt-3'>
 				{/* Logo */}
 				<Link to='/home' className='flex gap-2 items-center'>
 					<img
