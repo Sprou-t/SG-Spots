@@ -3,12 +3,12 @@ TLDR:
 LTR: add fallback image, integrate review, deploy
 
 - debug the review RUD operation
-- edit such that operations are done on aws(actually do others first see if have time then do this)
-- make everything responsive
 
 ### deploy!!!
 
 - add auth
+- add image display feature for review something is broken
+- edit such that operations are done on aws(actually do others first see if have time then do this)
 - slowly optimise for performance: use 1080 and compress the file, optionally think about using 2 versions of the same image file(nah stick to pagination). lastly, try memoization(see if need esp for fetching in homepage)
 - add responsiveness for 2kpixel screen
 

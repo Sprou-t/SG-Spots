@@ -165,7 +165,7 @@ const Navbar = () => {
 								onClick={toggleDropdown}
 							>
 								{user !== null ? (
-									<div className='flex flex-col gap-1 p-1 '>
+									<div className='flex flex-col gap-1 p-1 md:text-sm'>
 										<button className='uppercase text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold hover:bg-gray-100'>
 											Notification
 										</button>
@@ -200,7 +200,6 @@ const Navbar = () => {
 					</div>
 				</div>
 
-				{/* Mobile Menu: only visible below md screen w isMenuOpen */}
 				{/* Mobile Menu: only visible below md screen w isMenuOpen */}
 				{isMenuOpen && (
 					<div className='absolute top-full left-0 w-full hover:text-black bg-white shadow-md flex flex-col items-center gap-4 pb-4 md:hidden'>

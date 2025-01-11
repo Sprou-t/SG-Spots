@@ -15,13 +15,13 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		).userId;
 	}
 	// console.log(currentUserId);
-	const { _id, authorId, updatedAt, rating, description, image } = review;
+	const username = review.username;
+	// note that image is not supposed to be there
+	const { _id, authorId, updatedAt, rating, description, image } = review.reviewData;
+	// console.log("updatedAt ==> ", updatedAt);
 	// console.log("image ==> ", image);
 	// console.log('image content type ==> ', image.mimeType);
 	// console.log('image buffer ==>', image.buffer);
-
-
-
 
 	const assignImagePath = () => {
 		if (image && image.mimeType && image.buffer) {
@@ -32,17 +32,10 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		assignImagePath();
 	}, [review]);
 	// console.log('img path: ', imagePath);
-	const username = authorId.username;
-
-
-
 
 	// Dropdown state
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
-
-
-
 
 	// Format the date to a readable format
 	const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -51,14 +44,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		options
 	);
 
-
-
-
 	// Toggle the dropdown menu
 	const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-
-
-
 
 	// Handle actions
 	const handleEdit = () => {
@@ -67,20 +54,14 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 		setDropdownOpen((prevState) => !prevState);
 	};
 
-
-
-
 	const handleDelete = async () => {
 		await deleteReview(_id);
 		setReviewList((prev) => {
-			const updatedReviews = prev.filter((review) => review._id !== _id);
-
-
-
-
+			console.log("prev ==> ", prev);
+			const updatedReviews = prev.filter((review) => review.reviewData._id !== _id);
 			// Recalculate average rating based on the updated list
 			const totalStars = updatedReviews.reduce(
-				(acc, review) => acc + review.rating,
+				(acc, review) => acc + review.reviewData.rating,
 				0
 			);
 			const avg = updatedReviews.length
@@ -88,15 +69,9 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 				: 0;
 			setAverageRating(avg.toFixed(1)); // Update the average rating state
 
-
-
-
 			return updatedReviews; // Return the updated list
 		});
 	};
-
-
-
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
@@ -107,32 +82,17 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 				setDropdownOpen(false); // Close the dropdown if clicked outside
 			}
 		};
-
-
-
-
 		const handleScroll = () => {
 			setDropdownOpen(false); // Close dropdown if the user scrolls
 		};
-
-
-
-
 		document.addEventListener('click', handleClickOutside);
 		window.addEventListener('scroll', handleScroll);
-
-
-
-
 		// Clean up event listeners
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, []);
-
-
-
 
 	return (
 		<div className='border-b-2 py-4 relative'>
@@ -144,9 +104,6 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 						{formattedDate}
 					</span>
 				</div>
-
-
-
 
 				{/* Stars and 3-dots menu */}
 				<div className='flex items-center relative gap-5'>
@@ -165,11 +122,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 						))}
 					</div>
 
-
-
-
 					{/* 3-dots menu */}
-					{currentUserId === authorId._id && (
+					{currentUserId === authorId && (
 						<div className='ml-4' ref={dropdownRef}>
 							<button
 								className='text-gray-500 hover:text-gray-800 flex items-center'
@@ -199,14 +153,8 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 				</div>
 			</div>
 
-
-
-
 			{/* Review Description */}
 			<p className='mt-2 text-gray-700'>{description}</p>
-
-
-
 
 			{/* Conditionally render an image if available */}
 			{image && imagePath && (
@@ -223,23 +171,18 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 };
 
 
-
-
 const ReviewSection = ({ reviews }) => {
 	const [reviewList, setReviewList] = useState(null);
 	const [averageRating, setAverageRating] = useState(0);
 	const { openModal } = useContext(PropsContext);
 	const isUserLoggedIn = window.localStorage.getItem('loggedInUser');
 
-
-
-
 	useEffect(() => {
-		// console.log('reviews ==> ', reviews);
+		console.log('reviews ==> ', reviews);
 		// Calculate the average rating
 		setReviewList(reviews);
 		const totalStars = reviews.reduce(
-			(acc, review) => acc + review.rating,
+			(acc, review) => acc + review.reviewData.rating,
 			0
 		);
 		const avg = reviews.length ? totalStars / reviews.length : 0;
@@ -263,8 +206,6 @@ const ReviewSection = ({ reviews }) => {
 			reviewId: null,
 		});
 	};
-
-
 
 
 	return (
@@ -303,7 +244,6 @@ const ReviewSection = ({ reviews }) => {
 
 
 
-
 			<div className='flex flex-col mt-2'>
 				{isUserLoggedIn ? (
 					<button
@@ -322,8 +262,6 @@ const ReviewSection = ({ reviews }) => {
 						Sign In and Write a Review
 					</button>
 				)}
-
-
 
 
 				<div className="flex flex-col gap-4">

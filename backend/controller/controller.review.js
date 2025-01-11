@@ -249,14 +249,34 @@ export const deleteReview = async (req, res) => {
 		// .toString() is necessary in this context because MongoDB's ObjectId type is a special BSON object
 		const user = await User.findById(review.authorId);
 		console.log('user ==> ', user);
-		const attraction = await TIHDocument.findById(review.attractionId);
+		const attraction = await TIHDocument.findOne({ uuid: review.attractionUuid });
 		console.log('attraction ==> ', attraction);
-		user.reviews = user.reviews.filter(
-			(reviewId) => reviewId.toString() !== id
-		);
-		attraction.reviews = attraction.reviews.filter(
-			(reviewId) => reviewId.toString() !== id
-		);
+		// Handle user reviews filtering with error catching
+		try {
+			user.reviews = user.reviews.filter(
+				(reviewId) => reviewId.toString() !== id
+			);
+		} catch (err) {
+			console.error('Error filtering user reviews:', err);
+			return res.status(500).json({
+				success: false,
+				message: 'Error while updating user reviews',
+			});
+		}
+		attraction.userReviews.forEach((review) => console.log('review:', review))
+
+		// Handle attraction reviews filtering with error catching
+		try {
+			attraction.userReviews = attraction.userReviews.filter(
+				(reviewId) => reviewId.toString() !== id
+			);
+		} catch (err) {
+			console.error('Error filtering attraction reviews:', err);
+			return res.status(500).json({
+				success: false,
+				message: 'Error while updating attraction reviews',
+			});
+		}
 		await user.save();
 		await attraction.save();
 
@@ -267,6 +287,6 @@ export const deleteReview = async (req, res) => {
 		res.status(200).json({ success: true, message: 'Review deleted' });
 	} catch (error) {
 		// Handle server errors
-		res.status(500).json({ success: false, message: 'Server Error' });
+		res.status(500).json({ success: false, message: 'unable to delete review' });
 	}
 };

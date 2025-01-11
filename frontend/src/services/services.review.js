@@ -36,7 +36,7 @@ const createReview = async (newReview) => {
 };
 
 const updateReview = async (data) => {
-console.log("data ==> ", data);
+	console.log("data ==> ", data);
 	// Ensure user is logged in and token is set
 	ensureUserIsLoggedInAndTokenIsSet();
 
@@ -99,11 +99,12 @@ const deleteReview = async (reviewId) => {
 	let response;
 	try {
 		response = await axios.delete(`${reviewBaseUrl}/${reviewId}`, config);
+		console.log("response ==> ", response);
 	} catch (err) {
 		console.error('error: ', err);
 	}
 
-	return response.data;
+	return response;
 };
 
 export { createReview, updateReview, deleteReview, setToken, token };

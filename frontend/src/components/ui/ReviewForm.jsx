@@ -27,7 +27,7 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 		event.preventDefault();
 		let newReview;
 		const formData = new FormData(); // inbuilt js function to create form obj
-		formData.append('attractionId', attractionId);
+		formData.append('attractionUuid', attractionId);
 		formData.append('rating', rating);
 		formData.append('description', userReview);
 
@@ -136,13 +136,13 @@ const ReviewForm = ({ attractionId, handleReviewSubmit }) => {
 						<p>File selected!</p>
 					</div>
 				)}
-				<button>
+				{/* <button>
 					<GoPaperclip
 						onClick={handleFileUploadClick}
 						className='size-6 hover:text-blue-600'
 						type='button'
 					/>
-				</button>
+				</button> */}
 				<button
 					type='submit'
 					disabled={pending}

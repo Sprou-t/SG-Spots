@@ -4,7 +4,8 @@ import {
     extractImageFromS3,
     uploadImageToS3,
 } from '../services/s3.services.js';
-
+import User from '../models/models.users.js';
+import Review from '../models/models.review.js';
 // TODO: 1. save the image to cloudflare 2. display the data into UI
 
 /*this function has 3 inner functions:
@@ -218,10 +219,19 @@ export const retrieveSingleTihDataFromMongoAndS3 = async (req, res) => {
             rating: tihObject.rating, // From rating field
             pricing: tihObject.pricing, // From pricing field
             address: tihObject.address, // From address field
-            userReviews: tihObject.userReviews, // From userReviews field (currently empty)
+            userReviews: [], // From userReviews field (currently empty)
             website: tihObject.website,
             images: [], // contains all the iamge data to be rendered in client
         };
+
+        for (const reviewId of tihObject.userReviews) {
+            const review = await Review.findById(reviewId)
+            const user = await User.findById(review.authorId);
+            tihObjectForClientRender.userReviews.push({
+                username: user.username,
+                reviewData: review, // Assuming review contains a 'text' field
+            });
+        }
 
         for (const imageUuid of tihObject.imagesUuid) {
             // for each uuid, retrieve from aws

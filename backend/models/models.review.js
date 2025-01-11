@@ -50,5 +50,5 @@ const reviewSchema = new Schema(
 );
 
 //creates an reviews collection
-const review = mongoose.model('Review', reviewSchema);
-export default review;
+const Review = mongoose.model('Review', reviewSchema);
+export default Review;
