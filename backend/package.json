@@ -23,6 +23,8 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "file-type": "^19.6.0",
+    "firebase": "^11.1.0",
+    "firebase-admin": "^13.0.2",
     "image-type": "^5.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.2",

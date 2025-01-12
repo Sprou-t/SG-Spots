@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
-
+// just use firebase and not changing shit up. do everything by today
 const userSchema = new Schema({
 	// username is used for logging so it must be unique
 	email: {
@@ -15,11 +15,10 @@ const userSchema = new Schema({
 	},
 
 	//store hashed ver of password, thus must hash password first in controller
-	passwordHash: {
+	firebaseUuid: {
 		//TODO: make password req more robust(prob not for easy going website)
 		type: String,
 		required: true,
-		minlength: 3,
 	},
 	reviews: {
 		type: [mongoose.Schema.Types.ObjectId], // Array of ObjectIds
