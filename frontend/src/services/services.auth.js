@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { auth } from '../firebase/firebase.config.js'; // Import the auth instance
 import { signInWithEmailAndPassword, getIdToken } from 'firebase/auth';
-
-const logInBaseUrl = 'http://localhost:3000/user/logIn';
-const signUpBaseUrl = 'http://localhost:3000/user/signUp';
+const logInBaseUrl = 'http://52.74.247.172:3000/user/logIn';
+const signUpBaseUrl = 'http://52.74.247.172:3000/user/signUp';
 
 // credentails contain username and password
 // note that even with 1hr expiration time for firebasetoken, i am 
