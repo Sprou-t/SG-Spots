@@ -27,45 +27,23 @@ export const signUp = async (req, res) => {
 			.status(401)
 			.json({ success: false, message: 'missing user info' });
 	}
-	// check if user already exist in firebase
-	try {
-		// Check if the email already exists in Firebase
-		const existingUser = await admin.auth().getUserByEmail(email);
-		if (existingUser) {
-			return res.status(400).json({ success: false, message: 'Email already in use' });
-		}
-	} catch (error) {
-		if (error.code !== 'auth/user-not-found') {
-			console.error(`Error checking user existence: ${error.message}`);
-			return res.status(500).json({ success: false, message: 'Internal server error' });
-		}
-	}
 
 	try {
-		// create a user in firebase auth, but user is not verified yet
-		const userRecord = await admin.auth().createUser({
-			email,
-			password, //firebase hashes the password
-		});
-		console.log('userRecord ==> ', userRecord);
+		// Hash the password with bcrypt
+		const saltRounds = 10; // Number of salt rounds
+		const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 		// send a verification to user email
-		// TODO: update domain when pushing for production
-		const verificationEmail = await admin.auth().generateEmailVerificationLink(email, {
-			url: 'http://localhost:3000/verifyEmail', // once user click, req sent back to this url
-			handleCodeInApp: true,  // user does not get redirected, instead req is handled by server
-		});
-		console.log('Verification link:', verificationEmail);
-		await sendVerificationEmail(email, verificationEmail)
+		await sendVerificationEmail(username, email, password);
 
 		// store in temp user first while user waits to be signed in
-		const newUser = new TemporaryUser({
+		const newUser = new User({
 			email,
 			username,
-			firebaseUuid: userRecord.uid,
+			passwordHash: hashedPassword,
 		});
 		await newUser.save();
-		res.status(200).json({ success: true, message: 'User signed up. Please verify in your email.' });
+		res.status(200).json({ success: true, message: 'User signed up. A copy of your authentication detail has been emailed. You may now log in' });
 	} catch (error) {
 		console.error(`error in user creation: ${error.message}`);
 		res.status(500).json({
@@ -76,28 +54,13 @@ export const signUp = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-	// login function will either get idToken from req of sign up when user signs up 
+	// login function will either get idTok en from req of sign up when user signs up 
 	// or from frontend when user logs in
-	const { email, idToken } = req.body;
-
-	// Step 1: Authenticate with Firebase client SDK on the frontend
-	// Step 2: Get the ID token from the client and send it to the backend
-
-	if (!idToken) {
-		return res
-			.status(400)
-			.json({ success: false, message: 'ID token is missing' });
-	}
+	const { email, password } = req.body;
 
 	try {
-		// Step 3: Verify the ID token using Firebase Admin SDK
-		const decodedToken = await getAuth().verifyIdToken(idToken);
-
-		// Step 4: Retrieve user details from the decoded token
-		const userId = decodedToken.uid;
-
 		// Find user in the local database using Firebase UID (from decoded token)
-		const user = await User.findOne({ firebaseUuid: userId });
+		const user = await User.findOne({ email: email });
 
 		if (!user) {
 			return res
@@ -105,22 +68,33 @@ export const login = async (req, res) => {
 				.json({ success: false, message: 'User not found' });
 		}
 
-		// Step 5: Generate your own JWT to keep the session
+		// Compare the provided password with the hashed password
+		const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+
+		if (!passwordMatch) {
+			return res
+				.status(401)
+				.json({ success: false, message: 'Invalid password' });
+		}
+
+		// Generate a JWT token for the session
 		const userInfoForToken = {
 			email: user.email,
 			username: user.username,
 			id: user._id, // Use the local user _id for your app
 		};
-
 		const token = jwt.sign(userInfoForToken, process.env.SECRET, {
 			expiresIn: '48h',
 		});
 
 		// Step 6: Send the JWT token to the client for use in future requests
 		res.status(200).json({
-			userId: user._id,
-			token,
-			email: user.email,
+			success: true,
+			data: {
+				userId: user._id,
+				token,
+				email: user.email,
+			}
 		});
 	} catch (error) {
 		console.error(`Error in login: ${error.message}`);
@@ -131,85 +105,3 @@ export const login = async (req, res) => {
 	}
 };
 
-// export const login = async (req, res) => {
-// 	let passwordCorrect = false;
-// 	const { email, password } = req.body;
-// 	// check if username nad password matches
-// 	// need {} bcoz we are finding w obj key
-// 	const user = await User.findOne({ email });
-// 	if (!user) {
-// 		res.status(401).json({ success: false, message: 'incorrect username' });
-// 	} else {
-// 		passwordCorrect = await bcrypt.compare(
-// 			//return true if same
-// 			password,
-// 			user.passwordHash
-// 		);
-// 	}
-
-// 	if (!passwordCorrect) {
-// 		res.status(401).json({ success: false, message: 'incorrect password' });
-// 	}
-// 	// else if correct create a token for user: token use to verify their identity on sub request w/o checking agn
-// 	const userInfoForToken = {
-// 		email: user.email,
-// 		username: user.username,
-// 		id: user._id,
-// 	};
-
-// 	const token = jwt.sign(userInfoForToken, process.env.SECRET, {
-// 		expiresIn: 48 * 60 * 60,
-// 	});
-// 	console.log('loggged in!');
-// 	res.status(200).json({
-// 		userId: user._id,
-// 		token, // token: token
-// 		email: user.email,
-// 	});
-// };
-
-// export const updateUser = async (req, res) => {
-// 	const { id } = req.params;
-// 	// more like updatedUserData
-// 	const updatedUserData = req.body; // this new update will be sent in using postman
-
-// 	if (!mongoose.Types.ObjectId.isValid(id)) {
-// 		return res
-// 			.status(404)
-// 			.json({ success: false, message: 'invalid product id' });
-// 	}
-// 	try {
-// 		const updatedUser = await User.findByIdAndUpdate(id, updatedUserData, {
-// 			new: true,
-// 		});
-// 		console.log(`updated User to send: ${updatedUser}`);
-// 		res.status(201).json({ success: true, data: updatedUser });
-// 	} catch (error) {
-// 		console.error(`error in updating User: ${error.message}`);
-// 		res.status(500).json({ success: false, message: 'server error' });
-// 	}
-// };
-
-// export const deleteUser = async (req, res) => {
-// 	const { id } = req.params;
-
-// 	try {
-// 		const deletedUser = await User.findByIdAndDelete(id);
-
-// 		if (!deletedUser) {
-// 			// findbyID would return null if User not found
-// 			return res
-// 				.status(404)
-// 				.json({ success: false, message: 'User not found' });
-// 		}
-
-// 		// User was successfully deleted
-// 		res.status(200).json({
-// 			success: true,
-// 			message: `User: ${deletedUser.name} deleted`,
-// 		});
-// 	} catch (error) {
-// 		// If there was a server or validation error
-// 		res.status(500).json({ success: false, message: 'Server Error' });
-// 	}
-// };

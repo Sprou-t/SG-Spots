@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { auth } from '../firebase/firebase.js'; // Import the auth instance
+import { auth } from '../firebase/firebase.config.js'; // Import the auth instance
 import { signInWithEmailAndPassword, getIdToken } from 'firebase/auth';
 
 const logInBaseUrl = 'http://localhost:3000/user/logIn';
@@ -10,71 +10,55 @@ const signUpBaseUrl = 'http://localhost:3000/user/signUp';
 // using jwt token that has 48 hour expiration.
 // backend returns: userId, token, email
 const logIn = async (credentials) => {
-	// create token id function lies here
 	try {
-		const userCredential = await signInWithEmailAndPassword(
-			auth,
-			credentials.email,
-			credentials.password
-		);
-
-		if (!userCredential.user.emailVerified) {
-			console.error('Email not verified');
-			return { success: false, message: 'Please verify your email before logging in.', user: null };
-		}
-		// firebaseIdToken are used to securely communicate with backend services
-		const firebaseIdToken = await getIdToken(userCredential.user);
 		const response = await axios.post(logInBaseUrl, {
 			email: credentials.email,
-			idToken: firebaseIdToken,
+			password: credentials.password,
 		});
 		console.log('User logged in successfully:', response.data);
+
+		// Return a success response
 		return response.data;
 	} catch (error) {
-		// Log the error to see what went wrong
+		// Log the error details
 		console.error('Error during login:', error);
 
-		// Handle the error based on its type
+		// Handle different error types and return a failure response
 		if (error.response) {
-			// Server responded with a status code other than 2xx
-			console.error('Response data:', error.response.data);
-			console.error('Response status:', error.response.status);
-			console.error('Response headers:', error.response.headers);
+			return { success: false, message: error.response.data.message || 'Login failed' };
 		} else if (error.request) {
-			// Request was made but no response was received
-			console.error('No response received:', error.request);
+			return { success: false, message: 'No response from server' };
 		} else {
-			// Other errors (e.g., setting up the request)
-			console.error('Error message:', error.message);
+			return { success: false, message: error.message };
 		}
 	}
 };
+
 
 // sign up + log in
 // credentials include email, username and password
 const signUp = async (credentials) => {
 	try {
-		// signup response returns custom token
-		await axios.post(signUpBaseUrl, credentials);
+		// Sign up response returns a custom token
+		const signUpResponse = await axios.post(signUpBaseUrl, credentials);
+		console.log('User signed up successfully:', signUpResponse.data);
 
-		// Once sign-up is successful, proceed to login using the ID token
-		const loginResponse = await logIn(credentials);
-		return loginResponse; // contains username, email, password
+		// Return a success response
+		return { success: true, data: signUpResponse.data };
 	} catch (error) {
+		// Log the error details
 		console.error('Error during sign up:', error);
+
+		// Handle different error types and return a failure response
 		if (error.response) {
-			console.error('Response data:', error.response.data);
+			return { success: false, message: error.response.data.message || 'Sign up failed' };
 		} else if (error.request) {
-			console.error('No response received:', error.request);
+			return { success: false, message: 'No response from server' };
 		} else {
-			console.error('Error message:', error.message);
+			return { success: false, message: error.message };
 		}
 	}
-
-	// //continue with login
-	// const loginResponse = await logIn(credentials);
-	// // backend returns: userId, token, email
-	// return loginResponse;
 };
+
 
 export { logIn, signUp };

@@ -15,7 +15,7 @@ const Navbar = () => {
 	const navbarRef = useRef(null);
 	const profileRef = useRef(null);
 
-	const { setSearchQuery, user, setUser, openModal } =
+	const { setSearchQuery, user, setUser, openModal, showNotification } =
 		useContext(PropsContext);
 
 	const controlDirection = () => {
@@ -99,6 +99,7 @@ const Navbar = () => {
 	const logUserOut = () => {
 		window.localStorage.removeItem('loggedInUser');
 		setUser(null);
+		showNotification('Log out successful!', 'success');
 	};
 
 	return (

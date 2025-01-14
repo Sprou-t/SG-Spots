@@ -14,7 +14,6 @@ import AuthForm from './components/ui/AuthForm.jsx';
 import { PropsContext } from './context/context.props.jsx';
 import TestHomepage from './pages/TestHomepage.jsx';
 
-
 const App = () => {
 	const [user, setUser] = useState(null);
 	const [attractions, setAttractions] = useState([]);
@@ -25,21 +24,21 @@ const App = () => {
 		title: null,
 		reviewId: null,
 	}); // Combined state
+	const [notification, setNotification] = useState(null);
 
-
-	// useEffect(() => {
-	//  console.log('Updated modal state: ', modalState);
-	// }, [modalState]);
-
+	const showNotification = (message, type) => {
+		setNotification({ message, type });
+		setTimeout(() => setNotification(null), 5000); // Clear notification after 5 seconds
+	};
 
 	// Function to open the modal
-	// type: authentication/review
+	// type: authentication/review/notification
 	// title: auth(logIn or signUp), review(submit or edit)
+	// reviewID: null or give the value
 	const openModal = ({ type, title, reviewId }) => {
 		setIsModalOpen(true); // Open modal
 		setModalState({ type, title, reviewId }); // Update modal state
 	};
-
 
 	// Function to close the modal
 	const closeModal = () => {
@@ -47,7 +46,6 @@ const App = () => {
 		setModalState({ type: null, title: null }); // Reset modal state
 		// console.log('modalState after closing', modalState);
 	};
-
 
 	return (
 		<PropsContext.Provider
@@ -63,11 +61,11 @@ const App = () => {
 				openModal,
 				closeModal,
 				setModalState,
+				showNotification,
 			}}
 		>
 			<div className=' h-full min-w-full'>
 				<Navbar />
-
 
 				{isModalOpen && modalState.type === 'authentication' && (
 					<AuthModal>
@@ -75,12 +73,22 @@ const App = () => {
 					</AuthModal>
 				)}
 
+				{notification && (
+					<div
+						className={`fixed bottom-0 left-0 right-0 p-4 text-white ${notification.type === 'error'
+							? 'bg-red-500'
+							: 'bg-green-500'
+							}`}
+					>
+						<p>{notification.message}</p>
+					</div>
+				)}
+
 				{/* <TestHomepage /> */}
 				<Routes>
 					<Route path='/' element={<Landing />} />
 					<Route path='/home' element={<Homepage />} />
 					<Route path='/home/:id' element={<IndividualPage />} />
-
 
 					<Route path='/blog' element={<Blog />} />
 					<Route path='/privacyPolicy' element={<PrivacyPolicy />} />
@@ -95,6 +103,5 @@ const App = () => {
 		</PropsContext.Provider>
 	);
 };
-
 
 export default App;

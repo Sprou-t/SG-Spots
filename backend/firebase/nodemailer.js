@@ -1,10 +1,6 @@
 import nodemailer from 'nodemailer';
 
-async function sendVerificationEmail(to, link) {
-    // Log the environment variables to ensure they're loaded correctly
-    console.log('Email Username:', process.env.EMAIL_USERNAME);
-    console.log('Email Password:', process.env.EMAIL_PASSWORD);
-
+async function sendVerificationEmail(username, email, password) {
     // Create the transporter inside the function
     const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -20,9 +16,19 @@ async function sendVerificationEmail(to, link) {
         // Send the verification email
         await transporter.sendMail({
             from: process.env.EMAIL_USERNAME,
-            to: to,
-            subject: 'Email Verification',
-            text: `Click the link below to verify your email: ${link}`,
+            to: email,
+            subject: 'SGSPOTS Account D',
+            text: `Hi ${username},
+
+Your SGSpots account has been created successfully! Here are your account details:
+
+Email: ${email}  
+Password: ${password}
+
+Please keep this information secure. You can use these credentials to log in to your account.
+
+Best regards,  
+The SGSpots Team`,
         });
         console.log('Verification email sent successfully');
     } catch (error) {

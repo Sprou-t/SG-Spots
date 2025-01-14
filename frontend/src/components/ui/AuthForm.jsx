@@ -3,14 +3,19 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { PropsContext } from '../../context/context.props.jsx';
 import { logIn, signUp } from '../../services/services.auth.js';
-import setErrorMessage from './../../../../backend/node_modules/set-error-message/build/src/main';
 import { setToken } from '../../services/services.review.js';
-import { auth } from '../../firebase/firebase.js';
+import { auth } from '../../firebase/firebase.config.js';
 /*TODO: check that URL is correct */
 
 const AuthForm = () => {
-	const { setUser, modalState, setModalState, closeModal } =
-		useContext(PropsContext);
+	const {
+		setUser,
+		modalState,
+		setModalState,
+		openModal,
+		closeModal,
+		showNotification,
+	} = useContext(PropsContext);
 	const [email, setEmail] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -19,25 +24,40 @@ const AuthForm = () => {
 
 	const handleAuth = async (event) => {
 		event.preventDefault();
-		let user;
+		let loginResponse;
 		if (modalState.title === 'logIn') {
-			user = await logIn({
+			loginResponse = await logIn({
 				email,
 				password,
 			});
-			setUser(user);
-			setToken(user.token);
-			const currentTimestamp = new Date().getTime();
-			window.localStorage.setItem('loggedInUser', JSON.stringify({ user, timestamp: currentTimestamp }));
-			console.log('logged In');
+			console.log("loginResponse ==> ", loginResponse.data);
+			if (!loginResponse.success) {
+				// add a modal also
+				openModal('notification', 'logIn', null);
+				console.log('user log in fail');
+				showNotification(
+					'Login failed. Please check your credentials.',
+					'error'
+				);
+			} else {	
+				setUser(loginResponse.data);
+				setToken(loginResponse.data.token);
+				const currentTimestamp = new Date().getTime();
+				window.localStorage.setItem(
+					'loggedInUser',
+					JSON.stringify({ user: loginResponse.data, timestamp: currentTimestamp })
+				);
+				showNotification('Login successful!', 'success');
+			}
 		} else {
-			user = await signUp({
+			await signUp({
 				email,
 				username,
 				password,
 			});
 			console.log('signed In');
 			setUsername('');
+			showNotification('Sign up successful! A copy of your authentication detail is sent to email. You can now log in.', 'success')
 		}
 
 		setPassword('');

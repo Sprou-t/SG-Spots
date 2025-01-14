@@ -1,6 +1,8 @@
 # Ignore Node modules for both frontend and backend
 node_modules/
 
+frontend/src/firebase/firebase.config.js
+
 backend/.env
 
 backend/firebase/sg-spots-firebase-adminsdk-8n035-33f9c106e7.json

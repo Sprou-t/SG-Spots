@@ -1,5 +1,7 @@
 import admin from '../firebase/firebase.config.js';
+import { getAuth, isSignInWithEmailLink, verifyPasswordResetCode } from 'firebase/auth';
 import TemporaryUser from '../models/models.tempUser.js';
+import { initializeApp } from 'firebase/app';
 
 /* after user clicks the link, it will send a request back to my server at the endpoint
  defined in the verification link: ie.  https://sg-spots.firebaseapp.com/__/auth/action
@@ -8,10 +10,25 @@ import TemporaryUser from '../models/models.tempUser.js';
  */
 
 export const handleVerification = async (req, res) => {
+    const firebaseConfig = {
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.FIREBASE_PROJECT_ID,
+    };
+    const firebaseApp = initializeApp(firebaseConfig); // Initialize client app
+    const auth = getAuth(firebaseApp); // Pass the initialized app to getAuth
+
     const { oobCode } = req.query;
+    console.log("oobCode ==> ", oobCode);
     try {
+        const auth = getAuth(); // Get Firebase Auth instance using client SDK
         // Get user info from oobCode
-        const userInfo = await admin.auth().verifyActionCode(oobCode);
+        const isValid = await auth.isSignInWithEmailLink(auth, oobCode);
+        if (!isValid) {
+            return res.status(400).json({ success: false, message: 'Invalid or expired verification link.' });
+        }
+
+        const userInfo = await admin.auth().verifyPasswordResetCode(auth, oobCode);
         console.log("userInfo ==> ", userInfo);
 
         const userRecord = await admin.auth().getUserByEmail(userInfo.email);

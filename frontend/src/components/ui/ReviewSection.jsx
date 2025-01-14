@@ -12,12 +12,14 @@ const ReviewCard = ({ review, setReviewList, openModal, setAverageRating }) => {
 	if (window.localStorage.getItem('loggedInUser')) {
 		currentUserId = JSON.parse(
 			window.localStorage.getItem('loggedInUser')
-		).userId;
+		).user.userId;
+		console.log("currentUserId ==> ", currentUserId);
 	}
 	// console.log(currentUserId);
 	const username = review.username;
 	// note that image is not supposed to be there
 	const { _id, authorId, updatedAt, rating, description, image } = review.reviewData;
+	console.log("authorId ==> ", authorId);
 	// console.log("updatedAt ==> ", updatedAt);
 	// console.log("image ==> ", image);
 	// console.log('image content type ==> ', image.mimeType);
