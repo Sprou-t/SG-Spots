@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import User from '../models/models.users.js';
 import jwt from 'jsonwebtoken';
 import { getAuth } from 'firebase-admin/auth';
-import admin from '../firebase/firebase.config.js';
 import sendVerificationEmail from '../firebase/nodemailer.js';
 import TemporaryUser from '../models/models.tempUser.js'
 
