@@ -9,6 +9,22 @@ const setToken = (newToken) => {
 	token = `Bearer ${newToken}`;
 };
 
+const removeTokenIfExpired = () => {
+	const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
+
+	if (loggedInUser) {
+		const currentTimestamp = new Date().getTime();
+		const storedTimestamp = loggedInUser.timestamp;
+
+		// Check if 48 hours (48 * 60 * 60 * 1000 ms) have passed since the timestamp
+		if (currentTimestamp - storedTimestamp > 48 * 60 * 60 * 1000) {
+			// Clear localStorage if the token is expired
+			window.localStorage.removeItem('loggedInUser');
+			console.log('User session expired. Please log in again.');
+		}
+	}
+};
+
 const ensureUserIsLoggedInAndTokenIsSet = () => {
 	// Check if the token is already set in the module
 	if (!token) {
@@ -107,4 +123,4 @@ const deleteReview = async (reviewId) => {
 	return response;
 };
 
-export { createReview, updateReview, deleteReview, setToken, token };
+export { removeTokenIfExpired, createReview, updateReview, deleteReview, setToken, token };

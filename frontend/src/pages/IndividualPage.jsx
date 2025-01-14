@@ -11,6 +11,7 @@ import ReviewModal from '../components/ui/reviewModal.jsx';
 import { useParams } from 'react-router-dom';
 import { PropsContext } from '../context/context.props.jsx';
 import fallBackImage from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg'
+import { removeTokenIfExpired } from '../services/services.review.js';
 
 
 /* TODO:
@@ -49,6 +50,10 @@ const IndividualPage = () => {
 		fetchAttractionData();
 	}, [id]);
 	console.log('attraction data:', attraction)
+
+	useEffect(() => {
+		removeTokenIfExpired()
+	})
 
 
 	if (attraction != null) {

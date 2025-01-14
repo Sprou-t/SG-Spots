@@ -2,3 +2,5 @@
 node_modules/
 
 backend/.env
+
+backend/firebase/sg-spots-firebase-adminsdk-8n035-33f9c106e7.json

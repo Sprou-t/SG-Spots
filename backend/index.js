@@ -1,4 +1,3 @@
-
 import dotenv from 'dotenv';
 // Load environment variables from .env file
 dotenv.config();
@@ -8,7 +7,7 @@ import cors from 'cors';
 import reviewRoutes from './routes/routes.review.js';
 import userRoutes from './routes/routes.user.js';
 import TIHDataRoutes from './routes/routes.tih.js';
-
+import handleVerificationRoutes from './routes/routes.verifyEmail.js';
 // Initialize express app
 const app = express();
 
@@ -19,7 +18,9 @@ app.use(cors());
 // Define routes
 app.use('/review', reviewRoutes);
 app.use('/user', userRoutes);
+// app.use('/tempUserDetail', tempUser)
 app.use('/TIHData', TIHDataRoutes);
+app.use('/verifyEmail', handleVerificationRoutes);
 
 // Set the port
 const PORT = process.env.PORT;

@@ -3,6 +3,8 @@ import User from '../models/models.users.js';
 import jwt from 'jsonwebtoken';
 import { getAuth } from 'firebase-admin/auth';
 import admin from '../firebase/firebase.config.js';
+import sendVerificationEmail from '../firebase/nodemailer.js';
+import TemporaryUser from '../models/models.tempUser.js'
 
 // export const getAllUser = async (req, res) => {
 // 	try {
@@ -25,25 +27,45 @@ export const signUp = async (req, res) => {
 			.status(401)
 			.json({ success: false, message: 'missing user info' });
 	}
+	// check if user already exist in firebase
+	try {
+		// Check if the email already exists in Firebase
+		const existingUser = await admin.auth().getUserByEmail(email);
+		if (existingUser) {
+			return res.status(400).json({ success: false, message: 'Email already in use' });
+		}
+	} catch (error) {
+		if (error.code !== 'auth/user-not-found') {
+			console.error(`Error checking user existence: ${error.message}`);
+			return res.status(500).json({ success: false, message: 'Internal server error' });
+		}
+	}
 
 	try {
+		// create a user in firebase auth, but user is not verified yet
 		const userRecord = await admin.auth().createUser({
 			email,
 			password, //firebase hashes the password
 		});
 		console.log('userRecord ==> ', userRecord);
-		const newUser = new User({
-			// note that itenaries will be an empty array by default
+
+		// send a verification to user email
+		// TODO: update domain when pushing for production
+		const verificationEmail = await admin.auth().generateEmailVerificationLink(email, {
+			url: 'http://localhost:3000/verifyEmail', // once user click, req sent back to this url
+			handleCodeInApp: true,  // user does not get redirected, instead req is handled by server
+		});
+		console.log('Verification link:', verificationEmail);
+		await sendVerificationEmail(email, verificationEmail)
+
+		// store in temp user first while user waits to be signed in
+		const newUser = new TemporaryUser({
 			email,
 			username,
 			firebaseUuid: userRecord.uid,
 		});
-
 		await newUser.save();
-		// create custom token for new user's first session
-		const customToken = await admin.auth().createCustomToken(userRecord.uid);
-		console.log('signed up!');
-		res.status(200).json({ success: true });
+		res.status(200).json({ success: true, message: 'User signed up. Please verify in your email.' });
 	} catch (error) {
 		console.error(`error in user creation: ${error.message}`);
 		res.status(500).json({

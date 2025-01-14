@@ -23,7 +23,7 @@ const Navbar = () => {
 			setDirection('down');
 			setSearchQuery('');
 		} else {
-			setDirection('up');
+			setDirection('up')
 		}
 		setIsMenuOpen(false);
 		oldScrollY.current = window.scrollY;
@@ -67,10 +67,15 @@ const Navbar = () => {
 	useEffect(() => {
 		const loggedInUser = window.localStorage.getItem('loggedInUser');
 		if (loggedInUser) {
-			const user = JSON.parse(loggedInUser);
-			setUser(user);
+			const localStorageData = JSON.parse(loggedInUser);
+			console.log("localStorageData ==> ", localStorageData);
+			const currentUser = localStorageData.user;
+			setUser(currentUser)
+			console.log("user ==> ", currentUser.email);
 		}
 	}, []);
+
+	console.log('user: ', user)
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -160,7 +165,7 @@ const Navbar = () => {
 						{/*dropdown menu */}
 						{isDropdownOpen && (
 							<div
-								className='absolute top-full left-0 flex flex-col bg-white shadow-lg rounded-md mt-1 md:w-28'
+								className='absolute top-full left-0 flex flex-col bg-white shadow-lg rounded-md mt-1 md:w-28 '
 								ref={profileRef}
 								onClick={toggleDropdown}
 							>

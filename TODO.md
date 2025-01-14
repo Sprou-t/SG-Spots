@@ -1,12 +1,12 @@
 TODO:
 TLDR:
-LTR: add fallback image, integrate review, deploy
+TMR: give some error checking for hte password during sign up and also need to authenticate based on email
 
 - debug the review RUD operation
 
-### deploy!!!
+### deploy!!! (remember to ignore some files)
 
-- add auth
+- add auth 2d expiration time for firebase token
 - add image display feature for review something is broken
 - edit such that operations are done on aws(actually do others first see if have time then do this)
 - slowly optimise for performance: use 1080 and compress the file, optionally think about using 2 versions of the same image file(nah stick to pagination). lastly, try memoization(see if need esp for fetching in homepage)

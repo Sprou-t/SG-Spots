@@ -135,7 +135,7 @@ const CategoryBar = ({ selectedType, setSelectedType, handleSelectAll, handleRem
                 >
                     <p>Remove All</p>
                 </button>
-                <div className='relative z-50' ref={dropdownRef}>
+                <div className='relative ' ref={dropdownRef}>
                     <button
                         onClick={() => setDropdownOpen((prev) => !prev)}
                         className='flex flex-col gap-2 items-center border-2 p-2 rounded-lg hover:bg-customBlack hover:text-white active:bg-customBlack active:text-white'
