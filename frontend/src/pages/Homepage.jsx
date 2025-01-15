@@ -226,8 +226,10 @@ const Homepage = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
     const baseUrl = import.meta.env.VITE_AWS_DEPLOYMENT_URL;
+    console.log("baseUrl ==> ", baseUrl);
 
     const requestTihDataUrl = `${baseUrl}/TIHData`
+    console.log("requestTihDataUrl ==> ", requestTihDataUrl);
     useEffect(() => {
         axios
             .get(requestTihDataUrl)
