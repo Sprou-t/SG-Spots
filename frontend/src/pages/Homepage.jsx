@@ -226,7 +226,7 @@ const Homepage = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
     const baseUrl = process.env.AWS_DEPLOYMENT_URL;
-    const requestTihDataUrl = `${baseUrl}/TIHData`
+    const requestTihDataUrl = `http://54.251.144.57:8080/TIHData`
     console.log("requestTihDataUrl ==> ", requestTihDataUrl);
     useEffect(() => {
         axios
