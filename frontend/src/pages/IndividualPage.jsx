@@ -28,7 +28,7 @@ const IndividualPage = () => {
 	const handleImageError = (event) => {
 		event.target.src = fallBackImage; // Set fallback image when an error occurs
 	};
-	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const baseUrl = import.meta.env.VITE_AWS_DEPLOYMENT_URL;
 	const requestSingleTihDataUrl = `${baseUrl}/TIHData/${id}`;
 
 	// console.log('attraction page renders')

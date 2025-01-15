@@ -225,9 +225,9 @@ const Homepage = () => {
     const dropdownRef = useRef(null);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-    const baseUrl = process.env.AWS_DEPLOYMENT_URL;
-    const requestTihDataUrl = `http://54.251.144.57:8080/TIHData`
-    console.log("requestTihDataUrl ==> ", requestTihDataUrl);
+    const baseUrl = import.meta.env.VITE_AWS_DEPLOYMENT_URL;
+
+    const requestTihDataUrl = `${baseUrl}/TIHData`
     useEffect(() => {
         axios
             .get(requestTihDataUrl)

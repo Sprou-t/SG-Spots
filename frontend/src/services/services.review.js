@@ -39,7 +39,7 @@ const ensureUserIsLoggedInAndTokenIsSet = () => {
 };
 
 const createReview = async (newReview) => {
-	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const baseUrl = import.meta.env.VITE_AWS_DEPLOYMENT_URL;
 	const reviewBaseUrl = `${baseUrl}/review`;
 	ensureUserIsLoggedInAndTokenIsSet();
 	const config = {
@@ -54,7 +54,7 @@ const createReview = async (newReview) => {
 };
 
 const updateReview = async (data) => {
-	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const baseUrl = import.meta.env.VITE_AWS_DEPLOYMENT_URL;
 	const reviewBaseUrl = `${baseUrl}/review`;
 	console.log("data ==> ", data);
 	// Ensure user is logged in and token is set
@@ -111,7 +111,7 @@ const updateReview = async (data) => {
 
 
 const deleteReview = async (reviewId) => {
-	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const baseUrl = import.meta.env.VITE_AWS_DEPLOYMENT_URL;
 	const reviewBaseUrl = `${baseUrl}/review`;
 	ensureUserIsLoggedInAndTokenIsSet();
 	const config = {
