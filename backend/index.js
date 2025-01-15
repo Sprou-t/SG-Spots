@@ -22,7 +22,6 @@ app.use(cors());
 // Define routes
 app.use('/review', reviewRoutes);
 app.use('/user', userRoutes);
-// app.use('/tempUserDetail', tempUser)
 app.use('/TIHData', TIHDataRoutes);
 app.use('/verifyEmail', handleVerificationRoutes);
 

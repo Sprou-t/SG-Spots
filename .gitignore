@@ -1,6 +1,8 @@
 # Ignore Node modules for both frontend and backend
 node_modules/
 
+frontend/.env
+
 frontend/src/firebase/firebase.config.js
 
 backend/.env
