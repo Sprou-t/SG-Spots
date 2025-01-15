@@ -1,4 +1,4 @@
-import admin from '../firebase/firebase.config.js';
+// import admin from '../firebase/firebase.config.js';
 import { getAuth, isSignInWithEmailLink, verifyPasswordResetCode } from 'firebase/auth';
 import TemporaryUser from '../models/models.tempUser.js';
 import { initializeApp } from 'firebase/app';
