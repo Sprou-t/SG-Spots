@@ -227,6 +227,7 @@ const Homepage = () => {
 
     const baseUrl = process.env.AWS_DEPLOYMENT_URL;
     const requestTihDataUrl = `${baseUrl}/TIHData`
+    console.log("requestTihDataUrl ==> ", requestTihDataUrl);
     useEffect(() => {
         axios
             .get(requestTihDataUrl)
