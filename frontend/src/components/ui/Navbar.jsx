@@ -4,7 +4,6 @@ import logo from '../../assets/navbarImages/borders-2099224.svg';
 import Searchbox from './Searchbox.jsx';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
-import axios from 'axios';
 import { PropsContext } from '../../context/context.props.jsx';
 
 const Navbar = () => {
@@ -18,10 +17,14 @@ const Navbar = () => {
 	const { setSearchQuery, user, setUser, openModal, showNotification } =
 		useContext(PropsContext);
 
+	// when user scrolls, this function can close the dropdown menu
 	const controlDirection = () => {
 		if (window.scrollY > oldScrollY.current) {
 			setDirection('down');
-			setSearchQuery('');
+			setSearchQuery(''); // close the search dropdown menu
+			if (isDropdownOpen) {
+				setIsDropdownOpen(false); // Close the dropdown if it's open
+			}
 		} else {
 			setDirection('up')
 		}
@@ -166,7 +169,7 @@ const Navbar = () => {
 						{/*dropdown menu */}
 						{isDropdownOpen && (
 							<div
-								className='absolute top-full left-0 flex flex-col bg-white shadow-lg rounded-md mt-1 md:w-28 '
+								className={` ${direction === 'up' ? 'block' : 'hidden'}  absolute top-full left-0 flex flex-col bg-white shadow-lg rounded-md mt-1 md:w-28 `}
 								ref={profileRef}
 								onClick={toggleDropdown}
 							>
@@ -186,10 +189,10 @@ const Navbar = () => {
 										</button>
 									</div>
 								) : (
-									<>
+									<div >
 										<button
 											onClick={() => openLoginForm()}
-											className='uppercase text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold'
+											className={` uppercase text-black inline-flex items-center justify-center h-9 px-4 py-2 font-bold`}
 										>
 											Log In
 										</button>
@@ -199,7 +202,7 @@ const Navbar = () => {
 										>
 											Sign Up
 										</button>
-									</>
+									</div>
 								)}
 							</div>
 						)}
@@ -256,7 +259,7 @@ const Navbar = () => {
 				)}
 
 			</div>
-		</div>
+		</div >
 	);
 };
 
