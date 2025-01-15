@@ -35,9 +35,11 @@ export default {
         customBlack: 'rgb(24, 24, 56)',  // Define custom black color
         customYellow: '#FACC15', // Define custom yellow color
       },
+      // note that images from public folder should be referenced from the root 
+      // of the proj
       backgroundImage: {
-        'parallax1': 'url("./src/assets/landingImages/pexels-palumalerba-2426546.jpg")',
-        'parallax2': 'url("./src/assets/landingImages/pexels-simo-3544415.jpg")'
+        'parallax1': 'url("/pexels-palumalerba-2426546.jpg")',
+        'parallax2': 'url("/pexels-simo-3544415.jpg")'
       },
       // Custom font-variation-settings utility
       fontVariationSettings: {

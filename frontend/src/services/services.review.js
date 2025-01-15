@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const reviewBaseUrl = 'http://52.74.247.172:3000/review';
+const reviewBaseUrl = 'http://localhost:8080/review';
 let token = null;
 
 // this function will be invoked when user login in authForm

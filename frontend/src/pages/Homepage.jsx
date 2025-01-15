@@ -227,7 +227,7 @@ const Homepage = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:3000/TIHData')
+            .get('http://localhost:8080/TIHData')
             .then((response) => setAttractions(response.data.data))
             .catch((error) => console.log(error));
     }, []);

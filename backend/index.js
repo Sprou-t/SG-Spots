@@ -27,10 +27,10 @@ app.use('/TIHData', TIHDataRoutes);
 app.use('/verifyEmail', handleVerificationRoutes);
 
 // Set the port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Start the server and connect to the database
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     // Connect to MongoDB
     connectDb()
         .then(() => {

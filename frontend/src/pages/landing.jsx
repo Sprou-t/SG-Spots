@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import mainImg1 from '../assets/landingImages/pexels-alaric-sim-380461-1029188.jpg';
-import mainImg2 from '../assets/landingImages/Singapore-Bird-Paradise-8a764bb0-aaa3-407f-a934-d594dee2bf10.jpeg';
-import mainImg3 from '../assets/landingImages/sentosa-island-singapore-23-1440x1920.webp';
-import mainImg4 from '../assets/landingImages/night-wonderful-urban-beautiful-landscape.jpg';
-import mainImg5 from '../assets/landingImages/beautiful-flamingos-zoo.jpg';
-import findImg from '../assets/landingImages/water-new-night-marina-business.jpg';
-import writeImg from '../assets/landingImages/pexels-nextvoyage-3881761.jpg';
-import { SlideLeft, SlideRight } from '../components/animation/SlideInAnimation.jsx';
 import { Link } from 'react-router-dom';
-import gardensByTheBay from '../assets/landingImages/pexels-nextvoyage-3881761.jpg';
+import gardensByTheBay from '../../public/sands-city-colorful-tree-tourist.jpg'
 
 const Main = () => {
 	return (

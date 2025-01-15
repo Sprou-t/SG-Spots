@@ -35,7 +35,7 @@ const IndividualPage = () => {
 	// Extract the fetch logic into a reusable function
 	const fetchAttractionData = () => {
 		axios
-			.get(`http://localhost:3000/TIHData/${id}`)
+			.get(`http://localhost:8080/TIHData/${id}`)
 			.then((response) => {
 				console.log("response ==> ", response); // Log actual data
 				setAttraction(response.data); // Set the correct data
