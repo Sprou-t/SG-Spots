@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { auth } from '../firebase/firebase.config.js'; // Import the auth instance
 import { signInWithEmailAndPassword, getIdToken } from 'firebase/auth';
-const logInBaseUrl = 'http://localhost:8080/user/logIn';
-const signUpBaseUrl = 'http://localhost:8080/user/signUp';
 
 // credentails contain username and password
 // note that even with 1hr expiration time for firebasetoken, i am 
 // using jwt token that has 48 hour expiration.
 // backend returns: userId, token, email
 const logIn = async (credentials) => {
+	const baseUrl = process.env.AWS_DEPLOYMENT_URL
+	const logInUrl = `${baseUrl}/user/logIn`
 	try {
-		const response = await axios.post(logInBaseUrl, {
+		const response = await axios.post(logInUrl, {
 			email: credentials.email,
 			password: credentials.password,
 		});
@@ -37,6 +37,8 @@ const logIn = async (credentials) => {
 // sign up + log in
 // credentials include email, username and password
 const signUp = async (credentials) => {
+	const baseUrl = process.env.AWS_DEPLOYMENT_URL
+	const signUpUrl = `${baseUrl}/user/signUp`
 	try {
 		// Sign up response returns a custom token
 		const signUpResponse = await axios.post(signUpBaseUrl, credentials);

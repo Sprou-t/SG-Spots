@@ -10,14 +10,12 @@ import ReviewForm from '../components/ui/ReviewForm.jsx';
 import ReviewModal from '../components/ui/reviewModal.jsx';
 import { useParams } from 'react-router-dom';
 import { PropsContext } from '../context/context.props.jsx';
-import fallBackImage from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg'
+import fallBackImage from '../assets/homepageImages/pexels-stijn-dijkstra-1306815-2499786.jpg';
 import { removeTokenIfExpired } from '../services/services.review.js';
-
 
 /* TODO:
 -Review section + make icons more colorful
  */
-
 
 const IndividualPage = () => {
 	const { id } = useParams(); // uuid
@@ -30,31 +28,32 @@ const IndividualPage = () => {
 	const handleImageError = (event) => {
 		event.target.src = fallBackImage; // Set fallback image when an error occurs
 	};
+	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const requestSingleTihDataUrl = `${baseUrl}/TIHData/${id}`;
 
 	// console.log('attraction page renders')
 	// Extract the fetch logic into a reusable function
 	const fetchAttractionData = () => {
 		axios
-			.get(`http://localhost:8080/TIHData/${id}`)
+			.get(requestSingleTihDataUrl)
 			.then((response) => {
-				console.log("response ==> ", response); // Log actual data
+				console.log('response ==> ', response); // Log actual data
 				setAttraction(response.data); // Set the correct data
 			})
 			.catch((error) => {
-				console.error("Error fetching attractions:", error);
+				console.error('Error fetching attractions:', error);
 			});
-	}
+	};
 
 	// Initial fetch on component mount
 	useEffect(() => {
 		fetchAttractionData();
 	}, [id]);
-	console.log('attraction data:', attraction)
+	console.log('attraction data:', attraction);
 
 	useEffect(() => {
-		removeTokenIfExpired()
-	})
-
+		removeTokenIfExpired();
+	});
 
 	if (attraction != null) {
 		const imageCounter = attraction.images.length;
@@ -64,17 +63,22 @@ const IndividualPage = () => {
 					{imageCounter > 1 ? (
 						<Carousel images={attraction.images} />
 					) : (
-						<img src={attraction.images[0]} onError={handleImageError} className='w-full h-full max-h-[800px] object-contain' />
+						<img
+							src={attraction.images[0]}
+							onError={handleImageError}
+							className='w-full h-full max-h-[800px] object-contain'
+						/>
 					)}
-				</div >
-
+				</div>
 
 				{isModalOpen && modalState.type === 'review' && (
 					<ReviewModal>
-						<ReviewForm attractionId={id} handleReviewSubmit={fetchAttractionData} />
+						<ReviewForm
+							attractionId={id}
+							handleReviewSubmit={fetchAttractionData}
+						/>
 					</ReviewModal>
 				)}
-
 
 				<div className='w-10/12 mx-auto my-14 gap-10 flex flex-col items-center'>
 					<div className='flex items-center text-4xl font-semibold text-gray-600 gap-6 justify-center gray-800'>
@@ -85,19 +89,13 @@ const IndividualPage = () => {
 							<div className='flex items-center gap-1 font-bold text-gray-600'>
 								<MdOutlineStarRate />
 								<p>
-									Rating:{' '}
-									<span >
-										{attraction.rating}
-									</span>
+									Rating: <span>{attraction.rating}</span>
 								</p>
 							</div>
 							<div className='flex items-center gap-1 font-bold text-gray-600'>
 								<RiMoneyDollarCircleFill />
 								<p>
-									Price:{' '}
-									<span >
-										{attraction.pricing}
-									</span>
+									Price: <span>{attraction.pricing}</span>
 								</p>
 							</div>
 						</div>
@@ -105,15 +103,13 @@ const IndividualPage = () => {
 							<div className='flex items-center gap-1'>
 								<MdAccessTimeFilled />
 								<p className='font-bold text-gray-600'>
-									Category:{' '}
-									{attraction.categoryDescription}
+									Category: {attraction.categoryDescription}
 								</p>
 							</div>
 							<div className='flex items-center gap-1'>
 								<FaLocationDot />
 								<p className='font-bold text-gray-600'>
-									Postal Code:{' '}
-									{attraction.address}
+									Postal Code: {attraction.address}
 								</p>
 							</div>
 						</div>
@@ -131,10 +127,9 @@ const IndividualPage = () => {
 					</a>
 					<ReviewSection id={id} reviews={attraction.userReviews} />
 				</div>
-			</div >
+			</div>
 		);
 	}
 };
-
 
 export default IndividualPage;

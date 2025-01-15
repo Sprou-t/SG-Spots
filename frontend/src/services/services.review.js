@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const reviewBaseUrl = 'http://localhost:8080/review';
+
 let token = null;
 
 // this function will be invoked when user login in authForm
@@ -39,6 +39,8 @@ const ensureUserIsLoggedInAndTokenIsSet = () => {
 };
 
 const createReview = async (newReview) => {
+	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const reviewBaseUrl = `${baseUrl}/review`;
 	ensureUserIsLoggedInAndTokenIsSet();
 	const config = {
 		headers: {
@@ -52,6 +54,8 @@ const createReview = async (newReview) => {
 };
 
 const updateReview = async (data) => {
+	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const reviewBaseUrl = `${baseUrl}/review`;
 	console.log("data ==> ", data);
 	// Ensure user is logged in and token is set
 	ensureUserIsLoggedInAndTokenIsSet();
@@ -107,6 +111,8 @@ const updateReview = async (data) => {
 
 
 const deleteReview = async (reviewId) => {
+	const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+	const reviewBaseUrl = `${baseUrl}/review`;
 	ensureUserIsLoggedInAndTokenIsSet();
 	const config = {
 		headers: { Authorization: token },

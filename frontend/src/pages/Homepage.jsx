@@ -225,9 +225,11 @@ const Homepage = () => {
     const dropdownRef = useRef(null);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
+    const baseUrl = process.env.AWS_DEPLOYMENT_URL;
+    const requestTihDataUrl = `${baseUrl}/TIHData`
     useEffect(() => {
         axios
-            .get('http://localhost:8080/TIHData')
+            .get(requestTihDataUrl)
             .then((response) => setAttractions(response.data.data))
             .catch((error) => console.log(error));
     }, []);
