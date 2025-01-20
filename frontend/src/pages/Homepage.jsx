@@ -239,6 +239,7 @@ const Homepage = () => {
 
     console.log('attraction:', attractions)
     useEffect(() => {
+        console.log('homepage rendering')
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setDropdownOpen(false);
