@@ -1,10 +1,6 @@
 TODO:
 TLDR:
-TMR: give some error checking for hte password during sign up and also need to authenticate based on email
-
-- debug the review RUD operation
-
-### deploy!!! (remember to ignore some files)
+- see why error occurs on reload
 
 - add auth 2d expiration time for firebase token
 - add image display feature for review something is broken
