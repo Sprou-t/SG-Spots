@@ -151,7 +151,7 @@ const Navbar = () => {
 							>
 								{' '}
 								<GiHamburgerMenu className='size-5' />
-								<div className=' size-10 text-2xl border-2 border-solid  rounded-full text-red-500 bg-white'>
+								<div className='flex items-center justify-center size-10 text-2xl border-2 border-solid  rounded-full text-red-500 bg-white'>
 									{user.email.charAt(0)}
 								</div>
 							</button>

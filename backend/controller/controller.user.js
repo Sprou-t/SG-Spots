@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import User from '../models/models.users.js';
 import jwt from 'jsonwebtoken';
 import { getAuth } from 'firebase-admin/auth';
@@ -29,8 +29,8 @@ export const signUp = async (req, res) => {
 
 	try {
 		// Hash the password with bcrypt
-		const saltRounds = 10; // Number of salt rounds
-		const hashedPassword = await bcrypt.hash(password, saltRounds);
+		const saltRounds = bcrypt.genSaltSync(10); // Number of salt rounds
+		const hashedPassword = bcrypt.hashSync(password, saltRounds);
 
 		// send a verification to user email
 		await sendVerificationEmail(username, email, password);
@@ -68,7 +68,7 @@ export const login = async (req, res) => {
 		}
 
 		// Compare the provided password with the hashed password
-		const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+		const passwordMatch = bcrypt.compareSync(password, user.passwordHash);
 
 		if (!passwordMatch) {
 			return res

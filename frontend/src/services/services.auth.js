@@ -41,7 +41,7 @@ const signUp = async (credentials) => {
 	const signUpUrl = `${baseUrl}/user/signUp`
 	try {
 		// Sign up response returns a custom token
-		const signUpResponse = await axios.post(signUpBaseUrl, credentials);
+		const signUpResponse = await axios.post(signUpUrl, credentials);
 		console.log('User signed up successfully:', signUpResponse.data);
 
 		// Return a success response
