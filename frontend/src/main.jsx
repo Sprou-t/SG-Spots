@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./styles/tailwind.css";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 const rootElement = document.querySelector("#root"); // select tag to insert root 
 
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(rootElement); // create root
 root.render(
 	<React.StrictMode>
 		<React.Suspense fallback="loading">
-			<BrowserRouter>
+			<HashRouter>
 				<App />
-			</BrowserRouter>
+			</HashRouter>
 
 		</React.Suspense>
 	</React.StrictMode>
