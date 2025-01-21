@@ -3,7 +3,7 @@ import React from 'react';
 const AboutSGSpots = () => {
     return (
         <div className=' min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4'>
-            <div className='translate-y-36 bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full'>
+            <div className=' bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full'>
                 <h2 className='text-2xl font-bold mb-6 text-center'>
                     About <span className='text-red-600'>SG </span>SPOTS
                 </h2>
