@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 // serve the static files that are already built and served to backend
 app.use(express.static('dist'));
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Middleware to parse JSON payloads
