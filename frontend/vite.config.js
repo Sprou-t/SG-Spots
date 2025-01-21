@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 import tailwindcss from 'tailwindcss';
 import Inspect from 'vite-plugin-inspect';
+import path from 'path';
 
 export default defineConfig({
 	plugins: [
@@ -30,5 +30,9 @@ export default defineConfig({
 		fs: {
 			strict: true, // Enforces strict file system access, preserving case
 		},
+		historyApiFallback: true, // Ensure SPA routes work properly during development
+	},
+	build: {
+		outDir: 'dist', // Output directory for the production build
 	},
 });

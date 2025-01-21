@@ -14,8 +14,9 @@ import { fileURLToPath } from 'url';
 const app = express();
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename);
-// serve the static files that are already built and served to backend
+// serve the static files when a request route matchees a file in the directory eg. style.css
 app.use(express.static('dist'));
+// serve the index.html file for other routes not matched by the static files eg. /about
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
