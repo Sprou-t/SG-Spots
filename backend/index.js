@@ -12,13 +12,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 // Initialize express app
 const app = express();
+//import.meta.url provides the url of the current module file and put it in __filename which is the file we are currently in
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+// get the directory name of the current file with path
 const __dirname = path.dirname(__filename);
 // serve the static files when a request route matchees a file in the directory eg. style.css
 app.use(express.static(path.join(__dirname, 'dist')));
 // serve the index.html file for other routes not matched by the static files eg. /about
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
 
 // Middleware to parse JSON payloads
