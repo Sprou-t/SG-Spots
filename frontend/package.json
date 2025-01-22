@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "vite",
 		"server": "npx json-server --port 3001 --watch db.json",
-		"build": "vite build",
+		"build": "vite build", 
 		"start": "vite preview"
 	},
 	"type": "module",

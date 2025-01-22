@@ -29,21 +29,62 @@ Git (For cloning the repository)
 AWS CLI (If interacting with AWS services locally)
 Firebase CLI (For local Firebase setup, if applicable)
 
-### Installing
+### Installing and set up
 
-- How/where to download your program
-- Any modifications needed to be made to files/folders
+To get SG SPOTS up and running locally on your machine, follow these steps:
+
+1. Clone the repository:
+
+First, clone the repository to your local machine. In your terminal, run the following command:
+
+git clone https://github.com/Sprou-t/sg-spots.git
+
+2. After cloning the repo, move into the project folder:
+
+cd sg-spots
+Install dependencies:
+
+3. Make sure you have Node.js and npm installed. You can verify this by running:
+   node -v
+   npm -v
+   If these are installed, run the following command to install all the required dependencies:
+   npm install
+
+4. set up mongodb atlas
+
+- remember to set your mongodb api key
+
+5. Set up AWS CLI
+
+If you're interacting with AWS services locally, ensure that the AWS CLI is installed:
+aws --version
+Follow the official guide to configure the AWS CLI with your credentials if necessary.
+Environment Configuration:
+
+6. If your project requires environment variables (such as API keys or Firebase config), make sure to create a .env file in the root of your project and add the necessary keys.
+
+Example:
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_AWS_ACCESS_KEY=your_aws_access_key
+mongo_URI = your_mongo_URI
 
 ### Executing program
 
-- How to run the program
-- Step-by-step bullets
+To run SG SPOTS locally in development mode, follow these steps:
 
-`code blocks for commands`
+#### Run the app in development mode:
+
+In your terminal, inside the project folder, run:
+
+npm run dev
+This will start the development server and open your app in the browser (typically at http://localhost:3000 or a similar URL).
+Access the app:
+
+Open your browser and go to the specified address (e.g., http://localhost:8080) to view the app.
 
 ## Help
 
-Any advise for common problems or issues.
+- 404 get error when refreshing page in deployment mode due to the usage of BrowserRouter from React Router Dom. Issue rectified with hashrouting instead but would be open for other solutions.stackoverflow issue here: (https://stackoverflow.com/questions/79374870/page-refresh-not-working-on-deployment-but-works-in-local-environment)
 
 ## Authors
 
