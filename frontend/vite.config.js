@@ -22,8 +22,8 @@ export default defineConfig({
 		preserveSymlinks: true, // Preserve symlink paths to maintain exact casing
 	},
 	server: {
-		host: '0.0.0.0', // Allow access from outside the EC2 instance
-		port: 8080,
+		// host: '0.0.0.0', // Allow access from outside the EC2 instance
+		// port: 8080,
 		watch: {
 			usePolling: true, // Enables polling for file changes, useful for certain environments
 		},

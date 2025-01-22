@@ -12,6 +12,7 @@ import AboutSGSpots from './pages/About.jsx';
 import Blog from './pages/Blog.jsx';
 import AuthForm from './components/ui/AuthForm.jsx';
 import { PropsContext } from './context/context.props.jsx';
+import './config.js';
 
 const App = () => {
 	const [user, setUser] = useState(null);
@@ -74,7 +75,7 @@ const App = () => {
 
 				{notification && (
 					<div
-						className={`fixed bottom-0 left-0 right-0 p-4 text-white ${notification.type === 'error'
+						className={`fixed bottom-0 left-0 right-0 z-20 p-4 text-xl font-bold text-white text-center ${notification.type === 'error'
 							? 'bg-red-500'
 							: 'bg-green-500'
 							}`}
