@@ -1,7 +1,5 @@
 # SG Spots
 
-Simple overview of use/purpose.(May include introductory screenshots)
-
 ## Technology
 
 <div align="center">
