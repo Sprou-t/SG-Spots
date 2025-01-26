@@ -15,7 +15,7 @@
 
 SG SPOTS began as a side project with a simple yet powerful mission: to create a platform where users can share honest and real reviews about attractions, events, and places in Singapore. Unlike many other review platforms, SG SPOTS does not rely on predetermined algorithms that prioritize more popular spots, allowing for a truly unbiased experience. The goal is to give both locals and visitors a space to share their authentic experiences, helping others discover hidden gems or lesser-known places that might otherwise be overlooked. With a commitment to transparency and integrity, SG SPOTS ensures that every review reflects the genuine opinions of its users, fostering a community built on trust and open feedback. All our data is retrieved from the Singapore Tourism Information and Services Hub, ensuring that the information shared on SG SPOTS is accurate and up-to-date.
 
-[Live Preview](http://54.251.144.57:8080/)
+[Visit Official Website](http://54.251.144.57:8080/)
 
 ## Getting started
 
