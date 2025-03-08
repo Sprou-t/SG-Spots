@@ -5,7 +5,7 @@ import { PropsContext } from '../../context/context.props.jsx';
 import { logIn, signUp } from '../../services/services.auth.js';
 import { setToken } from '../../services/services.review.js';
 import { auth } from '../../firebase/firebase.config.js';
-/*TODO: check that URL is correct */
+import { Eye, EyeOff } from "lucide-react";
 
 const AuthForm = () => {
 	const {
@@ -19,6 +19,7 @@ const AuthForm = () => {
 	const [email, setEmail] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [isVisible, setIsVisible] = useState(false);
 
 	// className = "mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900"
 
@@ -39,7 +40,7 @@ const AuthForm = () => {
 					'Login failed. Please check your credentials.',
 					'error'
 				);
-			} else {	
+			} else {
 				setUser(loginResponse.data);
 				setToken(loginResponse.data.token);
 				const currentTimestamp = new Date().getTime();
@@ -145,19 +146,28 @@ const AuthForm = () => {
 									</a>
 								</div>
 							</div>
-							<div className='mt-2'>
+							<div className="mt-2 relative">
 								<input
-									id='password'
-									name='password'
-									data='password'
+									id="password"
+									name="password"
+									type={isVisible ? "text" : "password"} // Toggle visibility
 									required
-									autoComplete='current-password'
+									autoComplete="current-password"
 									value={password}
-									onChange={(e) =>
-										setPassword(e.target.value)
-									}
-									className='block w-full rounded-md bg-white px-3 py-2 text-3xl md:text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6'
+									onChange={(e) => setPassword(e.target.value)}
+									className="block w-full rounded-md bg-white px-3 py-2 text-3xl md:text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
 								/>
+
+								{/* Hold-to-show button */}
+								<button
+									type="button"
+									className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+									onMouseDown={() => setIsVisible(true)} // Show password when button is pressed
+									onMouseUp={() => setIsVisible(false)} // Hide when released
+									onMouseLeave={() => setIsVisible(false)} // Hide if user moves away
+								>
+									{isVisible ? <EyeOff size={24} /> : <Eye size={24} />}
+								</button>
 							</div>
 						</div>
 
